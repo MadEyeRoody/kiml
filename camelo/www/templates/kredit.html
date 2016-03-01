@@ -1,0 +1,24 @@
+<ion-view title="Kredit">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list">
+            <label class="item item-input" name="gesamtbetrag">
+                <span class="input-label">€</span>
+                <input type="number" placeholder="500">
+            </label>
+            <label class="item item-input" name="fehlbetrag">
+                <span class="input-label">Fehlbetrag:</span>
+                <input type="number" placeholder="250">
+            </label>
+        </form>
+        <form class="list">
+            <ion-item class="range range-positive">Laufzeit
+                <input type="range" value="12" min="6" max="36" name="laufzeit">
+            </ion-item>
+            <ion-item class="range range-positive">Rate
+                <input type="range" value="100" min="50" max="600" name="rate">
+            </ion-item>
+        </form>
+        <a ui-sref="menu.kredit2" class="button button-stable button-block  icon-right ion-android-arrow-forward">weiter</a>
+        <a ui-sref="menu.empfehlung2" class="button button-stable button-block  icon-left ion-android-arrow-back">zurück</a>
+    </ion-content>
+</ion-view>

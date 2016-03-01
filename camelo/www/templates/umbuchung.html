@@ -1,0 +1,20 @@
+<ion-view title="Umbuchung">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list">
+            <label class="item item-input" name="gesamtbetrag">
+                <span class="input-label">€</span>
+                <input type="number" placeholder="500">
+            </label>
+            <label class="item item-input" name="fehlbetrag">
+                <span class="input-label">Fehlbetrag</span>
+                <input type="number" placeholder="250 €">
+            </label>
+        </form>
+        <form class="list">
+            <ion-toggle toggle-class="toggle-positive" name="konto1">Konto 1 - 1365,- €</ion-toggle>
+            <ion-toggle toggle-class="toggle-positive" name="konto2">Konto 2 - 634,- €</ion-toggle>
+            <ion-toggle toggle-class="toggle-positive" name="konto3">Konto 3 - 2058,-€</ion-toggle>
+        </form>
+        <a ui-sref="menu.empfehlung2" class="button button-stable button-block  icon-left ion-android-arrow-back">zurück</a>
+    </ion-content>
+</ion-view>
