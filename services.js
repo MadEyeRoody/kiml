@@ -11,7 +11,7 @@ var db;
 var cloudant;
 
 var dbCredentials = {
-	dbName : 'camelo_db'
+	dbName : 'kiml_db'
 };
 
 var bodyParser = require('body-parser');
@@ -68,11 +68,11 @@ function initDBConnection() {
 		// Variables section for an app in the Bluemix console dashboard).
 		// Alternately you could point to a local database here instead of a 
 		// Bluemix service.
-		dbCredentials.host = "6bd247c9-fae4-4951-8240-c65dd055b08e-bluemix.cloudant.com";
+		dbCredentials.host = "35424ceb-46f3-4a2c-82c0-4562bf5a9559-bluemix.cloudant.com";
 		dbCredentials.port = 443;
-		dbCredentials.user = "6bd247c9-fae4-4951-8240-c65dd055b08e-bluemix";
-		dbCredentials.password = "12aa60cbf1badfda08908c1e43a35855b351218e238a809c4eb65391697aa966";
-		dbCredentials.url = "https://6bd247c9-fae4-4951-8240-c65dd055b08e-bluemix:12aa60cbf1badfda08908c1e43a35855b351218e238a809c4eb65391697aa966@6bd247c9-fae4-4951-8240-c65dd055b08e-bluemix.cloudant.com";
+		dbCredentials.user = "35424ceb-46f3-4a2c-82c0-4562bf5a9559-bluemix";
+		dbCredentials.password = "371057463bd07dcdcdf3885243410e696a357d30e0456dfbfc0715bfd6d3d43b";
+		dbCredentials.url = "https://35424ceb-46f3-4a2c-82c0-4562bf5a9559-bluemix:371057463bd07dcdcdf3885243410e696a357d30e0456dfbfc0715bfd6d3d43b@35424ceb-46f3-4a2c-82c0-4562bf5a9559-bluemix.cloudant.com";
 	}
 	
 		cloudant = require('cloudant')(dbCredentials.url);

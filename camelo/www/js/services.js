@@ -1,2 +1,10 @@
-angular.module('starter.services', [])
+angular.module('app.services', [])
+
+.factory('BlankFactory', [function(){
+
+}])
+
+.service('BlankService', [function(){
+
+}]);
 
