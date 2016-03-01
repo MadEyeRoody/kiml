@@ -1,0 +1,11 @@
+applications:
+- path: .
+  memory: 512M
+  instances: 1
+  domain: eu-gb.mybluemix.net
+  name: kiml
+  host: kiml
+  disk_quota: 1024M
+  services:
+  - kiml-cloudantNoSQLDB
+  command: node services.js
