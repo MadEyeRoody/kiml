@@ -102,6 +102,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
 .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
+  window.localStorage.setItem("fehlbetrag", 119);
   $scope.todoChoice = 1;
   $scope.amount = window.localStorage.getItem("amount");
   $scope.konto1 = window.localStorage.getItem("Konto1");
