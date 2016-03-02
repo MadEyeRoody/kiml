@@ -7,7 +7,7 @@ For example, you might change some of the default colors:
 
 $light:                           #fff !default;
 $stable:                          #0066B3 !default;
-$positive:                        #000 !default;
+$positive:                        #ff6600 !default;
 $calm:                            #000 !default;
 $balanced:                        #000 !default;
 $energized:                       #ff6600 !default;
@@ -24,6 +24,18 @@ $big-bg:      '../img/Volksbank_Logo.png';
 .scroll-bg {
   background: url($big-bg) no-repeat center center fixed;
   background-size: cover;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
 }
 
 // Include all of Ionic

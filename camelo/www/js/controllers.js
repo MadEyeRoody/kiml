@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['ionic','ngCordova'])
 
 .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state) {
 //Start Values
@@ -29,8 +29,27 @@ angular.module('app.controllers', [])
   };
 })
 
-.controller('wunschlisteCtrl', function($scope) {
+.controller('wunschlisteCtrl', function($scope,$cordovaBarcodeScanner,$ionicPlatform) {
+  var vm = this;
 
+  vm.scan = function(){
+    $ionicPlatform.ready(function() {
+      $cordovaBarcodeScanner
+        .scan()
+        .then(function(result) {
+          // Success! Barcode data is here
+          vm.scanResults = "We got a barcoden" +
+            "Result: " + result.text + "n" +
+            "Format: " + result.format + "n" +
+            "Cancelled: " + result.cancelled;
+        }, function(error) {
+          // An error occurred
+          vm.scanResults = 'Error: ' + error;
+        });
+    });
+  };
+
+  vm.scanResults = '';
 })
 
 .controller('finanzstatusCtrl', function($scope) {
