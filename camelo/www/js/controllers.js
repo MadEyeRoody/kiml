@@ -33,26 +33,25 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
 .controller('wunschlisteCtrl', function($scope,$cordovaBarcodeScanner,$ionicPlatform) {
-  var vm = this;
-
-  vm.scan = function(){
+  $scope.scanBarCode = function(){
+    console.log('ich bin drin');
     $ionicPlatform.ready(function() {
       $cordovaBarcodeScanner
         .scan()
         .then(function(result) {
           // Success! Barcode data is here
-          vm.scanResults = "We got a barcoden" +
-            "Result: " + result.text + "n" +
-            "Format: " + result.format + "n" +
+          var scanResults = "We got a barcode\n" +
+            "Result: " + result.text + "\n" +
+            "Format: " + result.format + "\n" +
             "Cancelled: " + result.cancelled;
+          console.log(scanResults);
         }, function(error) {
           // An error occurred
-          vm.scanResults = 'Error: ' + error;
+          var scanResults = 'Error: ' + error;
+          console.log(scanResults);
         });
     });
   };
-
-  vm.scanResults = '';
 })
 
 .controller('finanzstatusCtrl', function($scope) {
