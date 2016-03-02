@@ -1,11 +1,16 @@
 <ion-view title="Kontoverwaltung">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-        <h2>Referenzkonto:</h2>
         <form class="list">
-          <div> <span class="input-label">Wähle dein Primärkonto:</span></div>
-          <ion-radio ng-model="kontoChoice" ng-value="1" name="konto1">Konto 1: {{konto1}} €</ion-radio>
-          <ion-radio ng-model="kontoChoice" ng-value="2" name="konto2">Konto 2: {{konto2}} €</ion-radio>
-          <ion-radio ng-model="kontoChoice" ng-value="3" name="konto3">Konto 3: {{konto3}} €</ion-radio>
+          <div> <span class="input-label" style="color: #0066B3">Wähle dein Primärkonto:</span></div>
+          <ion-radio ng-model="kontoChoice" ng-value="1" name="konto1">Girokonto: {{konto1}} €
+            </br> <span style="font-size: smaller">DE 11 7019 0000 0000 0089 74</span>
+          </ion-radio>
+          <ion-radio ng-model="kontoChoice" ng-value="2" name="konto2">Tagegeld: {{konto2}} €
+            </br> <span style="font-size: smaller">DE 40 7919 0000 0001 5311 58</span>
+          </ion-radio>
+          <ion-radio ng-model="kontoChoice" ng-value="3" name="konto3">Gemeinschaftskonto: {{konto3}} €
+            </br> <span style="font-size: smaller">DE 46 1009 0900 0887 5754 33</span>
+          </ion-radio>
         </form>
         <form class="list">
             <label class="item item-input" name="untergrenze">

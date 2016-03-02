@@ -289,13 +289,13 @@ $scope.gesamtbetrag=window.localStorage.getItem("amount");
 
   $scope.saveRate = function(rate){
     console.log(rate);
-    window.localStorage.setItem("kreditRate", rate);
+    window.localStorage.setItem("rate", rate);
 
   }
 
   $scope.saveLaufzeit = function(laufzeit){
     console.log(laufzeit);
-    window.localStorage.setItem("kreditLaufzeit", laufzeit);
+    window.localStorage.setItem("laufzeit", laufzeit);
   }
 
 })
@@ -304,8 +304,8 @@ $scope.gesamtbetrag=window.localStorage.getItem("amount");
 
 .controller('kredit2Ctrl', function($scope,$state,$ionicPopup) {
   $scope.fehlbetrag=window.localStorage.getItem("fehlbetrag");
-  $scope.kreditRate=window.localStorage.getItem("kreditRate");
-  $scope.kreditLaufzeit= window.localStorage.getItem("kreditLaufzeit");
+  $scope.rate=window.localStorage.getItem("rate");
+  $scope.laufzeit= window.localStorage.getItem("laufzeit");
 
 
   $scope.order = function(){
