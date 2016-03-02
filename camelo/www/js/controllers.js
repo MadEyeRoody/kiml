@@ -9,11 +9,11 @@ $scope.checkAmount = function(betrag){
 
   if(betragValue > 500){
     $state.go('menu.empfehlung2');
-    window.localStorage.setItem("amount", betragValue)
+
   } else {
     $state.go('menu.empfehlung');
   }
-
+  window.localStorage.setItem("amount", betragValue)
   };
 })
 
@@ -26,6 +26,8 @@ $scope.checkAmount = function(betrag){
 })
 
 .controller('empfehlungCtrl', function($scope) {
+
+  $scope.amount = window.localStorage.getItem("amount");
 
 })
 
