@@ -1,8 +1,10 @@
 angular.module('app.controllers', ['ionic','ngCordova'])
 
-.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state) {
+.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform) {
 //Start Values
-  window.localStorage.setItem("Konto1", 650 );
+  $scope.formdata = [];
+  $scope.formdata.betragValue = NaN;
+
   window.localStorage.setItem("Konto2", 500 );
   window.localStorage.setItem("Konto3", 3000 );
   window.localStorage.setItem("rate", 25 );
@@ -15,35 +17,27 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
   $scope.checkAmount = function(betrag){
 
-  betragValue=parseInt(betrag);
+    betragValue=parseInt(betrag);
 
-  console.log(betragValue);
+    console.log(betragValue);
 
-  if(betragValue>3980){
-    $state.go('menu.empfehlung3');
+    if(betragValue>3980){
+      $state.go('menu.empfehlung3');
 
-  }else if(betrag>280 && betrag<3980) {
-    $state.go('menu.empfehlung2');
-  }else {
-      $state.go('menu.empfehlung');
-    }
-  window.localStorage.setItem("amount", betragValue)
+    }else if(betrag>280 && betrag<3980) {
+      $state.go('menu.empfehlung2');
+    }else {
+        $state.go('menu.empfehlung');
+      }
+    window.localStorage.setItem("amount", betragValue);
   };
-})
 
-.controller('wunschlisteCtrl', function($scope,$cordovaBarcodeScanner,$ionicPlatform) {
-  $scope.scanBarCode = function(){
-    console.log('ich bin drin');
+  $scope.scanBarCode = function() {
     $ionicPlatform.ready(function() {
       $cordovaBarcodeScanner
         .scan()
         .then(function(result) {
-          // Success! Barcode data is here
-          var scanResults = "We got a barcode\n" +
-            "Result: " + result.text + "\n" +
-            "Format: " + result.format + "\n" +
-            "Cancelled: " + result.cancelled;
-          console.log(scanResults);
+          $scope.formdata.betragValue=249;
         }, function(error) {
           // An error occurred
           var scanResults = 'Error: ' + error;
@@ -51,6 +45,10 @@ angular.module('app.controllers', ['ionic','ngCordova'])
         });
     });
   };
+})
+
+.controller('wunschlisteCtrl', function($scope) {
+
 })
 
 .controller('finanzstatusCtrl', function($scope) {
