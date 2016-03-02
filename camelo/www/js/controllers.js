@@ -2,7 +2,6 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
 .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state) {
 //Start Values
-  window.localStorage.setItem("fehlbetrag", 119);
   window.localStorage.setItem("Konto1", 650 );
   window.localStorage.setItem("Konto2", 500 );
   window.localStorage.setItem("Konto3", 3000 );
@@ -59,7 +58,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
 .controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
-
+  window.localStorage.setItem("fehlbetrag", 0);
   $scope.amount = window.localStorage.getItem("amount");
   $scope.konto1 = window.localStorage.getItem("Konto1");
 
@@ -103,6 +102,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
 .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
+  window.localStorage.setItem("fehlbetrag", 281);
   $scope.todoChoice = 1;
   $scope.amount = window.localStorage.getItem("amount");
   $scope.konto1 = window.localStorage.getItem("Konto1");
@@ -160,6 +160,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
   .controller('empfehlung3Ctrl', function($scope, $state,$ionicPopup) {
+    window.localStorage.setItem("fehlbetrag", 1920);
     $scope.todoChoice = 2;
     $scope.amount = window.localStorage.getItem("amount");
     $scope.konto1 = window.localStorage.getItem("Konto1");
@@ -218,6 +219,10 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   })
 
 .controller('kontoverwaltungCtrl', function($scope) {
+  $scope.kontoChoice = 1;
+  $scope.konto1=window.localStorage.getItem("Konto1");
+  $scope.konto2=window.localStorage.getItem("Konto2");
+  $scope.konto3=window.localStorage.getItem("Konto3");
 
 })
 

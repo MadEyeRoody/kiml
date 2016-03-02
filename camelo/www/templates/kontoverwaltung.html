@@ -2,15 +2,17 @@
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
         <h2>Referenzkonto:</h2>
         <form class="list">
-            <ion-toggle toggle-class="toggle-positive" name="konto1">Konto 1</ion-toggle>
-            <ion-toggle toggle-class="toggle-positive" name="konto2">Konto 2</ion-toggle>
-            <ion-toggle toggle-class="toggle-positive" name="konto3">Konto 3</ion-toggle>
+          <div> <span class="input-label">Wähle dein Primärkonto:</span></div>
+          <ion-radio ng-model="kontoChoice" ng-value="1" name="konto1">Konto 1: {{konto1}} €</ion-radio>
+          <ion-radio ng-model="kontoChoice" ng-value="2" name="konto2">Konto 2: {{konto2}} €</ion-radio>
+          <ion-radio ng-model="kontoChoice" ng-value="3" name="konto3">Konto 3: {{konto3}} €</ion-radio>
         </form>
         <form class="list">
             <label class="item item-input" name="untergrenze">
                 <span class="input-label">Untergrenze in €:</span>
-                <input type="number" placeholder="500">
+                <input type="number" value="200" placeholder="500">
             </label>
         </form>
+      <a ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Speichern</a>
     </ion-content>
 </ion-view>
