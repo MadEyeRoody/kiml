@@ -5,5 +5,18 @@
             <ion-item>Fernseher - 1200€</ion-item>
             <ion-item>Tablet - 499€</ion-item>
         </ion-list>
+      <div class="card">
+        <div class="item">
+          <button class="button button-block button-positive">
+            <i class="icon ion-qr-scanner"></i>
+            Scan Now
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-divider">Scan Results</div>
+        <div class="item item-text-wrap">{{vm.scanResults}}
+        </div>
+      </div>
     </ion-content>
 </ion-view>
