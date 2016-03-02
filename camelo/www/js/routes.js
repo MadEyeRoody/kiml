@@ -7,8 +7,8 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
+
+
 
       .state('menu.kIMLKannIchsMirLeisten', {
     url: '/home',
@@ -66,6 +66,16 @@ angular.module('app.routes', [])
     }
   })
 
+    .state('menu.empfehlung3', {
+      url: '/empfehlung3',
+      views: {
+        'side-menu21': {
+          templateUrl: 'templates/empfehlung3.html',
+          controller: 'empfehlung3Ctrl'
+        }
+      }
+    })
+
   .state('menu.kontoverwaltung', {
     url: '/kontoverwaltung',
     views: {
@@ -108,6 +118,6 @@ angular.module('app.routes', [])
 
 $urlRouterProvider.otherwise('/menu/home')
 
-  
+
 
 });

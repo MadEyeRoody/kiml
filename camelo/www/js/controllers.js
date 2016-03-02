@@ -2,15 +2,16 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
 .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state) {
 //Start Values
-  window.localStorage.setItem("fehlbetrag", 400);
-  window.localStorage.setItem("Konto1", 1365 );
-  window.localStorage.setItem("Konto2", 634 );
-  window.localStorage.setItem("Konto3", 2058 );
+  window.localStorage.setItem("fehlbetrag", 119);
+  window.localStorage.setItem("Konto1", 650 );
+  window.localStorage.setItem("Konto2", 500 );
+  window.localStorage.setItem("Konto3", 3000 );
   window.localStorage.setItem("rate", 25 );
   window.localStorage.setItem("laufzeit", 18 );
   window.localStorage.setItem("amount",0);
   window.localStorage.setItem("kreditRate", 0);
   window.localStorage.setItem("kreditLaufzeit", 0);
+  window.localStorage.setItem("financeType",'green');
   //End Start Values
 
   $scope.checkAmount = function(betrag){
@@ -19,12 +20,14 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
   console.log(betragValue);
 
-  if(betragValue > 500){
-    $state.go('menu.empfehlung2');
+  if(betragValue>3980){
+    $state.go('menu.empfehlung3');
 
-  } else {
-    $state.go('menu.empfehlung');
-  }
+  }else if(betrag>280 && betrag<3980) {
+    $state.go('menu.empfehlung2');
+  }else {
+      $state.go('menu.empfehlung');
+    }
   window.localStorage.setItem("amount", betragValue)
   };
 })
@@ -55,17 +58,184 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
 })
 
-.controller('empfehlungCtrl', function($scope) {
+.controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
 
   $scope.amount = window.localStorage.getItem("amount");
+  $scope.konto1 = window.localStorage.getItem("Konto1");
+
+  $scope.startFinance = function(){
+    window.localStorage.setItem("financeType",'green');
+    $state.go('menu.finanzstatus');
+  };
+
+  $scope.doneGreen = function(choice){
+
+   if(choice){
+     var myPopup = $ionicPopup.show({
+       template: '<input type="text" ng-model="wishlist">',
+       title: 'Zur Wunschliste hinzufügen',
+       subTitle: 'Gib einen Namen für diesen Wunsch ein',
+       scope: $scope,
+       buttons: [
+         { text: 'Cancel' },
+         {
+           text: '<b>Save</b>',
+           type: 'button-energized',
+           onTap: function(e) {
+             if (!$scope.wishlist) {
+               //don't allow the user to close unless he enters wifi password
+               window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
+               $state.go('menu.kIMLKannIchsMirLeisten');
+             } else {
+               e.preventDefault();
+
+             }
+           }
+         }
+       ]
+     });
+   }else{
+     $state.go('menu.kIMLKannIchsMirLeisten');
+   }
+
+  };
 
 })
 
-.controller('empfehlung2Ctrl', function($scope) {
-
+.controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
+  $scope.todoChoice = 1;
   $scope.amount = window.localStorage.getItem("amount");
+  $scope.konto1 = window.localStorage.getItem("Konto1");
+
+  $scope.startFinance = function(){
+    window.localStorage.setItem("financeType",'yellow');
+    $state.go('menu.finanzstatus');
+  };
+
+  $scope.doneYellow = function(choice,target){
+
+
+    if(choice){
+      var myPopup = $ionicPopup.show({
+        template: '<input type="text" ng-model="wishlist">',
+        title: 'Zur Wunschliste hinzufügen',
+        subTitle: 'Gib einen Namen für diesen Wunsch ein',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: '<b>Save</b>',
+            type: 'button-energized',
+            onTap: function(e) {
+              if (!$scope.wishlist) {
+                //don't allow the user to close unless he enters wifi password
+                window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
+
+                if(target>0) {
+                  console.log(target);
+                  if (target == 1) {
+                    $state.go('menu.umbuchung');
+                  }
+                  if (target == 2) {
+                    $state.go('menu.kredit')
+                  }
+
+
+                }
+
+
+              } else {
+                e.preventDefault();
+
+              }
+            }
+          }
+        ]
+      });
+    }else{
+      if(target>0) {
+        console.log(target);
+        if (target == 1) {
+          $state.go('menu.umbuchung');
+        }
+        if (target == 2) {
+          $state.go('menu.kredit')
+        }
+
+        }
+
+    }
+
+  };
 
 })
+
+  .controller('empfehlung3Ctrl', function($scope, $state,$ionicPopup) {
+    $scope.todoChoice = 2;
+    $scope.amount = window.localStorage.getItem("amount");
+    $scope.konto1 = window.localStorage.getItem("Konto1");
+
+    $scope.startFinance = function(){
+      window.localStorage.setItem("financeType",'red');
+      $state.go('menu.finanzstatus');
+    };
+
+    $scope.doneYellow = function(choice,target){
+
+
+      if(choice){
+        var myPopup = $ionicPopup.show({
+          template: '<input type="text" ng-model="wishlist">',
+          title: 'Zur Wunschliste hinzufügen',
+          subTitle: 'Gib einen Namen für diesen Wunsch ein',
+          scope: $scope,
+          buttons: [
+            { text: 'Cancel' },
+            {
+              text: '<b>Save</b>',
+              type: 'button-energized',
+              onTap: function(e) {
+                if (!$scope.wishlist) {
+                  //don't allow the user to close unless he enters wifi password
+                  window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
+
+                  if(target>0) {
+                    console.log(target);
+                    if (target == 1) {
+                      $state.go('menu.umbuchung');
+                    }
+                    if (target == 2) {
+                      $state.go('menu.kredit')
+                    }
+
+                  }
+
+
+                } else {
+                  e.preventDefault();
+
+                }
+              }
+            }
+          ]
+        });
+      }else{
+        if(target>0) {
+          console.log(target);
+          if (target == 1) {
+            $state.go('menu.umbuchung');
+          }
+          if (target == 2) {
+            $state.go('menu.kredit')
+          }
+
+        }
+
+      }
+
+    };
+
+  })
 
 .controller('kontoverwaltungCtrl', function($scope) {
 

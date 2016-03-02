@@ -2,7 +2,7 @@
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
 
       <div style="text-align:center;">
-            <img src="img/gelb.png" width="50%" height="auto">
+            <img src="img/rot.png" width="50%" height="auto">
         </div>
       <div>
         <table><tr><td>
@@ -14,7 +14,6 @@
         <ion-toggle  ng-model="wishlist" ng-checked="wishlist" name="wishlist">zur Wunschliste hinzufügen</ion-toggle>
         </br>
         <form ng-submit="doneYellow(wishlist,todoChoice)">
-          <ion-radio ng-model="todoChoice" ng-value="1" name="umbuchen">Umbuchen</ion-radio>
           <ion-radio ng-model="todoChoice" ng-value="2" name="kredit">Kredit beantragen</ion-radio>
         <div class="button-bar">
           <a ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-light button-block ">abbrechen</a>

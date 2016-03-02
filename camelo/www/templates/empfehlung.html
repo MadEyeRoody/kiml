@@ -1,13 +1,23 @@
 <ion-view title="Empfehlung">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
+
         <h1>Greif zu!</h1>
         <div style="text-align:center;">
-            <img src="img/gruen.png" width="70%" height="auto">
+            <img src="img/gruen.png" width="50%" height="auto">
         </div>
         <div>
-            <p>{{amount}}€</p>
+          <table><tr><td>
+            <span style="text-align: left; color: #0066B3">Kaufbetrag:</span></td><td><span style="text-align: right" > {{amount}}€ </span></td></tr></br>
+         <tr><td> <span style="text-align: right; color: #0066B3">Saldo Primärkonto:</span></td><td><span  style="text-align: right"> {{konto1}} €</span></td></tr>
+          </table>
         </div>
-        <a ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Fertig</a>
-        <button class="button button-stable button-block ">zur Wunschliste hinzufügen</button>
+      </br></br>
+          <ion-toggle  ng-model="wishlist" ng-checked="wishlist" name="wishlist">zur Wunschliste hinzufügen</ion-toggle>
+
+      <div class="button-bar">
+        <button class="button button-stable  button-block  icon ion-arrow-graph-up-right" ng-click="startFinance()"></button>
+        <button  class="button button-energized button-block" ng-click="doneGreen(wishlist)">fertig</button>
+      </div>
+
     </ion-content>
 </ion-view>
