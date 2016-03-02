@@ -6,7 +6,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 //Start Values
   $scope.formdata = [];
   $scope.formdata.betragValue = NaN;
-
+  window.localStorage.setItem("Konto1", 650 );
   window.localStorage.setItem("Konto2", 500 );
   window.localStorage.setItem("Konto3", 3000 );
   window.localStorage.setItem("rate", 25 );
