@@ -1,8 +1,8 @@
 <ion-view title="Empfehlung">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-      <span style="color: #0066B3"><h1>Noch nicht!</h1></span>
+
       <div style="text-align:center;">
-            <img src="img/rot.png" width="50%" height="auto"><button class="button button-stable button-clear icon ion-information-circled" ng-click="notify()">
+            <img src="img/rot.png" width="50%" height="auto">
         </div>
       <div>
         <table><tr><td>
@@ -16,9 +16,11 @@
         <form ng-submit="doneYellow(wishlist,todoChoice)">
           <ion-radio ng-model="todoChoice" ng-value="2" name="kredit">Kredit beantragen</ion-radio>
         <div class="button-bar">
+
           <a ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Abbrechen</a>
+
           <button type="button" class="button button-stable  button-block  icon ion-arrow-graph-up-right" ng-click="startFinance()"></button>
-          <button type="submit" class="button button-energized button-block">Weiter</button>
+          <button type="submit" class="button button-energized button-block">weiter</button>
         </div>
         </form>
 

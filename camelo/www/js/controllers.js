@@ -1,8 +1,12 @@
 angular.module('app.controllers', ['ionic','ngCordova'])
 
-.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$ionicPopup) {
+
+.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup) {
+
 //Start Values
-  window.localStorage.setItem("Konto1", 650 );
+  $scope.formdata = [];
+  $scope.formdata.betragValue = NaN;
+
   window.localStorage.setItem("Konto2", 500 );
   window.localStorage.setItem("Konto3", 3000 );
   window.localStorage.setItem("rate", 25 );
@@ -14,6 +18,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   //End Start Values
 
   $scope.checkAmount = function(betrag) {
+
 
     betragValue = parseInt(betrag);
 
@@ -42,21 +47,12 @@ angular.module('app.controllers', ['ionic','ngCordova'])
     }
     ;
   }
-})
-
-.controller('wunschlisteCtrl', function($scope,$cordovaBarcodeScanner,$ionicPlatform) {
-  $scope.scanBarCode = function(){
-    console.log('ich bin drin');
+  $scope.scanBarCode = function() {
     $ionicPlatform.ready(function() {
       $cordovaBarcodeScanner
         .scan()
         .then(function(result) {
-          // Success! Barcode data is here
-          var scanResults = "We got a barcode\n" +
-            "Result: " + result.text + "\n" +
-            "Format: " + result.format + "\n" +
-            "Cancelled: " + result.cancelled;
-          console.log(scanResults);
+          $scope.formdata.betragValue=249;
         }, function(error) {
           // An error occurred
           var scanResults = 'Error: ' + error;
@@ -64,6 +60,14 @@ angular.module('app.controllers', ['ionic','ngCordova'])
         });
     });
   };
+
+})
+
+
+
+
+.controller('wunschlisteCtrl', function($scope) {
+
 })
 
 .controller('finanzstatusCtrl', function($scope) {

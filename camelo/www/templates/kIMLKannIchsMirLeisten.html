@@ -1,12 +1,18 @@
 <ion-view title="KIML - Kann ichs mir Leisten?">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-        <form class="list" ng-submit="checkAmount(betragValue)">
+        <form class="list" ng-submit="checkAmount(formdata.betragValue)">
             <label class="item item-input" name="betrag">
                 <span class="input-label">Betrag in €:</span>
-                <input type="number"  ng-model="betragValue" >
+                <input type="number" ng-model="formdata.betragValue" >
             </label>
-          </br></br>
-          <button type="submit" class="button button-energized button-block">Kann ich's mir leisten?</button>
+            <div class="item">
+              <button type="button" class="button button-block button-positive" ng-click="scanBarCode()">
+                <i class="icon ion-qr-scanner"></i>
+                Scan Now
+              </button>
+            </div>
+            </br></br>
+            <button type="submit" class="button button-energized button-block">Kann ich's mir leisten?</button>
         </form>
     </ion-content>
 </ion-view>
