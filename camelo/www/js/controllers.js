@@ -11,7 +11,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   window.localStorage.setItem("amount",0);
   window.localStorage.setItem("kreditRate", 0);
   window.localStorage.setItem("kreditLaufzeit", 0);
-  window.localStorage.setItem("financeType",'green');
+  window.localStorage.setItem("financeType",'ohne');
   //End Start Values
 
   $scope.checkAmount = function(betrag){
@@ -56,7 +56,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
 .controller('finanzstatusCtrl', function($scope) {
-
+ $scope.financeType = window.localStorage.getItem("financeType");
 })
 
 .controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
@@ -65,7 +65,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   $scope.konto1 = window.localStorage.getItem("Konto1");
 
   $scope.startFinance = function(){
-    window.localStorage.setItem("financeType",'green');
+    window.localStorage.setItem("financeType",'gruen');
     $state.go('menu.finanzstatus');
   };
 
@@ -109,7 +109,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   $scope.konto1 = window.localStorage.getItem("Konto1");
 
   $scope.startFinance = function(){
-    window.localStorage.setItem("financeType",'yellow');
+    window.localStorage.setItem("financeType",'gelb');
     $state.go('menu.finanzstatus');
   };
 
@@ -132,18 +132,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
                 //don't allow the user to close unless he enters wifi password
                 window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
 
-                if(target>0) {
-                  console.log(target);
-                  if (target == 1) {
-                    $state.go('menu.umbuchung');
-                  }
-                  if (target == 2) {
-                    $state.go('menu.kredit')
-                  }
-
-
-                }
-
+                $state.go('menu.kIMLKannIchsMirLeisten');
 
               } else {
                 e.preventDefault();
@@ -177,7 +166,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
     $scope.konto1 = window.localStorage.getItem("Konto1");
 
     $scope.startFinance = function(){
-      window.localStorage.setItem("financeType",'red');
+      window.localStorage.setItem("financeType",'rot');
       $state.go('menu.finanzstatus');
     };
 
@@ -200,16 +189,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
                   //don't allow the user to close unless he enters wifi password
                   window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
 
-                  if(target>0) {
-                    console.log(target);
-                    if (target == 1) {
-                      $state.go('menu.umbuchung');
-                    }
-                    if (target == 2) {
-                      $state.go('menu.kredit')
-                    }
-
-                  }
+                  $state.go('menu.kIMLKannIchsMirLeisten');
 
 
                 } else {
