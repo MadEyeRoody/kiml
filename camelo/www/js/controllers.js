@@ -1,6 +1,6 @@
 angular.module('app.controllers', ['ionic','ngCordova'])
 
-.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state) {
+.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$ionicPopup) {
 //Start Values
   window.localStorage.setItem("Konto1", 650 );
   window.localStorage.setItem("Konto2", 500 );
@@ -13,22 +13,35 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   window.localStorage.setItem("financeType",'ohne');
   //End Start Values
 
-  $scope.checkAmount = function(betrag){
+  $scope.checkAmount = function(betrag) {
 
-  betragValue=parseInt(betrag);
+    betragValue = parseInt(betrag);
 
-  console.log(betragValue);
+    console.log(betragValue);
+    if (betragValue >0){
+      if (betragValue > 3980) {
+        $state.go('menu.empfehlung3');
 
-  if(betragValue>3980){
-    $state.go('menu.empfehlung3');
+      } else if (betrag > 280 && betrag < 3980) {
+        $state.go('menu.empfehlung2');
+      } else {
+        $state.go('menu.empfehlung');
+      }
+      window.localStorage.setItem("amount", betragValue)
+    } else {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Kein Betrag eingegeben',
+        template: 'Bitte gib einen Betrag ein!'
+      });
 
-  }else if(betrag>280 && betrag<3980) {
-    $state.go('menu.empfehlung2');
-  }else {
-      $state.go('menu.empfehlung');
+      alertPopup.then(function(res) {
+        //window.localStorage.setItem("Konto1",window.localStorage.getItem("Konto1")+$scope.fehlbetrag)
+        console.log('no Input');
+
+      });
     }
-  window.localStorage.setItem("amount", betragValue)
-  };
+    ;
+  }
 })
 
 .controller('wunschlisteCtrl', function($scope,$cordovaBarcodeScanner,$ionicPlatform) {
