@@ -8,6 +8,7 @@ angular.module('app.controllers', [])
   window.localStorage.setItem("Konto3", 2058 );
   window.localStorage.setItem("rate", 25 );
   window.localStorage.setItem("laufzeit", 18 );
+  window.localStorage.setItem("amount",0);
   //End Start Values
 
   $scope.checkAmount = function(betrag){
