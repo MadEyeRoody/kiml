@@ -3,11 +3,11 @@
         <form class="list"></form>
         <h2>Angebot:</h2>
         <ion-list>
-            <ion-item>Betrag: 250,- €</ion-item>
-            <ion-item>Laufzeit: 6 Monate</ion-item>
-            <ion-item>Rate: 50,- €</ion-item>
+            <ion-item>Betrag: {{fehlbetrag}} €</ion-item>
+            <ion-item>Laufzeit: {{kreditLaufzeit}} Monate</ion-item>
+            <ion-item>Rate: {{kreditRate}} €</ion-item>
         </ion-list>
-        <button class="button button-energized button-block ">Kostenpflichtig bestellen!</button>
+        <button class="button button-energized button-block " ng-click="order()">Kostenpflichtig bestellen!</button>
         <a ui-sref="menu.kredit" class="button button-light button-block  icon-left ion-android-arrow-back">abbrechen</a>
     </ion-content>
 </ion-view>

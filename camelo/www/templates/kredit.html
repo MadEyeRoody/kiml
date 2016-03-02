@@ -13,15 +13,15 @@
         <form class="list">
             <ion-label>Laufzeit in Monaten: </ion-label>
             <ion-item class="range range-positive">{{laufzeit}}
-                <input type="range"  min="6" max="36" name="laufzeit" ng-model="laufzeit">
+                <input type="range"  min="6" max="36" name="RangeLaufzeit" ng-model="laufzeit" ng-change="saveLaufzeit(laufzeit)">
             </ion-item>
           <ion-label>Rate in € pro Monat: </ion-label>
             <ion-item class="range range-positive">
              <ion-label >{{rate}}</ion-label>
-                <input type="range" min="50" max="600" name="rate" ng-model="rate">
+                <input type="range" min="50" max="600" name="rangeRate" ng-model="rate" ng-change="saveRate(rate)">
             </ion-item>
         </form>
-        <a ui-sref="menu.kredit2" class="button button-energized button-block  icon-right ion-android-arrow-forward">weiter</a>
+      <a ui-sref="menu.kredit2" class="button button-energized button-block  icon-right ion-android-arrow-forward">weiter</a>
         <a ui-sref="menu.empfehlung2" class="button button-light button-block  icon-left ion-android-arrow-back">zurück</a>
     </ion-content>
 </ion-view>

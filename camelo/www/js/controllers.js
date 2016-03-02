@@ -9,6 +9,8 @@ angular.module('app.controllers', [])
   window.localStorage.setItem("rate", 25 );
   window.localStorage.setItem("laufzeit", 18 );
   window.localStorage.setItem("amount",0);
+  window.localStorage.setItem("kreditRate", 0);
+  window.localStorage.setItem("kreditLaufzeit", 0);
   //End Start Values
 
   $scope.checkAmount = function(betrag){
@@ -61,52 +63,88 @@ angular.module('app.controllers', [])
 
   $scope.umbuchen = function(kontoChoice){
 
-    console.log(kontoChoice);
-    if(kontoChoice==1){
-    $scope.konto1 = $scope.konto1-$scope.fehlbetrag;
-      window.localStorage.setItem("Konto1",$scope.konto1);
+    if(kontoChoice>0) {
+      console.log(kontoChoice);
+      if (kontoChoice == 1) {
+        $scope.konto1 = $scope.konto1 - $scope.fehlbetrag;
+        window.localStorage.setItem("Konto1", $scope.konto1);
+      }
+      if (kontoChoice == 2) {
+        $scope.konto2 = $scope.konto2 - $scope.fehlbetrag;
+        window.localStorage.setItem("Konto2", $scope.konto2);
+      }
+      if (kontoChoice == 3) {
+        $scope.konto3 = $scope.konto3 - $scope.fehlbetrag;
+        window.localStorage.setItem("Konto3", $scope.konto3);
+      }
+
+
+      var alertPopup = $ionicPopup.alert({
+        title: 'Umbuchung erfolgreich',
+        template: 'Vom Konto ' + kontoChoice + ' wurden erfolgreich ' + $scope.fehlbetrag + ' € umgebucht!'
+      });
+
+      alertPopup.then(function (res) {
+        console.log('Umbuchung durchgeführt');
+        $state.go('menu.empfehlung');
+      });
+
+      $scope.fehlbetrag = 0;
+      window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag);
+    }else {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Kein Konto ausgewählt',
+        template: 'Bitte wählen Sie ein Konto für die Umbuchung aus!'
+      });
+
+      alertPopup.then(function(res) {
+        console.log('Umbuchung nicht durchgeführt');
+
+      });
     }
-    if(kontoChoice==2){
-      $scope.konto2 = $scope.konto2-$scope.fehlbetrag;
-      window.localStorage.setItem("Konto2",$scope.konto2);
-    }
-    if(kontoChoice==3){
-      $scope.konto3 = $scope.konto3-$scope.fehlbetrag;
-      window.localStorage.setItem("Konto3",$scope.konto3);
-    }
-
-
-
-    var alertPopup = $ionicPopup.alert({
-      title: 'Umbuchung erfolgreich',
-      template: 'Vom Konto '+ kontoChoice+' wurden erfolgreich '+$scope.fehlbetrag+' € umgebucht!'
-    });
-
-    alertPopup.then(function(res) {
-      console.log('Umbuchung durchgeführt');
-      $state.go('menu.empfehlung');
-    });
-
-    $scope.fehlbetrag=0;
-    window.localStorage.setItem("fehlbetrag",$scope.fehlbetrag);
-
 
   };
 
 
 })
 
-.controller('kreditCtrl', function($scope) {
+.controller('kreditCtrl', function($scope, $state) {
   $scope.fehlbetrag=window.localStorage.getItem("fehlbetrag");
   $scope.rate=window.localStorage.getItem("rate");
   $scope.laufzeit= window.localStorage.getItem("laufzeit");
 $scope.gesamtbetrag=window.localStorage.getItem("amount");
 
+  $scope.saveRate = function(rate){
+    console.log(rate);
+    window.localStorage.setItem("kreditRate", rate);
+
+  }
+
+  $scope.saveLaufzeit = function(laufzeit){
+    console.log(laufzeit);
+    window.localStorage.setItem("kreditLaufzeit", laufzeit);
+  }
 
 })
 
 
 
-.controller('kredit2Ctrl', function($scope) {
+.controller('kredit2Ctrl', function($scope,$state,$ionicPopup) {
+  $scope.fehlbetrag=window.localStorage.getItem("fehlbetrag");
+  $scope.kreditRate=window.localStorage.getItem("kreditRate");
+  $scope.kreditLaufzeit= window.localStorage.getItem("kreditLaufzeit");
 
+
+  $scope.order = function(){
+    var alertPopup = $ionicPopup.alert({
+      title: 'Kreditantrag erfolgreich',
+      template: 'Ihr Kreditbetrag von '+ $scope.fehlbetrag + ' € wurde Ihrem Konto gutgeschrieben!'
+    });
+
+    alertPopup.then(function(res) {
+      window.localStorage.setItem("Konto1",window.localStorage.getItem("Konto1")+$scope.fehlbetrag)
+      console.log('Kreditantrag durchgeführt');
+      $state.go('menu.empfehlung');
+    });
+  }
 })
