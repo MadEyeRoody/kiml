@@ -100,7 +100,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
 .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
-  window.localStorage.setItem("fehlbetrag", 281);
+  window.localStorage.setItem("fehlbetrag", 119);
   $scope.todoChoice = 1;
   $scope.amount = window.localStorage.getItem("amount");
   $scope.konto1 = window.localStorage.getItem("Konto1");
@@ -108,6 +108,17 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   $scope.startFinance = function(){
     window.localStorage.setItem("financeType",'gelb');
     $state.go('menu.finanzstatus');
+  };
+
+  $scope.notify = function(){
+    var alertPopup = $ionicPopup.alert({
+      title: 'Hinweis',
+      template: 'Aufgrund deiner Präferenzen (Minimalbetrag) und noch prognostizerter Abbuchungen fehlen Dir noch 119 €'
+    });
+
+    alertPopup.then(function (res) {
+      console.log('Information Shown');
+    });
   };
 
   $scope.doneYellow = function(choice,target){
@@ -168,6 +179,16 @@ angular.module('app.controllers', ['ionic','ngCordova'])
       $state.go('menu.finanzstatus');
     };
 
+    $scope.notify = function() {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Hinweis',
+        template: 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch 1920 €! Es sind keine Umbuchungsmöglichkeiten vorhanden'
+      });
+
+      alertPopup.then(function (res) {
+        console.log('Information Shown');
+      });
+    }
     $scope.doneYellow = function(choice,target){
 
 
@@ -233,26 +254,29 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
 
   $scope.umbuchen = function(kontoChoice){
-
+    var konto = '';
     if(kontoChoice>0) {
       console.log(kontoChoice);
       if (kontoChoice == 1) {
-        $scope.konto1 = $scope.konto1 - $scope.fehlbetrag;
+        //$scope.konto1 = $scope.konto1 - $scope.fehlbetrag;
         window.localStorage.setItem("Konto1", $scope.konto1);
+        konto = 'Girokonto';
       }
       if (kontoChoice == 2) {
-        $scope.konto2 = $scope.konto2 - $scope.fehlbetrag;
+        //$scope.konto2 = $scope.konto2 - $scope.fehlbetrag;
         window.localStorage.setItem("Konto2", $scope.konto2);
+        konto = 'Tagesgeldkonto';
       }
       if (kontoChoice == 3) {
-        $scope.konto3 = $scope.konto3 - $scope.fehlbetrag;
+        //$scope.konto3 = $scope.konto3 - $scope.fehlbetrag;
         window.localStorage.setItem("Konto3", $scope.konto3);
+        konto = 'Gemeinschaftskonto';
       }
 
 
       var alertPopup = $ionicPopup.alert({
         title: 'Umbuchung erfolgreich',
-        template: 'Vom Konto ' + kontoChoice + ' wurden erfolgreich ' + $scope.fehlbetrag + ' € umgebucht!'
+        template: 'Vom ' + konto + ' wurden erfolgreich ' + $scope.fehlbetrag + ' € umgebucht!'
       });
 
       alertPopup.then(function (res) {
@@ -313,9 +337,9 @@ $scope.gesamtbetrag=window.localStorage.getItem("amount");
     });
 
     alertPopup.then(function(res) {
-      window.localStorage.setItem("Konto1",window.localStorage.getItem("Konto1")+$scope.fehlbetrag)
+      //window.localStorage.setItem("Konto1",window.localStorage.getItem("Konto1")+$scope.fehlbetrag)
       console.log('Kreditantrag durchgeführt');
-      $state.go('menu.empfehlung');
+      $state.go('menu.kIMLKannIchsMirLeisten');
     });
   }
 })
