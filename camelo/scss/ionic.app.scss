@@ -19,6 +19,13 @@ $button-stable-text:              #fff !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
+$big-bg:      '../img/Volksbank_Logo.png';
+
+.scroll-bg {
+  background: url($big-bg) no-repeat center center fixed;
+  background-size: cover;
+}
+
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
