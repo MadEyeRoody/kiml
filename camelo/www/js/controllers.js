@@ -24,10 +24,10 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
     console.log(betragValue);
     if (betragValue >0){
-      if (betragValue > 3980) {
+      if (betragValue >= 3980) {
         $state.go('menu.empfehlung3');
 
-      } else if (betrag > 280 && betrag < 3980) {
+      } else if (betrag >= 280 && betrag < 3980) {
         $state.go('menu.empfehlung2');
       } else {
         $state.go('menu.empfehlung');
