@@ -1,12 +1,16 @@
 <ion-view title="KIML - Kann ichs mir Leisten?">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <form class="list">
+        <form class="list" ng-submit="checkAmount(betragValue)">
             <label class="item item-input" name="betrag">
                 <span class="input-label">Betrag in €:</span>
-                <input type="number" placeholder="">
+                <input type="number" placeholder="500" ng-model="betragValue" >
             </label>
+          </br></br>
+          <button type="submit" class="button button-stable button-block">Kaufen?</button>
         </form>
+      <!--
         <a ui-sref="menu.empfehlung" class="button button-stable button-block ">Kaufen? - positiv</a>
         <a ui-sref="menu.empfehlung2" class="button button-stable button-block ">Kaufen? - negativ</a>
+      -->
     </ion-content>
 </ion-view>
