@@ -85,6 +85,15 @@ angular.module('app.routes', [])
       }
     }
   })
+    .state('menu.impressum', {
+      url: '/impressum',
+      views: {
+        'side-menu21': {
+          templateUrl: 'templates/impressum.html',
+          controller: 'impressumCtrl'
+        }
+      }
+    })
 
   .state('menu.umbuchung', {
     url: '/umbuchung',

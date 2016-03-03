@@ -79,6 +79,10 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
 })
 
+  .controller('impressumCtrl', function($scope) {
+
+  })
+
 .controller('finanzstatusCtrl', function($scope) {
  $scope.financeType = window.localStorage.getItem("financeType");
 })
