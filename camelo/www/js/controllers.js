@@ -3,7 +3,17 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
 .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup) {
 
-//Start Values
+  var deviceInformation = ionic.Platform.device();
+  var isAndroid = ionic.Platform.isAndroid();
+
+  if(isAndroid) {
+    $scope.barcodeScannerVisibility=true;
+  }
+  else {
+    $scope.barcodeScannerVisibility=false;
+  }
+
+  //Start Values
   $scope.formdata = [];
   $scope.formdata.betragValue = NaN;
   window.localStorage.setItem("Konto1", 650 );
@@ -18,7 +28,6 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   //End Start Values
 
   $scope.checkAmount = function(betrag) {
-
 
     betragValue = parseInt(betrag);
 
