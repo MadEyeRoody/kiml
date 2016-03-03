@@ -19,7 +19,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   window.localStorage.setItem("Konto1", 650 );
   window.localStorage.setItem("Konto2", 500 );
   window.localStorage.setItem("Konto3", 3000 );
-  window.localStorage.setItem("rate", 25 );
+  window.localStorage.setItem("rate", 100 );
   window.localStorage.setItem("laufzeit", 18 );
   window.localStorage.setItem("amount",0);
   window.localStorage.setItem("kreditRate", 0);
@@ -61,7 +61,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
       $cordovaBarcodeScanner
         .scan()
         .then(function(result) {
-          $scope.formdata.betragValue=249;
+          $scope.formdata.betragValue=150;
         }, function(error) {
           // An error occurred
           var scanResults = 'Error: ' + error;
@@ -145,7 +145,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   $scope.notify = function(){
     var alertPopup = $ionicPopup.alert({
       title: 'Hinweis',
-      template: 'Aufgrund deiner Präferenzen (Minimalbetrag) und noch prognostizerter Abbuchungen fehlen Dir noch 119 €'
+      template: 'Aufgrund Deiner Präferenzen (Minimalbetrag) und noch prognostizerter Abbuchungen fehlen Dir noch 119 €'
     });
 
     alertPopup.then(function (res) {
