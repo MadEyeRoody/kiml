@@ -25,21 +25,30 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   window.localStorage.setItem("kreditRate", 0);
   window.localStorage.setItem("kreditLaufzeit", 0);
   window.localStorage.setItem("financeType",'ohne');
+  window.localStorage.setItem("prognose", 100);
+  window.localStorage.setItem("prognoseReason", 'Versicherungen');
+  window.localStorage.setItem("minRemaining", 200);
   //End Start Values
 
   $scope.checkAmount = function(betrag) {
 
     betragValue = parseInt(betrag);
+    prognose = parseInt(window.localStorage.getItem("prognose"));
+    minRemaining = parseInt(window.localStorage.getItem("minRemaining"));
+    konto1Value = parseInt(window.localStorage.getItem("Konto1"));
+    konto2Value = parseInt(window.localStorage.getItem("Konto2"));
+    konto3Value = parseInt(window.localStorage.getItem("Konto3"));
+    kontoGesamtValue = konto1Value + konto2Value + konto3Value;
 
     console.log(betragValue);
-    if (betragValue >0){
-      if (betragValue >= 3980) {
-        $state.go('menu.empfehlung3');
-
-      } else if (betrag >= 280 && betrag < 3980) {
-        $state.go('menu.empfehlung2');
-      } else {
+    if (betragValue>0){
+      if ((konto1Value - (betragValue+prognose))>=minRemaining) {
         $state.go('menu.empfehlung');
+
+      } else if ((kontoGesamtValue - (betragValue + prognose))>=minRemaining) {
+        $state.go('menu.empfehlung2');
+      } else if((kontoGesamtValue - (betragValue + prognose))< minRemaining) {
+        $state.go('menu.empfehlung3');
       }
       window.localStorage.setItem("amount", betragValue)
     } else {
@@ -88,9 +97,10 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
 .controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
-  window.localStorage.setItem("fehlbetrag", 0);
-  $scope.amount = window.localStorage.getItem("amount");
-  $scope.konto1 = window.localStorage.getItem("Konto1");
+  $scope.amount = parseInt((window.localStorage.getItem("amount")));
+  $scope.konto1 = parseInt((window.localStorage.getItem("Konto1")));
+  $scope.prognose = parseInt((window.localStorage.getItem("prognose")));
+  $scope.erwarteterStand = $scope.konto1 - ($scope.amount + $scope.prognose);
 
   $scope.startFinance = function(){
     window.localStorage.setItem("financeType",'gruen');
@@ -132,10 +142,14 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
 .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
-  window.localStorage.setItem("fehlbetrag", 119);
   $scope.todoChoice = 1;
-  $scope.amount = window.localStorage.getItem("amount");
-  $scope.konto1 = window.localStorage.getItem("Konto1");
+  $scope.amount = parseInt((window.localStorage.getItem("amount")));
+  $scope.konto1 = parseInt((window.localStorage.getItem("Konto1")));
+  $scope.prognose = parseInt((window.localStorage.getItem("prognose")));
+  $scope.minAmount = parseInt((window.localStorage.getItem("minRemaining")));
+  $scope.erwarteterStand = $scope.konto1 - ($scope.amount + $scope.prognose);
+  $scope.fehlbetrag = -($scope.erwarteterStand - $scope.minAmount);
+  window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag);
 
   $scope.startFinance = function(){
     window.localStorage.setItem("financeType",'gelb');
@@ -145,7 +159,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   $scope.notify = function(){
     var alertPopup = $ionicPopup.alert({
       title: 'Hinweis',
-      template: 'Aufgrund Deiner Präferenzen (Minimalbetrag) und noch prognostizerter Abbuchungen fehlen Dir noch 119 €'
+      template: 'Aufgrund Deiner Präferenzen (Minimalbetrag: '+ $scope.minAmount +' €) und noch prognostizerter Abbuchungen fehlen Dir ' +$scope.fehlbetrag+' €'
     });
 
     alertPopup.then(function (res) {
@@ -201,10 +215,14 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
   .controller('empfehlung3Ctrl', function($scope, $state,$ionicPopup) {
-    window.localStorage.setItem("fehlbetrag", 1920);
     $scope.todoChoice = 2;
-    $scope.amount = window.localStorage.getItem("amount");
-    $scope.konto1 = window.localStorage.getItem("Konto1");
+    $scope.amount = parseInt((window.localStorage.getItem("amount")));
+    $scope.konto1 = parseInt((window.localStorage.getItem("Konto1")));
+    $scope.prognose = parseInt((window.localStorage.getItem("prognose")));
+    $scope.minAmount = parseInt((window.localStorage.getItem("minRemaining")));
+    $scope.erwarteterStand = $scope.konto1 - ($scope.amount + $scope.prognose);
+    $scope.fehlbetrag = -($scope.erwarteterStand - $scope.minAmount);
+    window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag);
 
     $scope.startFinance = function(){
       window.localStorage.setItem("financeType",'rot');
@@ -214,7 +232,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
     $scope.notify = function() {
       var alertPopup = $ionicPopup.alert({
         title: 'Hinweis',
-        template: 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch 1920 €! Es sind keine Umbuchungsmöglichkeiten vorhanden'
+        template: 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch '+$scope.fehlbetrag+' €! Es sind keine Umbuchungsmöglichkeiten vorhanden'
       });
 
       alertPopup.then(function (res) {
@@ -375,3 +393,24 @@ $scope.gesamtbetrag=window.localStorage.getItem("amount");
     });
   }
 })
+
+
+$scope.getUserData = function(user, passwort){
+
+  if (user == 'Max Mustermann' && passwort == 'Start123') {
+    window.localStorage.setItem("Konto1", 650 );
+    window.localStorage.setItem("Konto2", 500 );
+    window.localStorage.setItem("Konto3", 3000 );
+    window.localStorage.setItem("rate", 100 );
+    window.localStorage.setItem("laufzeit", 18 );
+    window.localStorage.setItem("amount",0);
+    window.localStorage.setItem("financeType",'ohne');
+
+    // new Data
+    window.localStorage.setItem("prognose", -100);
+    window.localStorage.setItem("prognoseReason", 'Versicherungen');
+    window.localStorage.setItem("minRemaining", 200);
+
+  }
+
+}
