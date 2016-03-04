@@ -1,23 +1,24 @@
 <ion-view title="Kontoverwaltung">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-        <form class="list">
+        <form class="list" ng-submit="save(kontoChoice, minRemaining)">
           <div> <span class="input-label" style="color: #0066B3">Wähle dein Primärkonto:</span></div>
-          <ion-radio ng-model="kontoChoice" ng-value="1" name="konto1">Girokonto: {{konto1}} €
-            </br> <span style="font-size: smaller">DE 11 7019 0000 0000 0089 74</span>
+          <ion-radio ng-model="kontoChoice" ng-value="1" name="konto1">{{konto1Bez}}: {{konto1}} €
+            </br> <span style="font-size: smaller">{{konto1IBAN}}</span>
           </ion-radio>
-          <ion-radio ng-model="kontoChoice" ng-value="2" name="konto2">Tagegeld: {{konto2}} €
-            </br> <span style="font-size: smaller">DE 40 7919 0000 0001 5311 58</span>
+          <ion-radio ng-model="kontoChoice" ng-value="2" name="konto2">{{konto2Bez}}: {{konto2}} €
+            </br> <span style="font-size: smaller">{{konto2IBAN}}</span>
           </ion-radio>
-          <ion-radio ng-model="kontoChoice" ng-value="3" name="konto3">Gemeinschaftskonto: {{konto3}} €
-            </br> <span style="font-size: smaller">DE 46 1009 0900 0887 5754 33</span>
+          <ion-radio ng-model="kontoChoice" ng-value="3" name="konto3">{{konto3Bez}}: {{konto3}} €
+            </br> <span style="font-size: smaller">{{konto3IBAN}}</span>
           </ion-radio>
-        </form>
-        <form class="list">
-            <label class="item item-input" name="untergrenze">
+          </br></br>
+          <label class="item item-input" name="untergrenze">
                 <span class="input-label">Untergrenze in €:</span>
-                <input type="number" value="200" placeholder="500">
+                <input type="text" pattern="\\d{2}*" ng-model="minRemaining">
             </label>
+
+          <button type="submit" class="button button-energized button-block ">Speichern</button>
         </form>
-      <a ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Speichern</a>
+
     </ion-content>
 </ion-view>
