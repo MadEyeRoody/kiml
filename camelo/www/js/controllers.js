@@ -19,7 +19,6 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   window.localStorage.setItem("Konto1", 650 );
   window.localStorage.setItem("Konto2", 500 );
   window.localStorage.setItem("Konto3", 3000 );
-  window.localStorage.setItem("rate", 100 );
   window.localStorage.setItem("laufzeit", 18 );
   window.localStorage.setItem("amount",0);
   window.localStorage.setItem("kreditRate", 0);
@@ -167,48 +166,48 @@ angular.module('app.controllers', ['ionic','ngCordova'])
     });
   };
 
-  $scope.doneYellow = function(choice,target){
+  $scope.doneYellow = function(target){
 
 
-    if(choice){
-      var myPopup = $ionicPopup.show({
-        template: '<input type="text" ng-model="wishlist">',
-        title: 'Zur Wunschliste hinzufügen',
-        subTitle: 'Gib einen Namen für diesen Wunsch ein',
-        scope: $scope,
-        buttons: [
-          { text: 'Cancel' },
-          {
-            text: '<b>Save</b>',
-            type: 'button-energized',
-            onTap: function(e) {
-              if (!$scope.wishlist) {
-                //don't allow the user to close unless he enters wifi password
-                window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
-
-                $state.go('menu.kIMLKannIchsMirLeisten');
-
-              } else {
-                e.preventDefault();
-
-              }
-            }
-          }
-        ]
-      });
-    }else{
       if(target>0) {
         console.log(target);
         if (target == 1) {
-          $state.go('menu.umbuchung');
+          var myPopup = $ionicPopup.show({
+            template: '<input type="text" ng-model="wishlist">',
+            title: 'Zur Wunschliste hinzufügen',
+            subTitle: 'Gib einen Namen für diesen Wunsch ein',
+            scope: $scope,
+            buttons: [
+              { text: 'Cancel' },
+              {
+                text: '<b>Save</b>',
+                type: 'button-energized',
+                onTap: function(e) {
+                  if (!$scope.wishlist) {
+                    //don't allow the user to close unless he enters wifi password
+                    window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
+
+                    $state.go('menu.kIMLKannIchsMirLeisten');
+
+                  } else {
+                    e.preventDefault();
+
+                  }
+                }
+              }
+            ]
+          });
         }
         if (target == 2) {
+          $state.go('menu.umbuchung');
+        }
+        if (target == 3) {
           $state.go('menu.kredit')
         }
 
         }
 
-    }
+
 
   };
 
@@ -239,41 +238,39 @@ angular.module('app.controllers', ['ionic','ngCordova'])
         console.log('Information Shown');
       });
     }
-    $scope.doneYellow = function(choice,target){
+    $scope.doneYellow = function(target){
 
 
-      if(choice){
-        var myPopup = $ionicPopup.show({
-          template: '<input type="text" ng-model="wishlist">',
-          title: 'Zur Wunschliste hinzufügen',
-          subTitle: 'Gib einen Namen für diesen Wunsch ein',
-          scope: $scope,
-          buttons: [
-            { text: 'Cancel' },
-            {
-              text: '<b>Save</b>',
-              type: 'button-energized',
-              onTap: function(e) {
-                if (!$scope.wishlist) {
-                  //don't allow the user to close unless he enters wifi password
-                  window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
 
-                  $state.go('menu.kIMLKannIchsMirLeisten');
-
-
-                } else {
-                  e.preventDefault();
-
-                }
-              }
-            }
-          ]
-        });
-      }else{
         if(target>0) {
           console.log(target);
           if (target == 1) {
-            $state.go('menu.umbuchung');
+            var myPopup = $ionicPopup.show({
+              template: '<input type="text" ng-model="wishlist">',
+              title: 'Zur Wunschliste hinzufügen',
+              subTitle: 'Gib einen Namen für diesen Wunsch ein',
+              scope: $scope,
+              buttons: [
+                { text: 'Cancel' },
+                {
+                  text: '<b>Save</b>',
+                  type: 'button-energized',
+                  onTap: function(e) {
+                    if (!$scope.wishlist) {
+                      //don't allow the user to close unless he enters wifi password
+                      window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
+
+                      $state.go('menu.kIMLKannIchsMirLeisten');
+
+
+                    } else {
+                      e.preventDefault();
+
+                    }
+                  }
+                }
+              ]
+            });
           }
           if (target == 2) {
             $state.go('menu.kredit')
@@ -281,7 +278,7 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
         }
 
-      }
+
 
     };
 
@@ -354,20 +351,22 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 })
 
 .controller('kreditCtrl', function($scope, $state) {
-  $scope.fehlbetrag=window.localStorage.getItem("fehlbetrag");
-  $scope.rate=window.localStorage.getItem("rate");
-  $scope.laufzeit= window.localStorage.getItem("laufzeit");
+  $scope.fehlbetrag=parseFloat(window.localStorage.getItem("fehlbetrag"));
+  //$scope.rate=window.localStorage.getItem("rate");
+  $scope.laufzeit= parseFloat(window.localStorage.getItem("laufzeit"));
 $scope.gesamtbetrag=window.localStorage.getItem("amount");
 
-  $scope.saveRate = function(rate){
-    console.log(rate);
-    window.localStorage.setItem("rate", rate);
 
-  }
+  $scope.rate =Math.round(100.0 * ($scope.fehlbetrag/ $scope.laufzeit)) / 100.0; ;
 
   $scope.saveLaufzeit = function(laufzeit){
     console.log(laufzeit);
     window.localStorage.setItem("laufzeit", laufzeit);
+    $scope.rate =Math.round(100.0 * ($scope.fehlbetrag/ laufzeit)) / 100.0; ;
+    console.log($scope.rate);
+    $scope.$apply();
+    window.localStorage.setItem("rate", $scope.rate);
+
   }
 
 })
@@ -401,7 +400,6 @@ $scope.getUserData = function(user, passwort){
     window.localStorage.setItem("Konto1", 650 );
     window.localStorage.setItem("Konto2", 500 );
     window.localStorage.setItem("Konto3", 3000 );
-    window.localStorage.setItem("rate", 100 );
     window.localStorage.setItem("laufzeit", 18 );
     window.localStorage.setItem("amount",0);
     window.localStorage.setItem("financeType",'ohne');

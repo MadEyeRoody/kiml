@@ -11,10 +11,11 @@
         </table>
       </div>
       </br>
-        <ion-toggle  ng-model="wishlist" ng-checked="wishlist" name="wishlist">zur Wunschliste hinzufügen</ion-toggle>
         </br>
-        <form ng-submit="doneYellow(wishlist,todoChoice)">
-          <ion-radio ng-model="todoChoice" ng-value="2" name="kredit">Kredit beantragen</ion-radio>
+      <span style="text-align: right; color: #0066B3">Was willst du tun?</span>
+      <form ng-submit="doneYellow(todoChoice)">
+        <ion-radio  ng-model="todoChoice" ng-value="1" name="wishlist">zur Wunschliste hinzufügen</ion-radio>
+        <ion-radio ng-model="todoChoice" ng-value="2" name="kredit">Kredit beantragen</ion-radio>
         <div class="button-bar">
 
           <a ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Abbrechen</a>
