@@ -14,7 +14,7 @@
           </br></br>
           <label class="item item-input" name="untergrenze">
                 <span class="input-label">Untergrenze in €:</span>
-                <input type="text" pattern="\\d{2}*" ng-model="minRemaining">
+                <input type="text" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="minRemaining">
             </label>
 
           <button type="submit" class="button button-energized button-block ">Speichern</button>

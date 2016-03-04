@@ -5,7 +5,7 @@
       <form class="list" ng-submit="checkAmount(formdata.betragValue)">
             <label class="item item-input" name="betrag">
                 <span class="input-label">Betrag in €:</span>
-                <input type="text" pattern="\\d{2}*" ng-model="formdata.betragValue" >
+                <input type="text" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="formdata.betragValue" >
             </label>
             <div class="item"  ng-show="barcodeScannerVisibility">
               <button type="button" class="button button-block button-positive" ng-click="scanBarCode()">
