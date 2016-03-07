@@ -98,7 +98,49 @@ angular.module('app.controllers', ['ionic','ngCordova'])
   })
 
 .controller('finanzstatusCtrl', function($scope) {
- $scope.financeType = window.localStorage.getItem("financeType");
+ //$scope.financeType = window.localStorage.getItem("financeType");
+  minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
+  primeKonto = window.localStorage.getItem("primeKonto");
+  primeKontoValue = parseFloat(window.localStorage.getItem("Konto"+primeKonto));
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawVisualization);
+console.log(primeKontoValue);
+
+  function drawVisualization() {
+    var d = new Date();
+    d.setDate(1);
+    var n = new Date();
+    // Some raw data (not necessarily accurate)
+    var data = google.visualization.arrayToDataTable([
+      ['Monat', 'Saldo',  'Prognose', 'Mindestgrenze'],
+      [n.getMonth(n.setMonth(d.getMonth()-2))+1+'/'+ n.getFullYear(),  820,    ,minRemaining],
+      [n.getMonth(n.setMonth(d.getMonth()-1))+1+'/'+n.getFullYear(),  450,    ,minRemaining],
+      [d.getMonth()+1+'/'+d.getFullYear(),  primeKontoValue,   primeKontoValue  ,minRemaining ],
+      [n.getMonth(n.setMonth(d.getMonth()+1))+1+'/'+n.getFullYear(),,   primeKontoValue-89, minRemaining],
+      [n.getMonth(n.setMonth(d.getMonth()+2))+1+'/'+n.getFullYear(),,   700, minRemaining],
+    ]);
+
+    var options = {
+
+      vAxis:{
+        format:'decimal',
+
+      },
+      seriesType: 'line',
+      series: {
+        0: {color:'#0066B3', type:'area', areaOpacity:1.0},
+        1: {color: '#ff6600', lineDashStyle:[3,3]},
+        2: {visibleInLegend:'true', color:'green' }
+      },
+      legend: {
+        position: 'bottom',
+        maxLines:3
+      },
+    };
+
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
 })
 
 .controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
