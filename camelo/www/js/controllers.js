@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['ionic','ngCordova'])
+angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
 
 .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup) {
@@ -99,12 +99,65 @@ angular.module('app.controllers', ['ionic','ngCordova'])
 
 .controller('finanzstatusCtrl', function($scope) {
  //$scope.financeType = window.localStorage.getItem("financeType");
-  minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
+
+  $scope.myData = [10,20,30,40,60];
+
+/*  $scope.options = {
+    chart: {
+      type: 'lineChart',
+      height: 450,
+      margin: {
+        top: 20,
+        right: 20,
+        bottom: 40,
+        left: 55
+      },
+      x: function (d) {
+        return d.x;
+      },
+      y: function (d) {
+        return d.y;
+      },
+      useInteractiveGuideline: true,
+      dispatch: {
+        stateChange: function (e) {
+          console.log("stateChange");
+        },
+        changeState: function (e) {
+          console.log("changeState");
+        },
+        tooltipShow: function (e) {
+          console.log("tooltipShow");
+        },
+        tooltipHide: function (e) {
+          console.log("tooltipHide");
+        }
+      },
+      xAxis: {
+        tickFormat: function (d) {
+          return d3.time.format('%x')(new Date(d));
+        },
+        yAxis: {
+          axisLabel: 'Saldo',
+          tickFormat: function (d) {
+            return d3.format(d +' €');
+          },
+          axisLabelDistance: -10
+        },
+        callback: function (chart) {
+          console.log("!!! lineChart callback !!!");
+        }
+      },
+    }
+
+  };
+  $scope.data = dataset;+/
+
+ /* minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
   primeKonto = window.localStorage.getItem("primeKonto");
   primeKontoValue = parseFloat(window.localStorage.getItem("Konto"+primeKonto));
   google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawVisualization);
-console.log(primeKontoValue);
+  google.charts.setOnLoadCallback(drawVisualization());
 
   function drawVisualization() {
     var d = new Date();
@@ -138,9 +191,9 @@ console.log(primeKontoValue);
       },
     };
 
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
+    $scope.chart = new google.visualization.ComboChart(document.getElementById('chart'));
+    $scope.chart.draw(data, options);
+  }*/
 })
 
 .controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
@@ -458,7 +511,7 @@ $scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2)
 })
 
 
-$scope.getUserData = function(user, passwort){
+/*$scope.getUserData = function(user, passwort){
 
   if (user == 'Max Mustermann' && passwort == 'Start123') {
     window.localStorage.setItem("Konto1", 650 );
@@ -475,4 +528,127 @@ $scope.getUserData = function(user, passwort){
 
   }
 
+}*/
+  .controller('multiChartCtrl', function($scope){
+    var tickMarks = [new Date(2016,0,1),new Date(2016,1,1),new Date(2016,2,1),
+      new Date(2016,3,1),new Date(2016,4,1),new Date(2016,5,1),new Date(2016,6,1),
+      new Date(2016,7,1),new Date(2016,8,1),new Date(2016,9,1),new Date(2016,10,1),new Date(2016,11,1)]
+
+
+    var force = [new Date(2016,1,1),new Date(2016,11,1)]
+    $scope.options = {
+      chart: {
+        forceX: force,
+        type: 'multiChart',
+        height: 450,
+        margin : {
+          top: 20,
+          left: 50
+        },
+        color: d3.scale.category10().range(),
+        //useInteractiveGuideline: true,
+        duration: 500,
+
+        xAxis: {
+        //  ticks:d3.time.month,
+          tickValues: tickMarks,
+          tickFormat: function(d){
+            return d3.time.format("%b")(new Date(d));
+          }
+        },
+        yAxis1: {
+          tickFormat: function(d){
+            return d3.format('s')(d)+' €';
+          }
+        }
+
+      }
+    };
+    var n = new Date();
+    n.setDate(1);
+    $scope.data = [
+
+      {
+        "key": "Saldo",
+        type: 'area',
+        yAxis: 1,
+
+        "color": "#0066B3",
+        "values": [
+          {
+            "x": new Date(2016,1,1),
+            "y": 12
+          },
+          {
+            "x":  new Date(2016,2,1),
+            "y": 10.23
+          },
+          {
+            "x":  new Date(2016,3,1),
+            "y": 30.55
+          },
+          {
+            "x":  new Date(2016,4,1),
+            "y": 38
+          },
+          {
+            "x": new Date(2016,4,1),
+            "y": 0
+          },
+          {
+            "x":  new Date(2016,5,1),
+            "y": 0
+          },
+          {
+            "x":  new Date(2016,6,1),
+            "y": 0
+          }
+        ]
+      },{
+        "key": "Prognose",
+        type: 'area',
+        yAxis: 1,
+        "color": "#ffaa00",
+        "values": [
+          {
+            "x": new Date(2016,1,1),
+            "y": 0
+          },
+          {
+            "x":  new Date(2016,2,1),
+            "y": 0
+          },
+          {
+            "x":  new Date(2016,3,1),
+            "y": 0
+          },
+          {
+            "x":  new Date(2016,4,1),
+            "y": 0
+          },
+          {
+            "x": new Date(2016,4,1),
+            "y": 38
+          },
+          {
+            "x":  new Date(2016,5,1),
+            "y": 25
+          },
+          {
+            "x":  new Date(2016,6,1),
+            "y": 50
+          }
+        ]
+      }
+
+    ]
+
+console.log($scope.data);
+
+
+  })
+
+function sortByDateAscending(a, b) {
+  // Dates will be cast to numbers automagically:
+  return a.date - b.date;
 }

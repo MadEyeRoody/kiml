@@ -1,10 +1,23 @@
 <ion-view title="Finanzstatus">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-      <div id="chart_div" ></div>
 
-      <!--  <div style="text-align:center;">
-            <img src="img/finanzstatus-{{financeType}}.png" width="100%" height="auto">
-        </div> -->
+      <div ng-app="app.controllers">
+        <div ng-controller="multiChartCtrl">
+          <nvd3 options="options" data="data"></nvd3>
+        </div>
+      </div>
+
+
+      <!--
+        <div ng-app="app.directives" ng-controller="finanzstatusCtrl">
+
+       <div d3-bars bar-height="20" bar-padding="5"></div>
+
+      </div>
+        <nvd3 options="options" data="data"></nvd3>
+       <div style="text-align:center;">
+             <img src="img/finanzstatus-{{financeType}}.png" width="100%" height="auto">
+         </div> -->
 
     </ion-content>
 </ion-view>
