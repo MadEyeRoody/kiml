@@ -1,14 +1,20 @@
-<ion-view title="Finanzstatus">
+<ion-view title="Finanzstatus" hide-back-button="true">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
+
+
+
 
       <div ng-app="app.controllers">
         <div ng-controller="multiChartCtrl">
-          <nvd3 options="options" data="data"></nvd3>
+          <nvd3 options="options" data="data" config="config" ></nvd3>
         </div>
       </div>
 
 
+
+
       <!--
+     <div class="ct-chart ct-perfect-fourth"></div>
         <div ng-app="app.directives" ng-controller="finanzstatusCtrl">
 
        <div d3-bars bar-height="20" bar-padding="5"></div>

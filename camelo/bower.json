@@ -5,6 +5,7 @@
     "ionic": "driftyco/ionic-bower#1.1.0"
   },
   "dependencies": {
-    "angularjs-nvd3-directives": "^0.0.7"
+    "angularjs-nvd3-directives": "^0.0.7",
+    "chartist": "^0.9.7"
   }
 }
