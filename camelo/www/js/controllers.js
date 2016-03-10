@@ -139,7 +139,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
      yAxis: {
      axisLabel: 'Saldo',
      tickFormat: function (d) {
-     return d3.format(d +' â‚¬');
+     return d3.format(d +' €');
      },
      axisLabelDistance: -10
      },
@@ -207,13 +207,16 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
       $state.go('menu.finanzstatus');
     };
 
+    $scope.changeTodo = function(target){
+      $scope.wishlist = target;
+    }
     $scope.doneGreen = function(choice){
-
+      choice = $scope.wishlist;
       if(choice){
         var myPopup = $ionicPopup.show({
-          template: '<input type="text" ng-model="wishlist">',
-          title: 'Zur Wunschliste hinzufÃ¼gen',
-          subTitle: 'Gib einen Namen fÃ¼r diesen Wunsch ein',
+          template: '<input type="text">',
+          title: 'Zur Wunschliste hinzufügen',
+          subTitle: 'Gib einen Namen für diesen Wunsch ein',
           scope: $scope,
           buttons: [
             { text: 'Cancel' },
@@ -223,7 +226,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
               onTap: function(e) {
                 if (!$scope.wishlist) {
                   //don't allow the user to close unless he enters wifi password
-                  window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' â‚¬');
+                  window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
                   $state.go('menu.kIMLKannIchsMirLeisten');
                 } else {
                   e.preventDefault();
@@ -242,7 +245,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
   })
 
   .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
-    $scope.todoChoice = 1;
+    $scope.todoChoice = "1";
     $scope.amount = parseFloat((window.localStorage.getItem("amount")));
     $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
@@ -260,7 +263,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.notify = function(){
       var alertPopup = $ionicPopup.alert({
         title: 'Hinweis',
-        template: 'Aufgrund Deiner PrÃ¤ferenzen (Minimalbetrag: '+ $scope.minAmount.toFixed(2) +' â‚¬) und noch prognostizerter Abbuchungen ('+$scope.prognose.toFixed(2)+' â‚¬ fÃ¼r Versicherungen) fehlen Dir ' +$scope.fehlbetrag+' â‚¬'
+        template: 'Aufgrund Deiner Präferenzen (Minimalbetrag: '+ $scope.minAmount.toFixed(2) +' €) und noch prognostizerter Abbuchungen ('+$scope.prognose.toFixed(2)+' € für Versicherungen) fehlen Dir ' +$scope.fehlbetrag+' €'
       });
 
       alertPopup.then(function (res) {
@@ -268,16 +271,19 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
       });
     };
 
-    $scope.doneYellow = function(target){
+    $scope.changeTodo = function(target){
+      $scope.todoChoice = target;
+    }
 
-
+    $scope.doneYellow = function(){
+      target = $scope.todoChoice;
       if(target>0) {
         console.log(target);
         if (target == 1) {
           var myPopup = $ionicPopup.show({
             template: '<input type="text" ng-model="wishlist">',
-            title: 'Zur Wunschliste hinzufÃ¼gen',
-            subTitle: 'Gib einen Namen fÃ¼r diesen Wunsch ein',
+            title: 'Zur Wunschliste hinzufügen',
+            subTitle: 'Gib einen Namen für diesen Wunsch ein',
             scope: $scope,
             buttons: [
               { text: 'Cancel' },
@@ -287,7 +293,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
                 onTap: function(e) {
                   if (!$scope.wishlist) {
                     //don't allow the user to close unless he enters wifi password
-                    window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' â‚¬');
+                    window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
 
                     $state.go('menu.kIMLKannIchsMirLeisten');
 
@@ -334,24 +340,28 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.notify = function() {
       var alertPopup = $ionicPopup.alert({
         title: 'Hinweis',
-        template: 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch '+$scope.fehlbetrag+' â‚¬! Es sind keine UmbuchungsmÃ¶glichkeiten vorhanden'
+        template: 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch '+$scope.fehlbetrag+' €! Es sind keine UmbuchungsmÃ¶glichkeiten vorhanden'
       });
 
       alertPopup.then(function (res) {
         console.log('Information Shown');
       });
     }
-    $scope.doneYellow = function(target){
+    $scope.changeTodo = function(target){
+      $scope.todoChoice = target;
+    }
 
+    $scope.doneYellow = function(){
 
+      target = $scope.todoChoice;
 
       if(target>0) {
         console.log(target);
         if (target == 1) {
           var myPopup = $ionicPopup.show({
             template: '<input type="text" ng-model="wishlist">',
-            title: 'Zur Wunschliste hinzufÃ¼gen',
-            subTitle: 'Gib einen Namen fÃ¼r diesen Wunsch ein',
+            title: 'Zur Wunschliste hinzufügen',
+            subTitle: 'Gib einen Namen für diesen Wunsch ein',
             scope: $scope,
             buttons: [
               { text: 'Cancel' },
@@ -361,7 +371,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
                 onTap: function(e) {
                   if (!$scope.wishlist) {
                     //don't allow the user to close unless he enters wifi password
-                    window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' â‚¬');
+                    window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
 
                     $state.go('menu.kIMLKannIchsMirLeisten');
 
@@ -439,7 +449,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
         var alertPopup = $ionicPopup.alert({
           title: 'Umbuchung erfolgreich',
-          template: 'Vom ' + konto + ' wurden erfolgreich ' + $scope.fehlbetrag.toFixed(2) + ' â‚¬ umgebucht!'
+          template: 'Vom ' + konto + ' wurden erfolgreich ' + $scope.fehlbetrag.toFixed(2) + ' € umgebucht!'
 
         });
 
@@ -453,7 +463,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
       }else {
         var alertPopup = $ionicPopup.alert({
           title: 'Kein Konto ausgewÃ¤hlt',
-          template: 'Bitte wÃ¤hlen Sie ein Konto fÃ¼r die Umbuchung aus!'
+          template: 'Bitte wÃ¤hlen Sie ein Konto für die Umbuchung aus!'
         });
 
         alertPopup.then(function(res) {
@@ -498,7 +508,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.order = function(){
       var alertPopup = $ionicPopup.alert({
         title: 'Kreditantrag erfolgreich',
-        template: 'Ihr Kreditbetrag von '+ $scope.fehlbetrag + ' â‚¬ wurde Ihrem Konto gutgeschrieben!'
+        template: 'Ihr Kreditbetrag von '+ $scope.fehlbetrag + ' € wurde Ihrem Konto gutgeschrieben!'
       });
 
       alertPopup.then(function(res) {
@@ -565,7 +575,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
 
       {
-        "key": "Gesamtsaldo",
+        "key": "Saldo über alle Konten",
         area: true,
         yAxis: 1,
 
@@ -854,7 +864,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
                 html += "Angegebener Kaufbetrag ";
               };
 
-              html +="</span> : <b>"+parseFloat(elem.value).toFixed(2)+" â‚¬</b>";
+              html +="</span> : <b>"+parseFloat(elem.value).toFixed(2)+" €</b>";
             })
 
             return html;

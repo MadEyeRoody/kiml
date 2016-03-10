@@ -14,18 +14,24 @@
 
         </br>
       <span style="text-align: right; color: #0066B3">Was willst du tun?</span>
-        <form ng-submit="doneYellow(todoChoice)">
-          <ion-radio  ng-model="todoChoice" ng-value="1" name="wishlist">zur Wunschliste hinzufügen</ion-radio>
-          <ion-radio ng-model="todoChoice" ng-value="2" name="umbuchen">Umbuchen</ion-radio>
-          <ion-radio ng-model="todoChoice" ng-value="3" name="kredit">Kredit beantragen</ion-radio>
-        <div class="button-bar">
+        <form >
+          <ion-radio  ng-model="todoChoice" ng-value="1" name="wishlist" ng-change="changeTodo(todoChoice)">zur Wunschliste hinzufügen</ion-radio>
+          <ion-radio ng-model="todoChoice" ng-value="2" name="umbuchen" ng-change="changeTodo(todoChoice)" >Umbuchen</ion-radio>
+          <ion-radio ng-model="todoChoice" ng-value="3" name="kredit" ng-change="changeTodo(todoChoice)">Kredit beantragen</ion-radio>
 
-          <a ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Abbrechen</a>
 
-          <button type="button" class="button button-stable  button-block  icon ion-arrow-graph-up-right" ng-click="startFinance()"></button>
-          <button type="submit" class="button button-energized button-block">weiter</button>
-        </div>
         </form>
+</br></br></br>
 
     </ion-content>
+  <ion-footer-bar>
+    <div class="button-bar">
+
+      <button ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Abbrechen</button>
+
+      <button type="button" class="button button-stable  button-block  icon ion-arrow-graph-up-right" ng-click="startFinance()"></button>
+      <button type="button" class="button button-energized button-block" ng-click="doneYellow()">weiter</button>
+    </div>
+  </ion-footer-bar>
+
 </ion-view>

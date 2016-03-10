@@ -2,7 +2,7 @@
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
       <h1>Noch nicht!</h1>
       <div style="text-align:center;">
-            <img src="img/rot.png" width="50%" height="auto"><button ng-click="notify()" class="button button-stable button-clear  icon ion-information-circled"></button>
+            <img src="img/rot.png" width="40%" height="auto"><button ng-click="notify()" class="button button-stable button-clear  icon ion-information-circled"></button>
         </div>
       <div>
         <table><tr><td>
@@ -13,17 +13,23 @@
       </br>
         </br>
       <span style="text-align: right; color: #0066B3">Was willst du tun?</span>
-      <form ng-submit="doneYellow(todoChoice)">
-        <ion-radio  ng-model="todoChoice" ng-value="1" name="wishlist">zur Wunschliste hinzufügen</ion-radio>
-        <ion-radio ng-model="todoChoice" ng-value="2" name="kredit">Kredit beantragen</ion-radio>
-        <div class="button-bar">
+      <form >
+        <ion-radio  ng-model="todoChoice" ng-value="1" name="wishlist" ng-change="changeTodo(todoChoice)">zur Wunschliste hinzufügen</ion-radio>
+        <ion-radio ng-model="todoChoice" ng-value="2" name="kredit" ng-change="changeTodo(todoChoice)">Kredit beantragen</ion-radio>
+</br></br>
+        </br>
 
-          <a ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Abbrechen</a>
 
-          <button type="button" class="button button-stable  button-block  icon ion-arrow-graph-up-right" ng-click="startFinance()"></button>
-          <button type="submit" class="button button-energized button-block">weiter</button>
-        </div>
-        </form>
+      </form>
 
     </ion-content>
+  <ion-footer-bar>
+    <div class="button-bar">
+
+      <button ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Abbrechen</button>
+
+      <button type="button" class="button button-stable  button-block  icon ion-arrow-graph-up-right" ng-click="startFinance()"></button>
+      <button type="button" class="button button-energized button-block" ng-submit="doneYellow()">weiter</button>
+    </div>
+  </ion-footer-bar>
 </ion-view>

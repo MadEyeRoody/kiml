@@ -6,14 +6,11 @@
             <label class="item item-input" name="betrag">
                 <span class="input-label">Betrag in €:</span>
                 <input type="text" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="formdata.betragValue" >
-            </label>
-            <div class="item"  ng-show="barcodeScannerVisibility">
-              <button type="button" class="button button-block button-positive" ng-click="scanBarCode()">
-                <i class="icon ion-qr-scanner"></i>
-                Scan Now
+              <button  type="button" class="button  button-clear icon" ng-show="barcodeScannerVisibility" ng-click="scanBarCode()">
+                <img src="../img/menu_qr_code.png" ></img>
               </button>
-            </div>
-            </br></br>
+            </label>
+            </br>
             <button type="submit" class="button button-energized button-block">Kann ich's mir leisten?</button>
         </form>
     </ion-content>
