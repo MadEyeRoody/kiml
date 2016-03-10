@@ -1,274 +1,274 @@
 angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
 
-.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup) {
+  .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup) {
 
-  var deviceInformation = ionic.Platform.device();
-  var isAndroid = ionic.Platform.isAndroid();
+    var deviceInformation = ionic.Platform.device();
+    var isAndroid = ionic.Platform.isAndroid();
 
-  if(isAndroid) {
-    $scope.barcodeScannerVisibility=true;
-  }
-  else {
-    $scope.barcodeScannerVisibility=false;
-  }
-
-  //Start Values
-  $scope.formdata = [];
-  $scope.formdata.betragValue = NaN;
-  window.localStorage.setItem("Konto1", 652.00 );
-  window.localStorage.setItem("Konto1Bez", 'Girokonto' );
-  window.localStorage.setItem("Konto1IBAN", 'DE 11 7019 0000 0000 0089 74' );
-  window.localStorage.setItem("Konto2", 521.00 );
-  window.localStorage.setItem("Konto2Bez", 'Tagesgeldkonto' );
-  window.localStorage.setItem("Konto2IBAN", 'DE 40 7919 0000 0001 5311 58' );
-  window.localStorage.setItem("Konto3", 3234.00 );
-  window.localStorage.setItem("Konto3Bez", 'Gemeinschaftskonto' );
-  window.localStorage.setItem("Konto3IBAN", 'DE 46 1009 0900 0887 5754 33' );
-  window.localStorage.setItem("primeKonto", 1 );
-  window.localStorage.setItem("laufzeit", 18);
-  window.localStorage.setItem("amount",0);
-  window.localStorage.setItem("financeType",'ohne');
-  window.localStorage.setItem("prognose", 89.00);
-  window.localStorage.setItem("prognoseReason", 'Versicherungen');
-  window.localStorage.setItem("minRemaining", 200.00);
-  //End Start Values
-
-  console.log(window.localStorage.getItem("minRemaining"));
-  $scope.checkAmount = function(betrag) {
-
-    betragValue = parseFloat(betrag);
-    prognose = parseFloat(window.localStorage.getItem("prognose"));
-    minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
-    konto1Value = parseFloat(window.localStorage.getItem("Konto1"));
-    konto2Value = parseFloat(window.localStorage.getItem("Konto2"));
-    konto3Value = parseFloat(window.localStorage.getItem("Konto3"));
-    kontoGesamtValue = konto1Value + konto2Value + konto3Value;
-
-    console.log(betragValue);
-    if (betragValue>0){
-      if ((konto1Value - (betragValue+prognose))>=minRemaining) {
-        $state.go('menu.empfehlung');
-
-      } else if ((kontoGesamtValue - (betragValue + prognose))>=minRemaining) {
-        $state.go('menu.empfehlung2');
-      } else if((kontoGesamtValue - (betragValue + prognose))< minRemaining) {
-        $state.go('menu.empfehlung3');
-      }
-      window.localStorage.setItem("amount", betragValue)
-    } else {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Kein Betrag eingegeben',
-        template: 'Bitte gib einen Betrag ein!'
-      });
-
-      alertPopup.then(function(res) {
-        //window.localStorage.setItem("Konto1",window.localStorage.getItem("Konto1")+$scope.fehlbetrag)
-        console.log('no Input');
-
-      });
+    if(isAndroid) {
+      $scope.barcodeScannerVisibility=true;
     }
-    ;
-  }
-  $scope.scanBarCode = function() {
-    $ionicPlatform.ready(function() {
-      $cordovaBarcodeScanner
-        .scan()
-        .then(function(result) {
-          $scope.formdata.betragValue=150;
-        }, function(error) {
-          // An error occurred
-          var scanResults = 'Error: ' + error;
-          console.log(scanResults);
+    else {
+      $scope.barcodeScannerVisibility=false;
+    }
+
+    //Start Values
+    $scope.formdata = [];
+    $scope.formdata.betragValue = NaN;
+    window.localStorage.setItem("Konto1", 652.00 );
+    window.localStorage.setItem("Konto1Bez", 'Girokonto' );
+    window.localStorage.setItem("Konto1IBAN", 'DE 11 7019 0000 0000 0089 74' );
+    window.localStorage.setItem("Konto2", 521.00 );
+    window.localStorage.setItem("Konto2Bez", 'Tagesgeldkonto' );
+    window.localStorage.setItem("Konto2IBAN", 'DE 40 7919 0000 0001 5311 58' );
+    window.localStorage.setItem("Konto3", 3234.00 );
+    window.localStorage.setItem("Konto3Bez", 'Gemeinschaftskonto' );
+    window.localStorage.setItem("Konto3IBAN", 'DE 46 1009 0900 0887 5754 33' );
+    window.localStorage.setItem("primeKonto", 1 );
+    window.localStorage.setItem("laufzeit", 18);
+    window.localStorage.setItem("amount",0);
+    window.localStorage.setItem("financeType",'ohne');
+    window.localStorage.setItem("prognose", 89.00);
+    window.localStorage.setItem("prognoseReason", 'Versicherungen');
+    window.localStorage.setItem("minRemaining", 200.00);
+    //End Start Values
+
+    console.log(window.localStorage.getItem("minRemaining"));
+    $scope.checkAmount = function(betrag) {
+
+      betragValue = parseFloat(betrag);
+      prognose = parseFloat(window.localStorage.getItem("prognose"));
+      minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
+      konto1Value = parseFloat(window.localStorage.getItem("Konto1"));
+      konto2Value = parseFloat(window.localStorage.getItem("Konto2"));
+      konto3Value = parseFloat(window.localStorage.getItem("Konto3"));
+      kontoGesamtValue = konto1Value + konto2Value + konto3Value;
+
+      console.log(betragValue);
+      if (betragValue>0){
+        if ((konto1Value - (betragValue+prognose))>=minRemaining) {
+          $state.go('menu.empfehlung');
+
+        } else if ((kontoGesamtValue - (betragValue + prognose))>=minRemaining) {
+          $state.go('menu.empfehlung2');
+        } else if((kontoGesamtValue - (betragValue + prognose))< minRemaining) {
+          $state.go('menu.empfehlung3');
+        }
+        window.localStorage.setItem("amount", betragValue)
+      } else {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Kein Betrag eingegeben',
+          template: 'Bitte gib einen Betrag ein!'
         });
-    });
-  };
 
-})
+        alertPopup.then(function(res) {
+          //window.localStorage.setItem("Konto1",window.localStorage.getItem("Konto1")+$scope.fehlbetrag)
+          console.log('no Input');
+
+        });
+      }
+      ;
+    }
+    $scope.scanBarCode = function() {
+      $ionicPlatform.ready(function() {
+        $cordovaBarcodeScanner
+          .scan()
+          .then(function(result) {
+            $scope.formdata.betragValue=150;
+          }, function(error) {
+            // An error occurred
+            var scanResults = 'Error: ' + error;
+            console.log(scanResults);
+          });
+      });
+    };
+
+  })
 
 
 
 
-.controller('wunschlisteCtrl', function($scope) {
+  .controller('wunschlisteCtrl', function($scope) {
 
-})
+  })
 
   .controller('impressumCtrl', function($scope) {
 
   })
 
-.controller('finanzstatusCtrl', function($scope) {
- //$scope.financeType = window.localStorage.getItem("financeType");
+  .controller('finanzstatusCtrl', function($scope) {
+    //$scope.financeType = window.localStorage.getItem("financeType");
 
 
-/*  $scope.options = {
-    chart: {
-      type: 'lineChart',
-      height: 450,
-      margin: {
-        top: 20,
-        right: 20,
-        bottom: 40,
-        left: 55
-      },
-      x: function (d) {
-        return d.x;
-      },
-      y: function (d) {
-        return d.y;
-      },
-      useInteractiveGuideline: true,
-      dispatch: {
-        stateChange: function (e) {
-          console.log("stateChange");
-        },
-        changeState: function (e) {
-          console.log("changeState");
-        },
-        tooltipShow: function (e) {
-          console.log("tooltipShow");
-        },
-        tooltipHide: function (e) {
-          console.log("tooltipHide");
-        }
-      },
-      xAxis: {
-        tickFormat: function (d) {
-          return d3.time.format('%x')(new Date(d));
-        },
-        yAxis: {
-          axisLabel: 'Saldo',
-          tickFormat: function (d) {
-            return d3.format(d +' €');
-          },
-          axisLabelDistance: -10
-        },
-        callback: function (chart) {
-          console.log("!!! lineChart callback !!!");
-        }
-      },
-    }
+    /*  $scope.options = {
+     chart: {
+     type: 'lineChart',
+     height: 450,
+     margin: {
+     top: 20,
+     right: 20,
+     bottom: 40,
+     left: 55
+     },
+     x: function (d) {
+     return d.x;
+     },
+     y: function (d) {
+     return d.y;
+     },
+     useInteractiveGuideline: true,
+     dispatch: {
+     stateChange: function (e) {
+     console.log("stateChange");
+     },
+     changeState: function (e) {
+     console.log("changeState");
+     },
+     tooltipShow: function (e) {
+     console.log("tooltipShow");
+     },
+     tooltipHide: function (e) {
+     console.log("tooltipHide");
+     }
+     },
+     xAxis: {
+     tickFormat: function (d) {
+     return d3.time.format('%x')(new Date(d));
+     },
+     yAxis: {
+     axisLabel: 'Saldo',
+     tickFormat: function (d) {
+     return d3.format(d +' â‚¬');
+     },
+     axisLabelDistance: -10
+     },
+     callback: function (chart) {
+     console.log("!!! lineChart callback !!!");
+     }
+     },
+     }
 
-  };
-  $scope.data = dataset;+/
+     };
+     $scope.data = dataset;+/
 
- /* minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
-  primeKonto = window.localStorage.getItem("primeKonto");
-  primeKontoValue = parseFloat(window.localStorage.getItem("Konto"+primeKonto));
-  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawVisualization());
+     /* minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
+     primeKonto = window.localStorage.getItem("primeKonto");
+     primeKontoValue = parseFloat(window.localStorage.getItem("Konto"+primeKonto));
+     google.charts.load('current', {'packages':['corechart']});
+     google.charts.setOnLoadCallback(drawVisualization());
 
-  function drawVisualization() {
-    var d = new Date();
-    d.setDate(1);
-    var n = new Date();
-    // Some raw data (not necessarily accurate)
-    var data = google.visualization.arrayToDataTable([
-      ['Monat', 'Saldo',  'Prognose', 'Mindestgrenze'],
-      [n.getMonth(n.setMonth(d.getMonth()-2))+1+'/'+ n.getFullYear(),  820,    ,minRemaining],
-      [n.getMonth(n.setMonth(d.getMonth()-1))+1+'/'+n.getFullYear(),  450,    ,minRemaining],
-      [d.getMonth()+1+'/'+d.getFullYear(),  primeKontoValue,   primeKontoValue  ,minRemaining ],
-      [n.getMonth(n.setMonth(d.getMonth()+1))+1+'/'+n.getFullYear(),,   primeKontoValue-89, minRemaining],
-      [n.getMonth(n.setMonth(d.getMonth()+2))+1+'/'+n.getFullYear(),,   700, minRemaining],
-    ]);
+     function drawVisualization() {
+     var d = new Date();
+     d.setDate(1);
+     var n = new Date();
+     // Some raw data (not necessarily accurate)
+     var data = google.visualization.arrayToDataTable([
+     ['Monat', 'Saldo',  'Prognose', 'Mindestgrenze'],
+     [n.getMonth(n.setMonth(d.getMonth()-2))+1+'/'+ n.getFullYear(),  820,    ,minRemaining],
+     [n.getMonth(n.setMonth(d.getMonth()-1))+1+'/'+n.getFullYear(),  450,    ,minRemaining],
+     [d.getMonth()+1+'/'+d.getFullYear(),  primeKontoValue,   primeKontoValue  ,minRemaining ],
+     [n.getMonth(n.setMonth(d.getMonth()+1))+1+'/'+n.getFullYear(),,   primeKontoValue-89, minRemaining],
+     [n.getMonth(n.setMonth(d.getMonth()+2))+1+'/'+n.getFullYear(),,   700, minRemaining],
+     ]);
 
-    var options = {
+     var options = {
 
-      vAxis:{
-        format:'decimal',
+     vAxis:{
+     format:'decimal',
 
-      },
-      seriesType: 'line',
-      series: {
-        0: {color:'#0066B3', type:'area', areaOpacity:1.0},
-        1: {color: '#ff6600', lineDashStyle:[3,3]},
-        2: {visibleInLegend:'true', color:'green' }
-      },
-      legend: {
-        position: 'bottom',
-        maxLines:3
-      },
+     },
+     seriesType: 'line',
+     series: {
+     0: {color:'#0066B3', type:'area', areaOpacity:1.0},
+     1: {color: '#ff6600', lineDashStyle:[3,3]},
+     2: {visibleInLegend:'true', color:'green' }
+     },
+     legend: {
+     position: 'bottom',
+     maxLines:3
+     },
+     };
+
+     $scope.chart = new google.visualization.ComboChart(document.getElementById('chart'));
+     $scope.chart.draw(data, options);
+     }*/
+  })
+
+  .controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
+    $scope.amount = parseFloat(window.localStorage.getItem("amount"));
+    $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
+    $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
+    $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
+    $scope.amount=$scope.amount.toFixed(2);
+    console.log($scope.erwarteterStand);
+    $scope.startFinance = function(){
+      window.localStorage.setItem("financeType",'gruen');
+      $state.go('menu.finanzstatus');
     };
 
-    $scope.chart = new google.visualization.ComboChart(document.getElementById('chart'));
-    $scope.chart.draw(data, options);
-  }*/
-})
+    $scope.doneGreen = function(choice){
 
-.controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
-  $scope.amount = parseFloat(window.localStorage.getItem("amount"));
-  $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
-  $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
-  $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
-  $scope.amount=$scope.amount.toFixed(2);
-  console.log($scope.erwarteterStand);
-  $scope.startFinance = function(){
-    window.localStorage.setItem("financeType",'gruen');
-    $state.go('menu.finanzstatus');
-  };
+      if(choice){
+        var myPopup = $ionicPopup.show({
+          template: '<input type="text" ng-model="wishlist">',
+          title: 'Zur Wunschliste hinzufÃ¼gen',
+          subTitle: 'Gib einen Namen fÃ¼r diesen Wunsch ein',
+          scope: $scope,
+          buttons: [
+            { text: 'Cancel' },
+            {
+              text: '<b>Save</b>',
+              type: 'button-energized',
+              onTap: function(e) {
+                if (!$scope.wishlist) {
+                  //don't allow the user to close unless he enters wifi password
+                  window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' â‚¬');
+                  $state.go('menu.kIMLKannIchsMirLeisten');
+                } else {
+                  e.preventDefault();
 
-  $scope.doneGreen = function(choice){
+                }
+              }
+            }
+          ]
+        });
+      }else{
+        $state.go('menu.kIMLKannIchsMirLeisten');
+      }
 
-   if(choice){
-     var myPopup = $ionicPopup.show({
-       template: '<input type="text" ng-model="wishlist">',
-       title: 'Zur Wunschliste hinzufügen',
-       subTitle: 'Gib einen Namen für diesen Wunsch ein',
-       scope: $scope,
-       buttons: [
-         { text: 'Cancel' },
-         {
-           text: '<b>Save</b>',
-           type: 'button-energized',
-           onTap: function(e) {
-             if (!$scope.wishlist) {
-               //don't allow the user to close unless he enters wifi password
-               window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
-               $state.go('menu.kIMLKannIchsMirLeisten');
-             } else {
-               e.preventDefault();
+    };
 
-             }
-           }
-         }
-       ]
-     });
-   }else{
-     $state.go('menu.kIMLKannIchsMirLeisten');
-   }
+  })
 
-  };
+  .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
+    $scope.todoChoice = 1;
+    $scope.amount = parseFloat((window.localStorage.getItem("amount")));
+    $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
+    $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
+    $scope.minAmount = parseFloat((window.localStorage.getItem("minRemaining")));
+    $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
+    $scope.fehlbetrag = (-($scope.erwarteterStand - $scope.minAmount)).toFixed(2);
+    window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag);
+    $scope.amount=$scope.amount.toFixed(2);
 
-})
+    $scope.startFinance = function(){
+      window.localStorage.setItem("financeType",'gelb');
+      $state.go('menu.finanzstatus');
+    };
 
-.controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
-  $scope.todoChoice = 1;
-  $scope.amount = parseFloat((window.localStorage.getItem("amount")));
-  $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
-  $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
-  $scope.minAmount = parseFloat((window.localStorage.getItem("minRemaining")));
-  $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
-  $scope.fehlbetrag = (-($scope.erwarteterStand - $scope.minAmount)).toFixed(2);
-  window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag);
-  $scope.amount=$scope.amount.toFixed(2);
+    $scope.notify = function(){
+      var alertPopup = $ionicPopup.alert({
+        title: 'Hinweis',
+        template: 'Aufgrund Deiner PrÃ¤ferenzen (Minimalbetrag: '+ $scope.minAmount.toFixed(2) +' â‚¬) und noch prognostizerter Abbuchungen ('+$scope.prognose.toFixed(2)+' â‚¬ fÃ¼r Versicherungen) fehlen Dir ' +$scope.fehlbetrag+' â‚¬'
+      });
 
-  $scope.startFinance = function(){
-    window.localStorage.setItem("financeType",'gelb');
-    $state.go('menu.finanzstatus');
-  };
+      alertPopup.then(function (res) {
+        console.log('Information Shown');
+      });
+    };
 
-  $scope.notify = function(){
-    var alertPopup = $ionicPopup.alert({
-      title: 'Hinweis',
-      template: 'Aufgrund Deiner Präferenzen (Minimalbetrag: '+ $scope.minAmount.toFixed(2) +' €) und noch prognostizerter Abbuchungen ('+$scope.prognose.toFixed(2)+' € für Versicherungen) fehlen Dir ' +$scope.fehlbetrag+' €'
-    });
-
-    alertPopup.then(function (res) {
-      console.log('Information Shown');
-    });
-  };
-
-  $scope.doneYellow = function(target){
+    $scope.doneYellow = function(target){
 
 
       if(target>0) {
@@ -276,8 +276,8 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
         if (target == 1) {
           var myPopup = $ionicPopup.show({
             template: '<input type="text" ng-model="wishlist">',
-            title: 'Zur Wunschliste hinzufügen',
-            subTitle: 'Gib einen Namen für diesen Wunsch ein',
+            title: 'Zur Wunschliste hinzufÃ¼gen',
+            subTitle: 'Gib einen Namen fÃ¼r diesen Wunsch ein',
             scope: $scope,
             buttons: [
               { text: 'Cancel' },
@@ -287,7 +287,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
                 onTap: function(e) {
                   if (!$scope.wishlist) {
                     //don't allow the user to close unless he enters wifi password
-                    window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
+                    window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' â‚¬');
 
                     $state.go('menu.kIMLKannIchsMirLeisten');
 
@@ -307,13 +307,13 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           $state.go('menu.kredit')
         }
 
-        }
+      }
 
 
 
-  };
+    };
 
-})
+  })
 
   .controller('empfehlung3Ctrl', function($scope, $state,$ionicPopup) {
     $scope.todoChoice = 1;
@@ -334,7 +334,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.notify = function() {
       var alertPopup = $ionicPopup.alert({
         title: 'Hinweis',
-        template: 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch '+$scope.fehlbetrag+' €! Es sind keine Umbuchungsmöglichkeiten vorhanden'
+        template: 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch '+$scope.fehlbetrag+' â‚¬! Es sind keine UmbuchungsmÃ¶glichkeiten vorhanden'
       });
 
       alertPopup.then(function (res) {
@@ -345,41 +345,41 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
 
 
-        if(target>0) {
-          console.log(target);
-          if (target == 1) {
-            var myPopup = $ionicPopup.show({
-              template: '<input type="text" ng-model="wishlist">',
-              title: 'Zur Wunschliste hinzufügen',
-              subTitle: 'Gib einen Namen für diesen Wunsch ein',
-              scope: $scope,
-              buttons: [
-                { text: 'Cancel' },
-                {
-                  text: '<b>Save</b>',
-                  type: 'button-energized',
-                  onTap: function(e) {
-                    if (!$scope.wishlist) {
-                      //don't allow the user to close unless he enters wifi password
-                      window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' €');
+      if(target>0) {
+        console.log(target);
+        if (target == 1) {
+          var myPopup = $ionicPopup.show({
+            template: '<input type="text" ng-model="wishlist">',
+            title: 'Zur Wunschliste hinzufÃ¼gen',
+            subTitle: 'Gib einen Namen fÃ¼r diesen Wunsch ein',
+            scope: $scope,
+            buttons: [
+              { text: 'Cancel' },
+              {
+                text: '<b>Save</b>',
+                type: 'button-energized',
+                onTap: function(e) {
+                  if (!$scope.wishlist) {
+                    //don't allow the user to close unless he enters wifi password
+                    window.localStorage.setItem("wish",$scope.wishlist+' - '+window.localStorage.getItem("amount")+' â‚¬');
 
-                      $state.go('menu.kIMLKannIchsMirLeisten');
+                    $state.go('menu.kIMLKannIchsMirLeisten');
 
 
-                    } else {
-                      e.preventDefault();
+                  } else {
+                    e.preventDefault();
 
-                    }
                   }
                 }
-              ]
-            });
-          }
-          if (target == 2) {
-            $state.go('menu.kredit')
-          }
-
+              }
+            ]
+          });
         }
+        if (target == 2) {
+          $state.go('menu.kredit')
+        }
+
+      }
 
 
 
@@ -387,147 +387,323 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
   })
 
-.controller('kontoverwaltungCtrl', function($scope) {
-  $scope.kontoChoice = parseInt(window.localStorage.getItem("primeKonto"));
-  $scope.konto1=parseFloat(window.localStorage.getItem("Konto1")).toFixed(2);
-  $scope.konto1Bez=window.localStorage.getItem("Konto1Bez");
-  $scope.konto1IBAN=window.localStorage.getItem("Konto1IBAN");
-  $scope.konto2=parseFloat(window.localStorage.getItem("Konto2")).toFixed(2);
-  $scope.konto2Bez=window.localStorage.getItem("Konto2Bez");
-  $scope.konto2IBAN=window.localStorage.getItem("Konto2IBAN");
-  $scope.konto3=parseFloat(window.localStorage.getItem("Konto3")).toFixed(2);
-  $scope.konto3Bez=window.localStorage.getItem("Konto3Bez");
-  $scope.konto3IBAN=window.localStorage.getItem("Konto3IBAN");
-  $scope.minRemaining=parseFloat(window.localStorage.getItem("minRemaining")).toFixed(2);
+  .controller('kontoverwaltungCtrl', function($scope) {
+    $scope.kontoChoice = parseInt(window.localStorage.getItem("primeKonto"));
+    $scope.konto1=parseFloat(window.localStorage.getItem("Konto1")).toFixed(2);
+    $scope.konto1Bez=window.localStorage.getItem("Konto1Bez");
+    $scope.konto1IBAN=window.localStorage.getItem("Konto1IBAN");
+    $scope.konto2=parseFloat(window.localStorage.getItem("Konto2")).toFixed(2);
+    $scope.konto2Bez=window.localStorage.getItem("Konto2Bez");
+    $scope.konto2IBAN=window.localStorage.getItem("Konto2IBAN");
+    $scope.konto3=parseFloat(window.localStorage.getItem("Konto3")).toFixed(2);
+    $scope.konto3Bez=window.localStorage.getItem("Konto3Bez");
+    $scope.konto3IBAN=window.localStorage.getItem("Konto3IBAN");
+    $scope.minRemaining=parseFloat(window.localStorage.getItem("minRemaining")).toFixed(2);
 
-  $scope.save=function(choice, untergrenze){
-    window.localStorage.setItem("primeKonto", choice );
-    window.localStorage.setItem("minRemaining",untergrenze);
-  };
+    $scope.save=function(choice, untergrenze){
+      window.localStorage.setItem("primeKonto", choice );
+      window.localStorage.setItem("minRemaining",untergrenze);
+    };
 
-})
+  })
 
-.controller('umbuchungCtrl', function($scope, $ionicPopup, $state) {
-  $scope.fehlbetrag=parseFloat(window.localStorage.getItem("fehlbetrag")).toFixed(2);
-  $scope.konto1=parseFloat(window.localStorage.getItem("Konto1")).toFixed(2);
-  $scope.konto2=parseFloat(window.localStorage.getItem("Konto2")).toFixed(2);
-  $scope.konto3=parseFloat(window.localStorage.getItem("Konto3")).toFixed(2);
-  $scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2);
+  .controller('umbuchungCtrl', function($scope, $ionicPopup, $state) {
+    $scope.fehlbetrag=parseFloat(window.localStorage.getItem("fehlbetrag"));
+    $scope.konto1=parseFloat(window.localStorage.getItem("Konto1")).toFixed(2);
+    $scope.konto2=parseFloat(window.localStorage.getItem("Konto2")).toFixed(2);
+    $scope.konto3=parseFloat(window.localStorage.getItem("Konto3")).toFixed(2);
+    $scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2);
 
 
-  $scope.umbuchen = function(kontoChoice){
-    var konto = '';
-    if(kontoChoice>0) {
-      console.log(kontoChoice);
-      if (kontoChoice == 1) {
-        $scope.konto1 = (parseFloat($scope.konto1) - parseFloat($scope.fehlbetrag)).toFixed(2);
-        window.localStorage.setItem("Konto1", $scope.konto1);
+    $scope.umbuchen = function(kontoChoice){
+      var konto = '';
+      if(kontoChoice>0) {
+        console.log(kontoChoice);
+        if (kontoChoice == 1) {
+          $scope.konto1 = (parseFloat($scope.konto1) - parseFloat($scope.fehlbetrag)).toFixed(2);
+          window.localStorage.setItem("Konto1", $scope.konto1);
 
-        konto = 'Girokonto';
+          konto = 'Girokonto';
+        }
+        if (kontoChoice == 2) {
+          $scope.konto2 = (parseFloat($scope.konto2) - parseFloat($scope.fehlbetrag)).toFixed(2);
+          window.localStorage.setItem("Konto2", $scope.konto2);
+          konto = 'Tagesgeldkonto';
+        }
+        if (kontoChoice == 3) {
+          $scope.konto3 = (parseFloat($scope.konto3) - parseFloat($scope.fehlbetrag)).toFixed(2);
+          window.localStorage.setItem("Konto3", $scope.konto3);
+          konto = 'Gemeinschaftskonto';
+        }
+
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Umbuchung erfolgreich',
+          template: 'Vom ' + konto + ' wurden erfolgreich ' + $scope.fehlbetrag.toFixed(2) + ' â‚¬ umgebucht!'
+
+        });
+
+        alertPopup.then(function (res) {
+          console.log('Umbuchung durchgefÃ¼hrt');
+          $state.go('menu.empfehlung');
+        });
+
+        $scope.fehlbetrag = 0;
+        window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag.toFixed(2));
+      }else {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Kein Konto ausgewÃ¤hlt',
+          template: 'Bitte wÃ¤hlen Sie ein Konto fÃ¼r die Umbuchung aus!'
+        });
+
+        alertPopup.then(function(res) {
+          console.log('Umbuchung nicht durchgefÃ¼hrt');
+
+        });
       }
-      if (kontoChoice == 2) {
-        $scope.konto2 = (parseFloat($scope.konto2) - parseFloat($scope.fehlbetrag)).toFixed(2);
-        window.localStorage.setItem("Konto2", $scope.konto2);
-        konto = 'Tagesgeldkonto';
-      }
-      if (kontoChoice == 3) {
-        $scope.konto3 = (parseFloat($scope.konto3) - parseFloat($scope.fehlbetrag)).toFixed(2);
-        window.localStorage.setItem("Konto3", $scope.konto3);
-        konto = 'Gemeinschaftskonto';
-      }
+
+    };
 
 
+  })
+
+  .controller('kreditCtrl', function($scope, $state) {
+    $scope.fehlbetrag=parseFloat(window.localStorage.getItem("fehlbetrag")).toFixed(2);
+    $scope.laufzeit= parseFloat(window.localStorage.getItem("laufzeit"));
+    $scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2);
+
+
+    $scope.rate =Math.round(100.0 * (parseFloat($scope.fehlbetrag)/ $scope.laufzeit)) / 100.0; ;
+
+    $scope.saveLaufzeit = function(laufzeit){
+      console.log(laufzeit);
+      window.localStorage.setItem("laufzeit", laufzeit);
+      $scope.rate =Math.round(100.0 * (parseFloat($scope.fehlbetrag)/ laufzeit)) / 100.0; ;
+      console.log($scope.rate);
+      $scope.$apply();
+      window.localStorage.setItem("rate", $scope.rate.toFixed(2));
+
+    }
+
+  })
+
+
+
+  .controller('kredit2Ctrl', function($scope,$state,$ionicPopup) {
+    $scope.fehlbetrag=parseFloat(window.localStorage.getItem("fehlbetrag")).toFixed(2);
+    $scope.rate=window.localStorage.getItem("rate");
+    $scope.laufzeit= window.localStorage.getItem("laufzeit");
+
+
+    $scope.order = function(){
       var alertPopup = $ionicPopup.alert({
-        title: 'Umbuchung erfolgreich',
-        template: 'Vom ' + konto + ' wurden erfolgreich ' + $scope.fehlbetrag.toFixed(2) + ' € umgebucht!'
-
-      });
-
-      alertPopup.then(function (res) {
-        console.log('Umbuchung durchgeführt');
-        $state.go('menu.empfehlung');
-      });
-
-      $scope.fehlbetrag = 0;
-      window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag.toFixed(2));
-    }else {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Kein Konto ausgewählt',
-        template: 'Bitte wählen Sie ein Konto für die Umbuchung aus!'
+        title: 'Kreditantrag erfolgreich',
+        template: 'Ihr Kreditbetrag von '+ $scope.fehlbetrag + ' â‚¬ wurde Ihrem Konto gutgeschrieben!'
       });
 
       alertPopup.then(function(res) {
-        console.log('Umbuchung nicht durchgeführt');
-
+        window.localStorage.setItem("Konto1",parseFloat(window.localStorage.getItem("Konto1")).toFixed(2)+$scope.fehlbetrag)
+        console.log('Kreditantrag durchgefÃ¼hrt');
+        $state.go('menu.empfehlung');
       });
     }
-
-  };
-
-
-})
-
-.controller('kreditCtrl', function($scope, $state) {
-  $scope.fehlbetrag=parseFloat(window.localStorage.getItem("fehlbetrag")).toFixed(2);
-  $scope.laufzeit= parseFloat(window.localStorage.getItem("laufzeit"));
-$scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2);
+  })
 
 
-  $scope.rate =Math.round(100.0 * (parseFloat($scope.fehlbetrag)/ $scope.laufzeit)) / 100.0; ;
+  /*$scope.getUserData = function(user, passwort){
 
-  $scope.saveLaufzeit = function(laufzeit){
-    console.log(laufzeit);
-    window.localStorage.setItem("laufzeit", laufzeit);
-    $scope.rate =Math.round(100.0 * (parseFloat($scope.fehlbetrag)/ laufzeit)) / 100.0; ;
-    console.log($scope.rate);
-    $scope.$apply();
-    window.localStorage.setItem("rate", $scope.rate.toFixed(2));
+   if (user == 'Max Mustermann' && passwort == 'Start123') {
+   window.localStorage.setItem("Konto1", 650 );
+   window.localStorage.setItem("Konto2", 500 );
+   window.localStorage.setItem("Konto3", 3000 );
+   window.localStorage.setItem("laufzeit", 18 );
+   window.localStorage.setItem("amount",0);
+   window.localStorage.setItem("financeType",'ohne');
 
-  }
+   // new Data
+   window.localStorage.setItem("prognose", -100);
+   window.localStorage.setItem("prognoseReason", 'Versicherungen');
+   window.localStorage.setItem("minRemaining", 200);
 
-})
+   }
 
-
-
-.controller('kredit2Ctrl', function($scope,$state,$ionicPopup) {
-  $scope.fehlbetrag=parseFloat(window.localStorage.getItem("fehlbetrag")).toFixed(2);
-  $scope.rate=window.localStorage.getItem("rate");
-  $scope.laufzeit= window.localStorage.getItem("laufzeit");
-
-
-  $scope.order = function(){
-    var alertPopup = $ionicPopup.alert({
-      title: 'Kreditantrag erfolgreich',
-      template: 'Ihr Kreditbetrag von '+ $scope.fehlbetrag + ' € wurde Ihrem Konto gutgeschrieben!'
-    });
-
-    alertPopup.then(function(res) {
-      window.localStorage.setItem("Konto1",parseFloat(window.localStorage.getItem("Konto1")).toFixed(2)+$scope.fehlbetrag)
-      console.log('Kreditantrag durchgeführt');
-      $state.go('menu.empfehlung');
-    });
-  }
-})
+   }*/
+  .controller('multiChart2Ctrl', function($scope){
+    var tickMarks = [new Date(2016,0,1),new Date(2016,1,1),new Date(2016,2,1),
+      new Date(2016,3,1),new Date(2016,4,1),new Date(2016,5,1),new Date(2016,6,1),
+      new Date(2016,7,1),new Date(2016,8,1),new Date(2016,9,1),new Date(2016,10,1),new Date(2016,11,1)]
 
 
-/*$scope.getUserData = function(user, passwort){
+    $scope.options = {
+      chart: {
+        type: 'lineChart',
+        height: 550,
+        margin : {
+          left: 50
+        },
 
-  if (user == 'Max Mustermann' && passwort == 'Start123') {
-    window.localStorage.setItem("Konto1", 650 );
-    window.localStorage.setItem("Konto2", 500 );
-    window.localStorage.setItem("Konto3", 3000 );
-    window.localStorage.setItem("laufzeit", 18 );
-    window.localStorage.setItem("amount",0);
-    window.localStorage.setItem("financeType",'ohne');
 
-    // new Data
-    window.localStorage.setItem("prognose", -100);
-    window.localStorage.setItem("prognoseReason", 'Versicherungen');
-    window.localStorage.setItem("minRemaining", 200);
+        duration: 700,
+        forceY:0.00,
+        xAxis: {
+          tickValues: tickMarks,
+          tickFormat: function(d){
+            return d3.time.format("%b")(new Date(d));
+          }
+        },
+        yAxis: {
+          tickFormat: function(d){
+            return d3.format("$ , .2f")(d);
+          }
+        },
 
-  }
+      }
+    };
+    var n = new Date();
+    n.setDate(1);
+    $scope.data = [
 
-}*/
+
+      {
+        "key": "Gesamtsaldo",
+        area: true,
+        yAxis: 1,
+
+        "color": "lightblue",
+        "values": [
+          {
+            "x": new Date(2016,0,1),
+            "y": 2200
+          },
+          {
+            "x": new Date(2016,1,1),
+            "y": 3200
+          },
+          {
+            "x":  new Date(2016,2,22),
+            "y": 2920
+          },
+          {
+            "x":  new Date(2016,3,1),
+            "y": 2460
+          },
+          {
+            "x":  new Date(2016,4,1),
+            "y": 4200.00
+          }
+        ]
+      },{
+        "key": "Saldo Primärkonto",
+        area: true,
+        yAxis: 1,
+
+        "color": "#0066B3",
+        "values": [
+          {
+            "x": new Date(2016,0,1),
+            "y": 1200
+          },
+          {
+            "x": new Date(2016,1,1),
+            "y": 1200
+          },
+          {
+            "x":  new Date(2016,2,22),
+            "y": 920
+          },
+          {
+            "x":  new Date(2016,3,1),
+            "y": 1460
+          },
+          {
+            "x":  new Date(2016,4,1),
+            "y": 652.00
+          }
+        ]
+      },
+
+
+
+      {
+        "key": "Prognose Gesamtsaldo",
+        type: 'line',
+        yAxis: 1,
+        area:true,
+        "color": "red",
+        classed:'dashed',
+        "values": [
+
+          {
+            "x": new Date(2016,4,1),
+            "y": 4200.00
+          },
+          {
+            "x": new Date(2016,4,2),
+            "y": 4200-5000
+          },
+          {
+            "x":  new Date(2016,5,1),
+            "y": 4100-5000
+          },
+          {
+            "x":  new Date(2016,6,1),
+            "y": 4900-5000
+          }
+        ]
+      },{
+        "key": "Prognose Primärsaldo",
+        type: 'line',
+        yAxis: 1,
+        area:true,
+        visible:false,
+        "color": "red",
+        classed:'dashed',
+        "values": [
+
+          {
+            "x": new Date(2016,4,1),
+            "y": 652.00
+          },
+          {
+            "x": new Date(2016,4,2),
+            "y": 625-5000
+          },
+          {
+            "x":  new Date(2016,5,1),
+            "y": 525-5000
+          },
+          {
+            "x":  new Date(2016,6,1),
+            "y": 700-5000
+          }
+        ]
+      },
+      {
+
+        "key": "Mindestgrenze",
+        type: 'line',
+        yAxis: 1,
+        "color": "green",
+        "values": [
+          {
+            "x": new Date(2016,0,1),
+            "y": 200
+          },
+          {
+            "x":  new Date(2016,6,1),
+            "y": 200
+          }
+        ]
+      }
+
+
+    ]
+
+
+
+
+  })
+
   .controller('multiChartCtrl', function($scope){
     var tickMarks = [new Date(2016,0,1),new Date(2016,1,1),new Date(2016,2,1),
       new Date(2016,3,1),new Date(2016,4,1),new Date(2016,5,1),new Date(2016,6,1),
@@ -544,7 +720,7 @@ $scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2)
 
         zoom: {
           //NOTE: All attributes below are optional
-          enabled: true,
+          enabled: false,
           scale: 1,
           translate: [0, 0],
           useFixedDomain: false,
@@ -558,7 +734,7 @@ $scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2)
         duration: 700,
         forceY:0.00,
         xAxis: {
-        //  ticks:d3.time.month,
+          //  ticks:d3.time.month,
           tickValues: tickMarks,
           tickFormat: function(d){
             return d3.time.format("%b")(new Date(d));
@@ -652,3 +828,94 @@ $scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2)
 
   })
 
+  .controller('barChartCtrl', function($scope){
+    var isFehlbetrag = 0;
+    $scope.options = {
+      chart: {
+        type: 'discreteBarChart',
+        height: 450,
+        toolTipps:true,
+        tooltip:{
+          contentGenerator:(function (d) {
+            // var html = "<span>"+d.label+"</span> <ul>";
+            var html = "";
+            d.series.forEach(function(elem){
+
+              html += "<span>";
+              console.log(elem.color);
+              if(elem.color=="rgb(209, 10, 69)"){
+                html += "Fehlbetrag lt. Prognose ";
+              };
+              if(elem.color=="rgb(250, 203, 65)"){
+                html += "Gesamtsaldo Ã¼ber alle </br> hinterlegten Konten ";
+              };
+
+              if(elem.color=="rgb(138, 192, 86)"){
+                html += "Angegebener Kaufbetrag ";
+              };
+
+              html +="</span> : <b>"+parseFloat(elem.value).toFixed(2)+" â‚¬</b>";
+            })
+
+            return html;
+          })
+
+        },
+        margin : {
+          left: 50
+        },
+        x: function(d){return d.label;},
+        y: function(d){return d.value;},
+        showValues: true,
+        valueFormat: function(d){
+          var gesamtbetrag = 4200;
+
+          if(d>gesamtbetrag && isFehlbetrag < 1){
+            console.log(isFehlbetrag);
+            isFehlbetrag+1;
+            return parseFloat(d-gesamtbetrag).toFixed(2)+" €";
+          }
+          return parseFloat(d).toFixed(2)+ " €";
+        },
+        duration: 500,
+        xAxis: {
+
+        },
+        yAxis: {
+          valueFormat: function(d) {
+            return d3.format('$ ,.2f')(d)
+          }
+        }
+      }
+    };
+
+    $scope.data = [
+      {
+        key: "Saldos",
+        values: [
+          {
+            "label" : "Gesamtsaldo heute" ,
+            "value" : 4200,
+            "color" : 'rgb(250, 203, 65)',
+          } ,
+          {
+            "label" : "Prognose" ,
+            "value" : 5000,
+            "color" : "rgb(209, 10, 69)"
+          } ,
+          {
+            "label" : "Prognose" ,
+            "value" : 4200,
+            "color" : 'rgb(250, 203, 65)'
+          } ,
+          {
+            "label" : "Kaufbetrag" ,
+            "value" : 5000,
+            "color" : 'rgb(138, 192, 86)'
+          }
+        ]
+      }
+    ]
+
+
+  })

@@ -45,7 +45,7 @@
 }
 
 .nvd3 .nv-bars rect {
-    fill-opacity: .75;
+    fill-opacity: .7;
 
     transition: fill-opacity 250ms linear;
     -moz-transition: fill-opacity 250ms linear;
@@ -71,8 +71,8 @@
 .nvd3 .nv-multibar .nv-groups rect,
 .nvd3 .nv-multibarHorizontal .nv-groups rect,
 .nvd3 .nv-discretebar .nv-groups rect {
-    stroke-opacity: 0;
-
+    stroke-opacity: 1;
+     fill-opacity: .9;
     transition: fill-opacity 250ms linear;
     -moz-transition: fill-opacity 250ms linear;
     -webkit-transition: fill-opacity 250ms linear;
