@@ -4,24 +4,26 @@
 
 
         <div ng-app="app.controllers">
-          <div ng-controller="multiChart2Ctrl">
-            <nvd3 options="options" data="data" config="config" ></nvd3>
+
+          <div ng-controller="multiChartCtrl">
+            {{update()}}
+            <nvd3 options="options" data="data" config="config" events="events" config="config" on-ready="callback" ></nvd3>
           </div>
         </div>
 
 
-
+      <button class="button button-energized button-block " ng-click="resetFinanceType()" >Kaufpreis zurücksetzen</button>
       <!--
-     <div class="ct-chart ct-perfect-fourth"></div>
-        <div ng-app="app.directives" ng-controller="finanzstatusCtrl">
+ <div class="ct-chart ct-perfect-fourth"></div>
+    <div ng-app="app.directives" ng-controller="finanzstatusCtrl">
 
-       <div d3-bars bar-height="20" bar-padding="5"></div>
+   <div d3-bars bar-height="20" bar-padding="5"></div>
 
-      </div>
-        <nvd3 options="options" data="data"></nvd3>
-       <div style="text-align:center;">
-             <img src="img/finanzstatus-{{financeType}}.png" width="100%" height="auto">
-         </div> -->
+  </div>
+    <nvd3 options="options" data="data"></nvd3>
+   <div style="text-align:center;">
+         <img src="img/finanzstatus-{{financeType}}.png" width="100%" height="auto">
+     </div> -->
 
     </ion-content>
 </ion-view>

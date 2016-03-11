@@ -2,7 +2,6 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
 
   .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup) {
-
     var deviceInformation = ionic.Platform.device();
     var isAndroid = ionic.Platform.isAndroid();
 
@@ -33,7 +32,6 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     window.localStorage.setItem("prognoseReason", 'Versicherungen');
     window.localStorage.setItem("minRemaining", 200.00);
     //End Start Values
-
     console.log(window.localStorage.getItem("minRemaining"));
     $scope.checkAmount = function(betrag) {
 
@@ -99,103 +97,25 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
   .controller('finanzstatusCtrl', function($scope) {
     //$scope.financeType = window.localStorage.getItem("financeType");
+    $scope.$broadcast('doRefresh');
 
 
-    /*  $scope.options = {
-     chart: {
-     type: 'lineChart',
-     height: 450,
-     margin: {
-     top: 20,
-     right: 20,
-     bottom: 40,
-     left: 55
-     },
-     x: function (d) {
-     return d.x;
-     },
-     y: function (d) {
-     return d.y;
-     },
-     useInteractiveGuideline: true,
-     dispatch: {
-     stateChange: function (e) {
-     console.log("stateChange");
-     },
-     changeState: function (e) {
-     console.log("changeState");
-     },
-     tooltipShow: function (e) {
-     console.log("tooltipShow");
-     },
-     tooltipHide: function (e) {
-     console.log("tooltipHide");
-     }
-     },
-     xAxis: {
-     tickFormat: function (d) {
-     return d3.time.format('%x')(new Date(d));
-     },
-     yAxis: {
-     axisLabel: 'Saldo',
-     tickFormat: function (d) {
-     return d3.format(d +' €');
-     },
-     axisLabelDistance: -10
-     },
-     callback: function (chart) {
-     console.log("!!! lineChart callback !!!");
-     }
-     },
-     }
+    var gesamtsaldo = parseFloat(window.localStorage.getItem("Konto1"))+
+      parseFloat(window.localStorage.getItem("Konto2"))+
+      parseFloat(window.localStorage.getItem("Konto3"));
 
-     };
-     $scope.data = dataset;+/
+    window.localStorage.setItem("gesamtsaldo", gesamtsaldo);
 
-     /* minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
-     primeKonto = window.localStorage.getItem("primeKonto");
-     primeKontoValue = parseFloat(window.localStorage.getItem("Konto"+primeKonto));
-     google.charts.load('current', {'packages':['corechart']});
-     google.charts.setOnLoadCallback(drawVisualization());
+    $scope.resetFinanceType= function(){
+      window.localStorage.setItem("financeType", "ohne");
+      window.localStorage.setItem("amount",0);
+      $scope.$broadcast('doRefresh');
 
-     function drawVisualization() {
-     var d = new Date();
-     d.setDate(1);
-     var n = new Date();
-     // Some raw data (not necessarily accurate)
-     var data = google.visualization.arrayToDataTable([
-     ['Monat', 'Saldo',  'Prognose', 'Mindestgrenze'],
-     [n.getMonth(n.setMonth(d.getMonth()-2))+1+'/'+ n.getFullYear(),  820,    ,minRemaining],
-     [n.getMonth(n.setMonth(d.getMonth()-1))+1+'/'+n.getFullYear(),  450,    ,minRemaining],
-     [d.getMonth()+1+'/'+d.getFullYear(),  primeKontoValue,   primeKontoValue  ,minRemaining ],
-     [n.getMonth(n.setMonth(d.getMonth()+1))+1+'/'+n.getFullYear(),,   primeKontoValue-89, minRemaining],
-     [n.getMonth(n.setMonth(d.getMonth()+2))+1+'/'+n.getFullYear(),,   700, minRemaining],
-     ]);
-
-     var options = {
-
-     vAxis:{
-     format:'decimal',
-
-     },
-     seriesType: 'line',
-     series: {
-     0: {color:'#0066B3', type:'area', areaOpacity:1.0},
-     1: {color: '#ff6600', lineDashStyle:[3,3]},
-     2: {visibleInLegend:'true', color:'green' }
-     },
-     legend: {
-     position: 'bottom',
-     maxLines:3
-     },
-     };
-
-     $scope.chart = new google.visualization.ComboChart(document.getElementById('chart'));
-     $scope.chart.draw(data, options);
-     }*/
+    }
   })
 
   .controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
+    window.localStorage.setItem('refresh',1)
     $scope.amount = parseFloat(window.localStorage.getItem("amount"));
     $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
@@ -219,9 +139,9 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           subTitle: 'Gib einen Namen für diesen Wunsch ein',
           scope: $scope,
           buttons: [
-            { text: 'Cancel' },
+            { text: 'Abbrechen' },
             {
-              text: '<b>Save</b>',
+              text: 'Speichern',
               type: 'button-energized',
               onTap: function(e) {
                 if (!$scope.wishlist) {
@@ -246,6 +166,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
   .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
     $scope.todoChoice = "1";
+    window.localStorage.setItem('refresh',1)
     $scope.amount = parseFloat((window.localStorage.getItem("amount")));
     $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
@@ -286,9 +207,9 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
             subTitle: 'Gib einen Namen für diesen Wunsch ein',
             scope: $scope,
             buttons: [
-              { text: 'Cancel' },
+              { text: 'Abbrechen' },
               {
-                text: '<b>Save</b>',
+                text: 'Speichern',
                 type: 'button-energized',
                 onTap: function(e) {
                   if (!$scope.wishlist) {
@@ -323,6 +244,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
   .controller('empfehlung3Ctrl', function($scope, $state,$ionicPopup) {
     $scope.todoChoice = 1;
+    window.localStorage.setItem('refresh',1)
     $scope.amount = parseFloat((window.localStorage.getItem("amount")));
     $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
@@ -340,7 +262,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.notify = function() {
       var alertPopup = $ionicPopup.alert({
         title: 'Hinweis',
-        template: 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch '+$scope.fehlbetrag+' €! Es sind keine UmbuchungsmÃ¶glichkeiten vorhanden'
+        template: 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch '+$scope.fehlbetrag+' €! Es sind keine Umbuchungsmöglichkeiten vorhanden'
       });
 
       alertPopup.then(function (res) {
@@ -364,9 +286,9 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
             subTitle: 'Gib einen Namen für diesen Wunsch ein',
             scope: $scope,
             buttons: [
-              { text: 'Cancel' },
+              { text: 'Abbrechen' },
               {
-                text: '<b>Save</b>',
+                text: 'Speichern',
                 type: 'button-energized',
                 onTap: function(e) {
                   if (!$scope.wishlist) {
@@ -520,38 +442,43 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
   })
 
 
-  /*$scope.getUserData = function(user, passwort){
+  .controller('multiChartCtrl', function($scope){
+    var financeType = window.localStorage.getItem("financeType");
+    $scope.financeType = financeType;
+    var kaufbetrag = parseFloat(window.localStorage.getItem("amount"));
+    var gesamtsaldo = parseFloat(window.localStorage.getItem("gesamtsaldo"));
+    var saldoPrime = parseFloat(window.localStorage.getItem("Konto1"));
+    var disabled = false;
+    var colorPrime= "orange";
+    var colorGesamt= "orange";
+    var areaPrime = true;
+    var areaGesamt = true;
 
-   if (user == 'Max Mustermann' && passwort == 'Start123') {
-   window.localStorage.setItem("Konto1", 650 );
-   window.localStorage.setItem("Konto2", 500 );
-   window.localStorage.setItem("Konto3", 3000 );
-   window.localStorage.setItem("laufzeit", 18 );
-   window.localStorage.setItem("amount",0);
-   window.localStorage.setItem("financeType",'ohne');
 
-   // new Data
-   window.localStorage.setItem("prognose", -100);
-   window.localStorage.setItem("prognoseReason", 'Versicherungen');
-   window.localStorage.setItem("minRemaining", 200);
+    console.log(kaufbetrag);
 
-   }
-
-   }*/
-  .controller('multiChart2Ctrl', function($scope){
     var tickMarks = [new Date(2016,0,1),new Date(2016,1,1),new Date(2016,2,1),
       new Date(2016,3,1),new Date(2016,4,1),new Date(2016,5,1),new Date(2016,6,1),
       new Date(2016,7,1),new Date(2016,8,1),new Date(2016,9,1),new Date(2016,10,1),new Date(2016,11,1)]
+
+
+
+    $scope.config = {
+
+      deepWatchData: true,
+      deepWatchDataDepth: 2,
+    }
 
 
     $scope.options = {
       chart: {
         type: 'lineChart',
         height: 550,
+        duration:1,
         margin : {
           left: 50
-        },
 
+        },
 
         duration: 700,
         forceY:0.00,
@@ -569,363 +496,209 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
       }
     };
-    var n = new Date();
-    n.setDate(1);
-    $scope.data = [
-
-
-      {
-        "key": "Saldo über alle Konten",
-        area: true,
-        yAxis: 1,
-
-        "color": "lightblue",
-        "values": [
-          {
-            "x": new Date(2016,0,1),
-            "y": 2200
-          },
-          {
-            "x": new Date(2016,1,1),
-            "y": 3200
-          },
-          {
-            "x":  new Date(2016,2,22),
-            "y": 2920
-          },
-          {
-            "x":  new Date(2016,3,1),
-            "y": 2460
-          },
-          {
-            "x":  new Date(2016,4,1),
-            "y": 4200.00
-          }
-        ]
-      },{
-        "key": "Saldo Primärkonto",
-        area: true,
-        yAxis: 1,
-
-        "color": "#0066B3",
-        "values": [
-          {
-            "x": new Date(2016,0,1),
-            "y": 1200
-          },
-          {
-            "x": new Date(2016,1,1),
-            "y": 1200
-          },
-          {
-            "x":  new Date(2016,2,22),
-            "y": 920
-          },
-          {
-            "x":  new Date(2016,3,1),
-            "y": 1460
-          },
-          {
-            "x":  new Date(2016,4,1),
-            "y": 652.00
-          }
-        ]
-      },
+    update();
 
 
 
-      {
-        "key": "Prognose Gesamtsaldo",
-        type: 'line',
-        yAxis: 1,
-        area:true,
-        "color": "red",
-        classed:'dashed',
-        "values": [
-
-          {
-            "x": new Date(2016,4,1),
-            "y": 4200.00
-          },
-          {
-            "x": new Date(2016,4,2),
-            "y": 4200-5000
-          },
-          {
-            "x":  new Date(2016,5,1),
-            "y": 4100-5000
-          },
-          {
-            "x":  new Date(2016,6,1),
-            "y": 4900-5000
-          }
-        ]
-      },{
-        "key": "Prognose Primärsaldo",
-        type: 'line',
-        yAxis: 1,
-        area:true,
-        visible:false,
-        "color": "red",
-        classed:'dashed',
-        "values": [
-
-          {
-            "x": new Date(2016,4,1),
-            "y": 652.00
-          },
-          {
-            "x": new Date(2016,4,2),
-            "y": 625-5000
-          },
-          {
-            "x":  new Date(2016,5,1),
-            "y": 525-5000
-          },
-          {
-            "x":  new Date(2016,6,1),
-            "y": 700-5000
-          }
-        ]
-      },
-      {
-
-        "key": "Mindestgrenze",
-        type: 'line',
-        yAxis: 1,
-        "color": "green",
-        "values": [
-          {
-            "x": new Date(2016,0,1),
-            "y": 200
-          },
-          {
-            "x":  new Date(2016,6,1),
-            "y": 200
-          }
-        ]
-      }
-
-
-    ]
-
-
-
-
-  })
-
-  .controller('multiChartCtrl', function($scope){
-    var tickMarks = [new Date(2016,0,1),new Date(2016,1,1),new Date(2016,2,1),
-      new Date(2016,3,1),new Date(2016,4,1),new Date(2016,5,1),new Date(2016,6,1),
-      new Date(2016,7,1),new Date(2016,8,1),new Date(2016,9,1),new Date(2016,10,1),new Date(2016,11,1)]
-
-
-    $scope.options = {
-      chart: {
-        type: 'lineChart',
-        height: 350,
-        margin : {
-          left: 50
-        },
-
-        zoom: {
-          //NOTE: All attributes below are optional
-          enabled: false,
-          scale: 1,
-          translate: [0, 0],
-          useFixedDomain: false,
-          useNiceScale: true,
-          horizontalOff: true,
-          verticalOff: false,
-          unzoomEventType: 'dblclick.zoom'
-        },
-        //color: d3.scale.category10().range(),
-
-        duration: 700,
-        forceY:0.00,
-        xAxis: {
-          //  ticks:d3.time.month,
-          tickValues: tickMarks,
-          tickFormat: function(d){
-            return d3.time.format("%b")(new Date(d));
-          }
-        },
-        yAxis: {
-
-          tickFormat: function(d){
-            return d3.format("$ , .2f")(d);
-          }
-        },
+    $scope.events={
+      doRefresh: function(e,scope){
+        update().then(function(response){
+          console.log("callback");
+          scope.api.clearElement();
+          scope.api.update();
+        })
 
       }
-    };
-    var n = new Date();
-    n.setDate(1);
-    $scope.data = [
+    }
+    $scope.update = function(){
+      if(window.localStorage.getItem('refresh')==1) {
+        update();
+        window.localStorage.setItem('refresh',0)
+      }
+    }
 
-      {
-        "key": "Saldo",
-        area: true,
-        yAxis: 1,
+    function update (callback){
+      var financeType = window.localStorage.getItem("financeType");
+      var kaufbetrag = parseFloat(window.localStorage.getItem("amount"));
+      var gesamtsaldo = parseFloat(window.localStorage.getItem("gesamtsaldo"));
+      var saldoPrime = parseFloat(window.localStorage.getItem("Konto1"));
+      console.log(kaufbetrag,gesamtsaldo,saldoPrime);
 
-        "color": "#0066B3",
-        "values": [
-          {
-            "x": new Date(2016,0,1),
-            "y": 1200
-          },
-          {
-            "x": new Date(2016,1,1),
-            "y": 1200
-          },
-          {
-            "x":  new Date(2016,2,22),
-            "y": 920
-          },
-          {
-            "x":  new Date(2016,3,1),
-            "y": 1460
-          },
-          {
-            "x":  new Date(2016,4,1),
-            "y": 652.00
-          }
-        ]
-      },{
-        "key": "Prognose",
-        type: 'line',
-        yAxis: 1,
-        "color": "#ffaa00",
-        classed:'dashed',
-        "values": [
-
-          {
-            "x": new Date(2016,4,1),
-            "y": 652.00
-          },
-          {
-            "x":  new Date(2016,5,1),
-            "y": 563
-          },
-          {
-            "x":  new Date(2016,6,1),
-            "y": 1270
-          }
-        ]
-      },{
-
-        "key": "Mindestgrenze",
-        type: 'line',
-        yAxis: 1,
-        "color": "green",
-        "values": [
-          {
-            "x": new Date(2016,0,1),
-            "y": 200
-          },
-          {
-            "x":  new Date(2016,6,1),
-            "y": 200
-          }
-        ]
+      if(financeType == "gelb" || financeType == "rot"){
+        disabled = false;
+      }else {
+        disabled = true;
       }
 
+      if (financeType== "gelb" ){
+        colorPrime = "red";
+        colorGesamt= "green";
+        areaPrime = true;
+        areaGesamt = true;
+      } else if (financeType == "rot") {
+        colorPrime= "red";
+        colorGesamt="red";
+        areaPrime = true;
+        areaGesamt = true;
+      } else if(financeType=="gruen"){
+        colorPrime= "green";
+        colorGesamt="orange";
+        areaPrime = true;
+        areaGesamt = false;
+      } else if (financeType== "ohne") {
+        colorPrime= "orange";
+        colorGesamt="orange";
+        areaPrime = false;
+        areaGesamt = false;
+      }
+      var n = new Date();
+      n.setDate(1);
+      $scope.data = [
 
-    ]
 
+        {
+          "key": "Saldo über alle Konten",
+          area: true,
+          yAxis: 1,
+          disabled: disabled,
+          "color": "lightblue",
+          "values": [
+            {
+              "x": new Date(2016,0,1),
+              "y": 600 + gesamtsaldo,
+            },
+            {
+              "x": new Date(2016,0,30),
+              "y": -200 + gesamtsaldo,
+            },
+            {
+              "x":  new Date(2016,1,22),
+              "y": 920 + gesamtsaldo,
+            },
+            {
+              "x":  new Date(2016,2,1),
+              "y": -160 + gesamtsaldo
+            },
+            {
+              "x":  new Date(),
+              "y": gesamtsaldo
+            }
+          ]
+        },{
+          "key": "Saldo Primärkonto",
+          area: true,
+          yAxis: 1,
 
-
-
-  })
-
-  .controller('barChartCtrl', function($scope){
-    var isFehlbetrag = 0;
-    $scope.options = {
-      chart: {
-        type: 'discreteBarChart',
-        height: 450,
-        toolTipps:true,
-        tooltip:{
-          contentGenerator:(function (d) {
-            // var html = "<span>"+d.label+"</span> <ul>";
-            var html = "";
-            d.series.forEach(function(elem){
-
-              html += "<span>";
-              console.log(elem.color);
-              if(elem.color=="rgb(209, 10, 69)"){
-                html += "Fehlbetrag lt. Prognose ";
-              };
-              if(elem.color=="rgb(250, 203, 65)"){
-                html += "Gesamtsaldo Ã¼ber alle </br> hinterlegten Konten ";
-              };
-
-              if(elem.color=="rgb(138, 192, 86)"){
-                html += "Angegebener Kaufbetrag ";
-              };
-
-              html +="</span> : <b>"+parseFloat(elem.value).toFixed(2)+" €</b>";
-            })
-
-            return html;
-          })
-
+          "color": "#0066B3",
+          "values": [
+            {
+              "x": new Date(2016,0,1),
+              "y": 200 +saldoPrime
+            },
+            {
+              "x": new Date(2016,0,23),
+              "y": 900 +saldoPrime
+            },
+            {
+              "x":  new Date(2016,1,22),
+              "y": 720 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,2,1),
+              "y": 460 +saldoPrime
+            },
+            {
+              "x":  new Date(),
+              "y": saldoPrime
+            }
+          ]
         },
-        margin : {
-          left: 50
-        },
-        x: function(d){return d.label;},
-        y: function(d){return d.value;},
-        showValues: true,
-        valueFormat: function(d){
-          var gesamtbetrag = 4200;
 
-          if(d>gesamtbetrag && isFehlbetrag < 1){
-            console.log(isFehlbetrag);
-            isFehlbetrag+1;
-            return parseFloat(d-gesamtbetrag).toFixed(2)+" €";
-          }
-          return parseFloat(d).toFixed(2)+ " €";
-        },
-        duration: 500,
-        xAxis: {
 
+
+        {
+          "key": "Kaufprognose aller Konten",
+          type: 'line',
+          yAxis: 1,
+          area:areaGesamt,
+          "color": colorGesamt,
+          disabled: disabled,
+          classed:'dashed',
+          "values": [
+
+            {
+              "x": new Date(),
+              "y": gesamtsaldo
+            },
+            {
+              "x": new Date(2016,4,1),
+              "y": gesamtsaldo-kaufbetrag
+            },
+            {
+              "x":  new Date(2016,5,1),
+              "y": gesamtsaldo-kaufbetrag-170
+            },
+            {
+              "x":  new Date(2016,6,1),
+              "y": gesamtsaldo-kaufbetrag+500
+            }
+          ]
+        },{
+          "key": "Kaufprognose Primärkonto",
+          type: 'line',
+          yAxis: 1,
+          area:areaPrime,
+          "color": colorPrime,
+          classed:'dashed',
+          "values": [
+
+            {
+              "x": new Date(),
+              "y": saldoPrime
+            },
+            {
+              "x": new Date(2016,4,1),
+              "y": saldoPrime-kaufbetrag
+            },
+            {
+              "x":  new Date(2016,5,1),
+              "y": saldoPrime-kaufbetrag - 89
+            },
+            {
+              "x":  new Date(2016,6,1),
+              "y": saldoPrime-kaufbetrag + 300
+            }
+          ]
         },
-        yAxis: {
-          valueFormat: function(d) {
-            return d3.format('$ ,.2f')(d)
-          }
+        {
+
+          "key": "Mindestgrenze",
+          type: 'line',
+          yAxis: 1,
+          "color": "green",
+          "values": [
+            {
+              "x": new Date(2016,0,1),
+              "y": 200
+            },
+            {
+              "x":  new Date(2016,6,1),
+              "y": 200
+            }
+          ]
         }
-      }
-    };
 
-    $scope.data = [
-      {
-        key: "Saldos",
-        values: [
-          {
-            "label" : "Gesamtsaldo heute" ,
-            "value" : 4200,
-            "color" : 'rgb(250, 203, 65)',
-          } ,
-          {
-            "label" : "Prognose" ,
-            "value" : 5000,
-            "color" : "rgb(209, 10, 69)"
-          } ,
-          {
-            "label" : "Prognose" ,
-            "value" : 4200,
-            "color" : 'rgb(250, 203, 65)'
-          } ,
-          {
-            "label" : "Kaufbetrag" ,
-            "value" : 5000,
-            "color" : 'rgb(138, 192, 86)'
-          }
-        ]
-      }
-    ]
 
+      ];
+
+
+      return new Promise(function(resolve,reject){
+        resolve();
+      });
+
+    }
 
   })
+
+
+
