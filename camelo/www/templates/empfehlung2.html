@@ -4,23 +4,32 @@
       <div style="text-align:center;">
             <img src="img/gelb.png" width="50%" height="auto"><button ng-click="notify()" class="button button-stable button-clear  icon ion-information-circled"></button>
         </div>
-      <div>
-        <table><tr><td>
-          <span style="text-align: left; color: #0066B3" >Kaufbetrag:</span></td><td><span style="text-align: right" > {{amount}} € </span></td></tr></br>
-          <tr><td> <span style="text-align: right; color: #0066B3">erwarteter Saldo Primärkonto:</span></td><td><span  style="text-align: right"> {{erwarteterStand}} €</span></td></tr>
-        </table>
+      <div class="row">
+        <div class="col col-20"> <span style="text-align: left; color: #0066B3; ">Kaufbetrag:</span></div>
+        <div class="col"> {{amount}} €</div>
       </div>
+      <div class="row">
+        <div class="col col-20"> <span style="text-align: right; color: #0066B3; ">prognostizierter </br>Saldo Primärkonto:</span></div>
+        <div class="col"> </br> {{erwarteterStand}} €</div>
+      </div>
+
       </br>
 
         </br>
-      <span style="text-align: right; color: #0066B3">Was willst du tun?</span>
-        <form >
-          <ion-radio  ng-model="todoChoice" ng-value="1" name="wishlist" ng-change="changeTodo(todoChoice)">zur Wunschliste hinzufügen</ion-radio>
-          <ion-radio ng-model="todoChoice" ng-value="2" name="umbuchen" ng-change="changeTodo(todoChoice)" >Umbuchen</ion-radio>
-          <ion-radio ng-model="todoChoice" ng-value="3" name="kredit" ng-change="changeTodo(todoChoice)">Kredit beantragen</ion-radio>
 
+          <div class="list">
 
-        </form>
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Was willst du tun?
+              </div>
+              <select ng-model="todoChoice" ng-options="item for item in ['zur Wunschliste hinzufügen','Umbuchen', 'Kredit beantragen','Daueraufträge anzeigen','Terminüberweisungen anzeigen','Sparplan anlegen']" ng-change="changeTodo(todoChoice)">
+              </select>
+            </label>
+            </br></br>
+            </br>
+          </div>
+
 </br></br></br>
 
     </ion-content>

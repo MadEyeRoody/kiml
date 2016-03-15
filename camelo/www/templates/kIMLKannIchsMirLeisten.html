@@ -1,4 +1,4 @@
-<ion-view title="Kann ich's mir Leisten? - Demo" hide-back-button="true">
+<ion-view title="Kann ich's mir leisten? - Demo" hide-back-button="true">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
 
       </br></br></br>
@@ -6,7 +6,7 @@
            <div class="item item-input-inset" >
              <label class=" item-input-wrapper" name="betrag" style="background: transparent">
                 <span class="input-label">Betrag in €:</span>
-                <input type="text" pattern="\d*[0-9](\.\d{1,2})?$"  ng-model="formdata.betragValue"/>
+                <input type="tel" pattern="\d*[0-9](\.\d{1,2})?$"  ng-model="formdata.betragValue"/>
 
 
             </label>
@@ -18,7 +18,7 @@
             <button type="submit" class="button button-energized button-block">Kann ich's mir leisten?</button>
         </form>
       </br></br>
-      <video width="100%"  controls="controls"  tabindex="0">
+      <video width="100%" autobuffer  controls="controls" poster="img/vidBack.png" tabindex="0">
         <source src="vid/kiml.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
       </video>
     </ion-content>

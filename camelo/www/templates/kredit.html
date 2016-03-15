@@ -19,7 +19,14 @@
           <ion-item class="item-divider">Monatliche Rate: {{rate}} €</ion-item>
 
         </form>
-      <a ui-sref="menu.kredit2" class="button button-energized button-block  icon-right ion-android-arrow-forward">weiter</a>
-        <a ui-sref="menu.empfehlung2" class="button button-light button-block  icon-left ion-android-arrow-back">zurück</a>
+
     </ion-content>
+
+  <ion-footer-bar>
+    <div class="button-bar">
+      <button ui-sref="{{kreditBack}}" class="button button-light button-block  icon-left ion-android-arrow-back">zurück</button>
+      <button ui-sref="menu.kredit2" class="button button-energized button-block  icon-right ion-android-arrow-forward">weiter</button>
+
+    </div>
+    </ion-footer-bar>
 </ion-view>

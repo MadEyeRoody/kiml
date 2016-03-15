@@ -10,18 +10,28 @@
         </label>
     </div></br>
       <h5 style="color: #0066B3">Von welchem Konto soll umgebucht werden?</h5>
-        <form class="list" ng-submit="umbuchen(kontoChoice)">
-          <!--  <ion-radio ng-model="kontoChoice" ng-value="1" name="konto1">Konto 1: {{konto1}} €</ion-radio>-->
-            <ion-radio ng-model="kontoChoice" ng-value="2" name="konto2">Tagegeld: {{konto2}} €
-            </br> <span style="font-size: smaller">DE 40 7919 0000 0001 5311 58</span>
+        <form class="list">
+          <ion-radio ng-if="isKonto1" ng-model="kontoChoice" ng-value="1" name="konto1" ng-change="changeKonto(kontoChoice)">{{konto1Bez}}: {{konto1}} €
+            </br> <span style="font-size: smaller">{{konto1IBAN}}</span>
+          </ion-radio>
+
+          <ion-radio ng-if="isKonto2" ng-model="kontoChoice" ng-value="2" name="konto2" ng-change="changeKonto(kontoChoice)">{{konto2Bez}}: {{konto2}} €
+            </br> <span style="font-size: smaller">{{konto2IBAN}}</span>
             </ion-radio>
 
-            <ion-radio ng-model="kontoChoice" ng-value="3" name="konto3">Gemeinschaftskonto: {{konto3}} €
-              </br> <span style="font-size: smaller">DE 46 1009 0900 0887 5754 33</span>
+            <ion-radio ng-if="isKonto3" ng-model="kontoChoice" ng-value="3" name="konto3" ng-change="changeKonto(kontoChoice)">{{konto3Bez}}: {{konto3}} €
+              </br> <span style="font-size: smaller">{{konto3IBAN}}</span>
             </ion-radio>
 
-          <button class="button button-energized button-block ">Umbuchen</button>
         </form>
-        <a ui-sref="menu.empfehlung2" class="button button-light button-block  icon-left ion-android-arrow-back">zurück</a>
+
     </ion-content>
+  <ion-footer-bar>
+    <div class="button-bar">
+
+      <button ui-sref="menu.empfehlung2" class="button button-light button-block  icon-left ion-android-arrow-back">zurück</button>
+      <button class="button button-energized button-block " ng-click="umbuchen()">Umbuchen</button>
+
+    </div>
+  </ion-footer-bar>
 </ion-view>

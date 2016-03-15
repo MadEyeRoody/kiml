@@ -1,7 +1,7 @@
 angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
 
-  .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup) {
+  .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup, $ionicModal) {
     var deviceInformation = ionic.Platform.device();
     var isAndroid = ionic.Platform.isAndroid();
 
@@ -18,34 +18,35 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     window.localStorage.setItem("Konto1", 652.00 );
     window.localStorage.setItem("Konto1Bez", 'Girokonto' );
     window.localStorage.setItem("Konto1IBAN", 'DE 11 7019 0000 0000 0089 74' );
-    window.localStorage.setItem("Konto2", 521.00 );
+    window.localStorage.setItem("Konto2", 411.00 );
     window.localStorage.setItem("Konto2Bez", 'Tagesgeldkonto' );
     window.localStorage.setItem("Konto2IBAN", 'DE 40 7919 0000 0001 5311 58' );
-    window.localStorage.setItem("Konto3", 3234.00 );
+    window.localStorage.setItem("Konto3", 634.00 );
     window.localStorage.setItem("Konto3Bez", 'Gemeinschaftskonto' );
     window.localStorage.setItem("Konto3IBAN", 'DE 46 1009 0900 0887 5754 33' );
     window.localStorage.setItem("primeKonto", 1 );
     window.localStorage.setItem("laufzeit", 18);
     window.localStorage.setItem("amount",0);
     window.localStorage.setItem("financeType",'ohne');
-    window.localStorage.setItem("prognose", 89.00);
+    window.localStorage.setItem("prognose", 202.00);
     window.localStorage.setItem("prognoseReason", 'Versicherungen');
     window.localStorage.setItem("minRemaining", 200.00);
     //End Start Values
     console.log(window.localStorage.getItem("minRemaining"));
     $scope.checkAmount = function(betrag) {
 
-      betragValue = parseFloat(betrag);
-      prognose = parseFloat(window.localStorage.getItem("prognose"));
-      minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
-      konto1Value = parseFloat(window.localStorage.getItem("Konto1"));
-      konto2Value = parseFloat(window.localStorage.getItem("Konto2"));
-      konto3Value = parseFloat(window.localStorage.getItem("Konto3"));
-      kontoGesamtValue = konto1Value + konto2Value + konto3Value;
+      var betragValue = parseFloat(betrag);
+      var prognose = parseFloat(window.localStorage.getItem("prognose"));
+      var minRemaining = parseFloat(window.localStorage.getItem("minRemaining"));
+      var konto1Value = parseFloat(window.localStorage.getItem("Konto1"));
+      var konto2Value = parseFloat(window.localStorage.getItem("Konto2"));
+      var konto3Value = parseFloat(window.localStorage.getItem("Konto3"));
+      var kontoGesamtValue = konto1Value + konto2Value + konto3Value;
+      var kontoPrimeValue = parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
 
       console.log(betragValue);
       if (betragValue>0){
-        if ((konto1Value - (betragValue+prognose))>=minRemaining) {
+        if ((kontoPrimeValue - (betragValue+prognose))>=minRemaining) {
           $state.go('menu.empfehlung');
 
         } else if ((kontoGesamtValue - (betragValue + prognose))>=minRemaining) {
@@ -55,6 +56,32 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
         }
         window.localStorage.setItem("amount", betragValue)
       } else {
+
+        $ionicModal.fromTemplateUrl('/modal/inputModal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+        });
+        $scope.openModal = function() {
+          $scope.modal.show();
+        };
+        $scope.closeModal = function() {
+          $scope.modal.hide();
+        };
+        //Cleanup the modal when we're done with it!
+        $scope.$on('$destroy', function() {
+          $scope.modal.remove();
+        });
+        // Execute action on hide modal
+        $scope.$on('modal.hidden', function() {
+          // Execute action
+        });
+        // Execute action on remove modal
+        $scope.$on('modal.removed', function() {
+          // Execute action
+        });
+        /*
         var alertPopup = $ionicPopup.alert({
           title: 'Kein Betrag eingegeben',
           template: 'Bitte gib einen Betrag ein!'
@@ -64,7 +91,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           //window.localStorage.setItem("Konto1",window.localStorage.getItem("Konto1")+$scope.fehlbetrag)
           console.log('no Input');
 
-        });
+        });*/
       }
       ;
     }
@@ -117,7 +144,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
   .controller('empfehlungCtrl', function($scope, $state,$ionicPopup) {
     window.localStorage.setItem('refresh',1)
     $scope.amount = parseFloat(window.localStorage.getItem("amount"));
-    $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
+    $scope.konto1 = parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
     $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
     $scope.amount=$scope.amount.toFixed(2);
@@ -165,10 +192,10 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
   })
 
   .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
-    $scope.todoChoice = "1";
+    $scope.todoChoice = "zur Wunschliste hinzufügen";
     window.localStorage.setItem('refresh',1)
     $scope.amount = parseFloat((window.localStorage.getItem("amount")));
-    $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
+    $scope.konto1 = parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
     $scope.minAmount = parseFloat((window.localStorage.getItem("minRemaining")));
     $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
@@ -198,9 +225,9 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
     $scope.doneYellow = function(){
       target = $scope.todoChoice;
-      if(target>0) {
+      if(target) {
         console.log(target);
-        if (target == 1) {
+        if (target == "zur Wunschliste hinzufügen") {
           var myPopup = $ionicPopup.show({
             template: '<input type="text" ng-model="wishlist">',
             title: 'Zur Wunschliste hinzufügen',
@@ -227,11 +254,25 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
             ]
           });
         }
-        if (target == 2) {
+        else if (target == "Umbuchen") {
           $state.go('menu.umbuchung');
         }
-        if (target == 3) {
+        else if (target == "Kredit beantragen") {
+          window.localStorage.setItem("kreditBack", 2);
           $state.go('menu.kredit')
+        } else {
+
+          var alertPopup = $ionicPopup.alert({
+            title: 'Not Implemented yet',
+            template: 'Diese funktion ist in der Demo Anwendung nicht verfügbar'
+          });
+
+          alertPopup.then(function(res) {
+
+            console.log('no Input');
+
+          });
+
         }
 
       }
@@ -243,10 +284,10 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
   })
 
   .controller('empfehlung3Ctrl', function($scope, $state,$ionicPopup) {
-    $scope.todoChoice = 1;
+    $scope.todoChoice = "zur Wunschliste hinzufügen";
     window.localStorage.setItem('refresh',1)
     $scope.amount = parseFloat((window.localStorage.getItem("amount")));
-    $scope.konto1 = parseFloat((window.localStorage.getItem("Konto1")));
+    $scope.konto1 =parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
     $scope.minAmount = parseFloat((window.localStorage.getItem("minRemaining")));
     $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
@@ -273,13 +314,13 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
       $scope.todoChoice = target;
     }
 
-    $scope.doneYellow = function(){
+    $scope.doneRed = function(){
 
       target = $scope.todoChoice;
 
-      if(target>0) {
+      if(target) {
         console.log(target);
-        if (target == 1) {
+        if (target == "zur Wunschliste hinzufügen") {
           var myPopup = $ionicPopup.show({
             template: '<input type="text" ng-model="wishlist">',
             title: 'Zur Wunschliste hinzufügen',
@@ -306,9 +347,22 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
               }
             ]
           });
-        }
-        if (target == 2) {
+        }else if (target == "Kredit beantragen") {
+          window.localStorage.setItem("kreditBack", 3);
           $state.go('menu.kredit')
+
+        } else {
+
+          var alertPopup = $ionicPopup.alert({
+            title: 'Not Implemented yet',
+            template: 'Diese funktion ist in der Demo Anwendung nicht verfügbar'
+          });
+
+          alertPopup.then(function(res) {
+
+            console.log('no Input');
+
+          });
         }
 
       }
@@ -319,7 +373,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
   })
 
-  .controller('kontoverwaltungCtrl', function($scope) {
+  .controller('kontoverwaltungCtrl', function($scope, $state) {
     $scope.kontoChoice = parseInt(window.localStorage.getItem("primeKonto"));
     $scope.konto1=parseFloat(window.localStorage.getItem("Konto1")).toFixed(2);
     $scope.konto1Bez=window.localStorage.getItem("Konto1Bez");
@@ -335,6 +389,8 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.save=function(choice, untergrenze){
       window.localStorage.setItem("primeKonto", choice );
       window.localStorage.setItem("minRemaining",untergrenze);
+      window.localStorage.setItem('refresh',1);
+      $state.go("menu.kIMLKannIchsMirLeisten");
     };
 
   })
@@ -342,13 +398,36 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
   .controller('umbuchungCtrl', function($scope, $ionicPopup, $state) {
     $scope.fehlbetrag=parseFloat(window.localStorage.getItem("fehlbetrag"));
     $scope.konto1=parseFloat(window.localStorage.getItem("Konto1")).toFixed(2);
+    $scope.konto1Bez=window.localStorage.getItem("Konto1Bez");
+    $scope.konto1IBAN=window.localStorage.getItem("Konto1IBAN");
     $scope.konto2=parseFloat(window.localStorage.getItem("Konto2")).toFixed(2);
+    $scope.konto2Bez=window.localStorage.getItem("Konto2Bez");
+    $scope.konto2IBAN=window.localStorage.getItem("Konto2IBAN");
     $scope.konto3=parseFloat(window.localStorage.getItem("Konto3")).toFixed(2);
+    $scope.konto3Bez=window.localStorage.getItem("Konto3Bez");
+    $scope.konto3IBAN=window.localStorage.getItem("Konto3IBAN");
     $scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2);
+    var primeKonto = parseFloat(window.localStorage.getItem("primeKonto"));
 
+    $scope.isKonto1 = true;
+    $scope.isKonto2 = true;
+    $scope.isKonto3 = true;
+    if(primeKonto == 1){
+      $scope.isKonto1 = false;
+    }
+    if(primeKonto == 2){
+      $scope.isKonto2 = false;
+    }
+    if(primeKonto == 3){
+      $scope.isKonto3 = false;
+    }
+    $scope.changeKonto = function(target){
+      $scope.kontoChoice = target;
+    }
 
-    $scope.umbuchen = function(kontoChoice){
+    $scope.umbuchen = function(){
       var konto = '';
+      var kontoChoice = $scope.kontoChoice;
       if(kontoChoice>0) {
         console.log(kontoChoice);
         if (kontoChoice == 1) {
@@ -384,12 +463,12 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
         window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag.toFixed(2));
       }else {
         var alertPopup = $ionicPopup.alert({
-          title: 'Kein Konto ausgewÃ¤hlt',
-          template: 'Bitte wÃ¤hlen Sie ein Konto für die Umbuchung aus!'
+          title: 'Kein Konto ausgewählt',
+          template: 'Bitte wählen Sie ein Konto für die Umbuchung aus!'
         });
 
         alertPopup.then(function(res) {
-          console.log('Umbuchung nicht durchgefÃ¼hrt');
+          console.log('Umbuchung nicht durchgeführt');
 
         });
       }
@@ -403,7 +482,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.fehlbetrag=parseFloat(window.localStorage.getItem("fehlbetrag")).toFixed(2);
     $scope.laufzeit= parseFloat(window.localStorage.getItem("laufzeit"));
     $scope.gesamtbetrag=parseFloat(window.localStorage.getItem("amount")).toFixed(2);
-
+    $scope.kreditBack = "menu.empfehlung"+ window.localStorage.getItem("kreditBack");
 
     $scope.rate =Math.round(100.0 * (parseFloat($scope.fehlbetrag)/ $scope.laufzeit)) / 100.0; ;
 
@@ -436,7 +515,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
       alertPopup.then(function(res) {
         window.localStorage.setItem("Konto1",parseFloat(window.localStorage.getItem("Konto1")).toFixed(2)+$scope.fehlbetrag)
         console.log('Kreditantrag durchgefÃ¼hrt');
-        $state.go('menu.empfehlung');
+        $state.go('menu.kIMLKannIchsMirLeisten');
       });
     }
   })
@@ -447,7 +526,6 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.financeType = financeType;
     var kaufbetrag = parseFloat(window.localStorage.getItem("amount"));
     var gesamtsaldo = parseFloat(window.localStorage.getItem("gesamtsaldo"));
-    var saldoPrime = parseFloat(window.localStorage.getItem("Konto1"));
     var disabled = false;
     var colorPrime= "orange";
     var colorGesamt= "orange";
@@ -521,7 +599,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
       var financeType = window.localStorage.getItem("financeType");
       var kaufbetrag = parseFloat(window.localStorage.getItem("amount"));
       var gesamtsaldo = parseFloat(window.localStorage.getItem("gesamtsaldo"));
-      var saldoPrime = parseFloat(window.localStorage.getItem("Konto1"));
+      var saldoPrime = parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
       console.log(kaufbetrag,gesamtsaldo,saldoPrime);
 
       if(financeType == "gelb" || financeType == "rot"){
@@ -593,22 +671,106 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           "values": [
             {
               "x": new Date(2016,0,1),
-              "y": 200 +saldoPrime
+              "y": saldoPrime +1500
             },
             {
-              "x": new Date(2016,0,23),
+              "x": new Date(2016,0,3),
               "y": 900 +saldoPrime
             },
             {
-              "x":  new Date(2016,1,22),
+              "x": new Date(2016,0,8),
+              "y": 820 +saldoPrime
+            },
+            {
+              "x": new Date(2016,0,12),
+              "y": 670 +saldoPrime
+            },
+            {
+              "x": new Date(2016,0,17),
+              "y": 634 +saldoPrime
+            },
+            {
+              "x": new Date(2016,0,23),
+              "y": 550 +saldoPrime
+            },
+            {
+              "x": new Date(2016,0,27),
+              "y": 350 +saldoPrime
+            },
+            {
+              "x": new Date(2016,1,01),
+              "y": 2350 +saldoPrime
+            },
+            {
+              "x": new Date(2016,1,2),
+              "y": 2050 +saldoPrime
+            },
+            {
+              "x":  new Date(2016,1,10),
+              "y": 1920 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,1,12),
+              "y": 920 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,1,14),
               "y": 720 + saldoPrime
             },
             {
-              "x":  new Date(2016,2,1),
-              "y": 460 +saldoPrime
+              "x":  new Date(2016,1,16),
+              "y": 800 + saldoPrime
             },
             {
-              "x":  new Date(),
+              "x":  new Date(2016,1,22),
+              "y": 220 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,1,25),
+              "y": 120 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,2,1),
+              "y": 1620 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,2,3),
+              "y": 1020 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,2,5),
+              "y": 820 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,2,9),
+              "y": 570 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,2,11),
+              "y": 420 +saldoPrime
+            },
+            {
+              "x":  new Date(2016,2,16),
+              "y": 270 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,2,22),
+              "y":  saldoPrime -200
+            },
+            {
+              "x":  new Date(2016,3,1),
+              "y":   1300 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,3,3),
+              "y":  700 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,3,5),
+              "y":  340 + saldoPrime
+            },
+            {
+              "x":  new Date(2016,3,11),
               "y": saldoPrime
             }
           ]
@@ -627,7 +789,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           "values": [
 
             {
-              "x": new Date(),
+              "x": new Date(2016,3,11),
               "y": gesamtsaldo
             },
             {
@@ -638,10 +800,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
               "x":  new Date(2016,5,1),
               "y": gesamtsaldo-kaufbetrag-170
             },
-            {
-              "x":  new Date(2016,6,1),
-              "y": gesamtsaldo-kaufbetrag+500
-            }
+
           ]
         },{
           "key": "Kaufprognose Primärkonto",
@@ -653,21 +812,54 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           "values": [
 
             {
-              "x": new Date(),
+              "x": new Date(2016,3,11),
               "y": saldoPrime
             },
             {
-              "x": new Date(2016,4,1),
+              "x": new Date(2016,3,13),
               "y": saldoPrime-kaufbetrag
             },
             {
-              "x":  new Date(2016,5,1),
-              "y": saldoPrime-kaufbetrag - 89
+              "x": new Date(2016,3,17),
+              "y": saldoPrime-kaufbetrag -20
             },
             {
-              "x":  new Date(2016,6,1),
-              "y": saldoPrime-kaufbetrag + 300
-            }
+              "x": new Date(2016,3,22),
+              "y": saldoPrime-kaufbetrag -80
+            },
+            {
+              "x": new Date(2016,3,26),
+              "y": saldoPrime-kaufbetrag -202
+            },
+            {
+              "x": new Date(2016,4,1),
+              "y": saldoPrime-kaufbetrag+1150
+            },
+            {
+              "x":  new Date(2016,4,3),
+              "y": saldoPrime-kaufbetrag + 450
+            },
+            {
+              "x":  new Date(2016,4,17),
+              "y": saldoPrime-kaufbetrag + 30
+            },
+            {
+              "x":  new Date(2016,4,17),
+              "y": saldoPrime-kaufbetrag -50
+            },
+            {
+              "x":  new Date(2016,4,22),
+              "y": saldoPrime-kaufbetrag + -70
+            },
+            {
+              "x":  new Date(2016,4,26),
+              "y": saldoPrime-kaufbetrag + -142
+            },
+            {
+              "x":  new Date(2016,5,1),
+              "y": saldoPrime-kaufbetrag + 1450
+            },
+
           ]
         },
         {
@@ -679,11 +871,11 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           "values": [
             {
               "x": new Date(2016,0,1),
-              "y": 200
+              "y": parseFloat(window.localStorage.getItem("minRemaining"))
             },
             {
-              "x":  new Date(2016,6,1),
-              "y": 200
+              "x":  new Date(2016,5,1),
+              "y": parseFloat(window.localStorage.getItem("minRemaining"))
             }
           ]
         }

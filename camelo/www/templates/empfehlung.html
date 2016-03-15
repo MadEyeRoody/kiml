@@ -5,12 +5,17 @@
         <div style="text-align:center;">
             <img src="img/gruen.png" width="50%" height="auto">
         </div>
-        <div>
-          <table><tr><td>
-            <span style="text-align: left; color: #0066B3; ">Kaufbetrag:</span></td><td><span style="text-align: right" > {{amount}} € </span></td></tr></br>
-         <tr><td> <span style="text-align: right; color: #0066B3; "> erwarteter Saldo Primärkonto:</span></td><td><span  style="text-align: right"> {{erwarteterStand}} €</span></td></tr>
-          </table>
+
+
+      <div class="row">
+        <div class="col col-20"> <span style="text-align: left; color: #0066B3; ">Kaufbetrag:</span></div>
+        <div class="col"> {{amount}} €</div>
         </div>
+      <div class="row">
+        <div class="col col-20"> <span style="text-align: right; color: #0066B3; ">prognostizierter </br>Saldo Primärkonto:</span></div>
+        <div class="col"> </br> {{erwarteterStand}} €</div>
+      </div>
+
       </br></br>
           <ion-toggle  ng-model="wishlist" ng-checked="wishlist" name="wishlist" ng-change="changeTodo(wishlist)">zur Wunschliste hinzufügen</ion-toggle>
 

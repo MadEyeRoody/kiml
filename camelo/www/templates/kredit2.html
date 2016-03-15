@@ -7,7 +7,14 @@
             <ion-item><span style="color: #0066B3">Laufzeit:</span> {{laufzeit}} Monate</ion-item>
             <ion-item><span style="color: #0066B3">Rate:</span> {{rate}} €</ion-item>
         </ion-list>
-        <button class="button button-energized button-block " ng-click="order()">Kostenpflichtig bestellen!</button>
-        <a ui-sref="menu.kredit" class="button button-light button-block  icon-left ion-android-arrow-back">abbrechen</a>
+
     </ion-content>
+  <ion-footer-bar>
+    <div class="button-bar">
+
+      <button ui-sref="menu.kredit" class="button button-light button-block  icon-left ion-android-arrow-back">abbrechen</button>
+      <button class="button button-energized button-block " ng-click="order()">Kostenpflichtig bestellen!</button>
+
+    </div>
+  </ion-footer-bar>
 </ion-view>
