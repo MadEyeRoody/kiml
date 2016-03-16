@@ -43,7 +43,8 @@ $state.go('menu.kIMLKannIchsMirLeisten')
     else {
       $scope.barcodeScannerVisibility=false;
     }
-
+    
+    $scope.formdata = [];
 
     $scope.checkAmount = function(betrag) {
 
@@ -83,12 +84,8 @@ $state.go('menu.kIMLKannIchsMirLeisten')
       }
       ;
     }
-
-
-
-
+    
     $scope.scanBarCode = function() {
-    	//getPreisToBarcode("EAN_13","9783642111853");
       $ionicPlatform.ready(function() {
         $cordovaBarcodeScanner
           .scan()
@@ -106,11 +103,17 @@ $state.go('menu.kIMLKannIchsMirLeisten')
           });
       });
     };
-
+    
+    $scope.betragChanged = function () {
+    	$scope.artikelAnzeigeVisibility=false;
+    };
+    
     function getPreisToBarcode(format,data) {
     	//mock impl.
     	if("EAN_13"===format && "9783642111853"===data) {
-    		 $scope.formdata.betragValue=49.99;
+    		$scope.formdata.betragValue=49.99;
+   		 	$scope.artikelAnzeigeVisibility=true;
+   		 	$scope.artikel="Taschenbuch 'Einführung in die Kryptographie'";
     	}
     	else {
     		var alertPopup = $ionicPopup.alert({
