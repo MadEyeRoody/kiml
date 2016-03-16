@@ -8,10 +8,8 @@
              <label class=" item-input-wrapper" name="betrag" style="background: transparent">
                 <span class="input-label">Betrag in €:</span>
                 <input type="tel" pattern="\d*[0-9](\.\d{1,2})?$"  ng-model="formdata.betragValue"/>
-
-
             </label>
-             <button  type="button" class="button  button-clear icon"  ng-click="scanBarCode()">
+             <button  type="button" class="button  button-clear icon" ng-show="barcodeScannerVisibility" ng-click="scanBarCode()">
                <img src="img/menu_qr_code.png" />
              </button>
              </div>

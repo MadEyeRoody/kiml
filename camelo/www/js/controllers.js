@@ -1,11 +1,11 @@
 angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
 
-  .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup, $ionicModal) {
+.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup, $ionicModal) {
     var deviceInformation = ionic.Platform.device();
-    var isAndroid = ionic.Platform.isAndroid();
+    var isWebView = ionic.Platform.isWebView();
 
-    if(isAndroid) {
+    if(isWebView) {
       $scope.barcodeScannerVisibility=true;
     }
     else {
@@ -96,11 +96,17 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
       ;
     }
     $scope.scanBarCode = function() {
+    	getPreisToBarcode("EAN_13","9783642111853");
       $ionicPlatform.ready(function() {
         $cordovaBarcodeScanner
           .scan()
           .then(function(result) {
-            $scope.formdata.betragValue=150;
+        	  if(result.cancelled) {
+        		  console.log("Scan cancelled");
+        	  }
+        	  else {
+        		  getPreisToBarcode(result.format,result.text);
+        	  }
           }, function(error) {
             // An error occurred
             var scanResults = 'Error: ' + error;
@@ -108,10 +114,20 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           });
       });
     };
-
+    
+    function getPreisToBarcode(format,data) {
+    	//mock impl.
+    	if("EAN_13"===format && "9783642111853"===data) {
+    		 $scope.formdata.betragValue=49.99;
+    	}
+    	else {
+    		var alertPopup = $ionicPopup.alert({
+    	      title: "Kein Preis gefunden",
+    	      template: "Zu dem gescannten Artikel konnte kein Preis ermittelt werden. Bitte gib einen Betrag ein!"
+    	    });
+    	}
+    }
   })
-
-
 
 
   .controller('wunschlisteCtrl', function($scope) {
