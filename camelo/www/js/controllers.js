@@ -160,6 +160,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
     $scope.prognoseTarget = (window.localStorage.getItem("prognoseTarget"));
     $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
     $scope.amount=$scope.amount.toFixed(2);
+    window.localStorage.setItem("financeType",'gruen');
     console.log($scope.erwarteterStand);
     $scope.startFinance = function(){
       window.localStorage.setItem("financeType",'gruen');
@@ -213,6 +214,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
     $scope.minAmount = parseFloat((window.localStorage.getItem("minRemaining")));
     $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
     $scope.fehlbetrag = (-($scope.erwarteterStand - $scope.minAmount)).toFixed(2);
+    window.localStorage.setItem("financeType",'gelb');
     window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag);
     $scope.amount=$scope.amount.toFixed(2);
 
@@ -303,10 +305,12 @@ $state.go('menu.kIMLKannIchsMirLeisten')
 
     }).then(function(modal) {
       $scope.modal = modal;
+      $scope.$broadcast('doRefresh');
       console.log(modal);
     });
     $scope.openModal = function() {
       $scope.modal.show();
+      $scope.$broadcast('doRefresh');
     };
     $scope.closeModal = function() {
 
@@ -339,6 +343,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
     $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
     $scope.fehlbetrag = (-($scope.erwarteterStand - $scope.minAmount)).toFixed(2);
     window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag);
+    window.localStorage.setItem("financeType",'rot');
     $scope.amount=$scope.amount.toFixed(2);
 
     $scope.startFinance = function(){
@@ -587,15 +592,16 @@ $state.go('menu.kIMLKannIchsMirLeisten')
 
   .controller('multiChartCtrl', function($scope){
 
-    $scope.init = function(value) {
+    $scope.init = function(value,legend) {
       $scope.options = {
         chart: {
           type: 'lineChart',
           height: value,
           duration:1,
+          showLegend: legend,
+          legendPosition:'right',
           margin : {
             left: 50
-
           },
 
           duration: 700,
@@ -665,6 +671,8 @@ $state.go('menu.kIMLKannIchsMirLeisten')
       var kaufbetrag = parseFloat(window.localStorage.getItem("amount"));
       var gesamtsaldo = parseFloat(window.localStorage.getItem("gesamtsaldo"));
       var saldoPrime = parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
+
+      console.log(financeType);
 
       if(financeType == "gelb" || financeType == "rot"){
         disabled = false;
