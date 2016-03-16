@@ -402,7 +402,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
   })
 
-  .controller('kontoverwaltungCtrl', function($scope, $state) {
+  .controller('kontoverwaltungCtrl', function($scope, $state, $ionicPopup) {
     $scope.kontoChoice = parseInt(window.localStorage.getItem("primeKonto"));
     $scope.konto1=parseFloat(window.localStorage.getItem("Konto1")).toFixed(2);
     $scope.konto1Bez=window.localStorage.getItem("Konto1Bez");
@@ -690,22 +690,87 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           "values": [
             {
               "x": new Date(2016,0,1),
-              "y": 600 + gesamtsaldo,
+              "y": gesamtsaldo +1900
             },
             {
-              "x": new Date(2016,0,30),
-              "y": -200 + gesamtsaldo,
+              "x": new Date(2016,0,3),
+              "y": 1300 +gesamtsaldo
             },
+            {
+              "x": new Date(2016,0,8),
+              "y": 1020 +gesamtsaldo
+            },
+            {
+              "x": new Date(2016,0,12),
+              "y": 1070 +gesamtsaldo
+            },
+            {
+              "x": new Date(2016,0,17),
+              "y": 1000 +gesamtsaldo
+            },
+            {
+              "x": new Date(2016,0,23),
+              "y": 850 +gesamtsaldo
+            },
+            {
+              "x": new Date(2016,1,01),
+              "y": 3050 +gesamtsaldo
+            },
+            {
+              "x": new Date(2016,1,2),
+              "y": 2250 +gesamtsaldo
+            },
+
+            {
+              "x":  new Date(2016,1,12),
+              "y": 1620 + gesamtsaldo
+            },
+            {
+              "x":  new Date(2016,1,14),
+              "y": 1120 +gesamtsaldo
+            },
+
             {
               "x":  new Date(2016,1,22),
-              "y": 920 + gesamtsaldo,
+              "y": 420 +gesamtsaldo
             },
+
             {
               "x":  new Date(2016,2,1),
-              "y": -160 + gesamtsaldo
+              "y": 2020 + gesamtsaldo
             },
             {
-              "x":  new Date(),
+              "x":  new Date(2016,2,3),
+              "y": 1620 + gesamtsaldo
+            },
+            {
+              "x":  new Date(2016,2,5),
+              "y": 1220 + gesamtsaldo
+            },
+
+            {
+              "x":  new Date(2016,2,11),
+              "y": 820 +gesamtsaldo
+            },
+
+            {
+              "x":  new Date(2016,2,22),
+              "y":  200 + gesamtsaldo
+            },
+            {
+              "x":  new Date(2016,3,1),
+              "y":   1700 + gesamtsaldo
+            },
+            {
+              "x":  new Date(2016,3,3),
+              "y":  1100 + gesamtsaldo
+            },
+            {
+              "x":  new Date(2016,3,5),
+              "y":  540 +gesamtsaldo
+            },
+            {
+              "x":  new Date(2016,3,11),
               "y": gesamtsaldo
             }
           ]
@@ -840,12 +905,48 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
               "y": gesamtsaldo
             },
             {
-              "x": new Date(2016,4,1),
+              "x": new Date(2016,3,13),
               "y": gesamtsaldo-kaufbetrag
             },
             {
+              "x": new Date(2016,3,17),
+              "y": gesamtsaldo-kaufbetrag -20
+            },
+            {
+              "x": new Date(2016,3,22),
+              "y": gesamtsaldo-kaufbetrag -80
+            },
+            {
+              "x": new Date(2016,3,26),
+              "y": gesamtsaldo-kaufbetrag -102
+            },
+            {
+              "x": new Date(2016,4,1),
+              "y": gesamtsaldo-kaufbetrag+1350
+            },
+            {
+              "x":  new Date(2016,4,3),
+              "y": gesamtsaldo-kaufbetrag + 250
+            },
+            {
+              "x":  new Date(2016,4,17),
+              "y": gesamtsaldo-kaufbetrag + 30
+            },
+            {
+              "x":  new Date(2016,4,17),
+              "y": gesamtsaldo-kaufbetrag -50
+            },
+            {
+              "x":  new Date(2016,4,22),
+              "y": gesamtsaldo-kaufbetrag + -200
+            },
+            {
+              "x":  new Date(2016,4,26),
+              "y": gesamtsaldo-kaufbetrag + -142
+            },
+            {
               "x":  new Date(2016,5,1),
-              "y": gesamtsaldo-kaufbetrag-170
+              "y": gesamtsaldo-kaufbetrag + 1350
             },
 
           ]
