@@ -1,6 +1,6 @@
 angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
-  .controller('homeCtrl', function($scope) {
+  .controller('homeCtrl', function($scope,$state) {
     //Start Values
     $scope.formdata = [];
     $scope.formdata.betragValue = NaN;
@@ -22,7 +22,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     window.localStorage.setItem("prognoseReason", 'Versicherungen');
     window.localStorage.setItem("minRemaining", 200.00);
     //End Start Values
-
+$state.go('menu.kIMLKannIchsMirLeisten')
   })
 
 .controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup, $ionicModal) {
