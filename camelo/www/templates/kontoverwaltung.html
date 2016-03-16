@@ -1,6 +1,6 @@
 <ion-view title="Kontoverwaltung" hide-back-button="true">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-        <form class="list" ng-submit="save(kontoChoice, minRemaining)">
+        <form class="list" ng-submit="save(kontoChoice, minRemaining, prognoseTarget)">
           <div> <span class="input-label" style="color: #0066B3">Wähle dein Primärkonto:</span></div>
           <ion-radio ng-model="kontoChoice" ng-value="1" name="konto1">{{konto1Bez}}: {{konto1}} €
             </br> <span style="font-size: smaller">{{konto1IBAN}}</span>
@@ -11,11 +11,29 @@
           <ion-radio ng-model="kontoChoice" ng-value="3" name="konto3">{{konto3Bez}}: {{konto3}} €
             </br> <span style="font-size: smaller">{{konto3IBAN}}</span>
           </ion-radio>
+
+          <div class="button-bar">
+
+
+            <button type="button" class="button button-stable  button-block icon ion-close-circled" ng-click="demo()"></button>
+            <button type="button" class="button button-energized button-block icon ion-plus-circled" ng-click="demo()"></button>
+          </div>
+
           </br></br>
           <label class="item item-input" name="untergrenze">
                 <span class="input-label">Untergrenze in €:</span>
                 <input type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="minRemaining">
             </label>
+          </br>
+            <label class="item item-input item-select">
+              <div class="input-label">
+               Stichtag für die Prognose
+              </div>
+              <select ng-model="prognoseTarget" ng-options="item for item in ['zur Mitte des Monats','zum Ende des Monats']" ng-change="changePrognoseTarget(prognoseTarget)">
+              </select>
+            </label>
+            </br></br>
+
 
           <button type="submit" class="button button-energized button-block ">Speichern</button>
         </form>

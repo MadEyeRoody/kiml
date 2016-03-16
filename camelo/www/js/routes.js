@@ -8,11 +8,21 @@ angular.module('app.routes', [])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-
+    .state('menu.home', {
+      url: '/home',
+      cache: false,
+      views: {
+        'side-menu21': {
+          templateUrl: 'templates/home.html',
+          controller: 'homeCtrl'
+        }
+      }
+    })
 
       .state('menu.kIMLKannIchsMirLeisten', {
-    url: '/home',
-    views: {
+    url: '/kIMLKannIchsMirLeisten',
+        cache: false,
+        views: {
       'side-menu21': {
         templateUrl: 'templates/kIMLKannIchsMirLeisten.html',
         controller: 'kIMLKannIchsMirLeistenCtrl'
@@ -22,6 +32,7 @@ angular.module('app.routes', [])
 
   .state('menu.wunschliste', {
     url: '/wunschliste',
+    cache: false,
     views: {
       'side-menu21': {
         templateUrl: 'templates/wunschliste.html',
@@ -32,6 +43,7 @@ angular.module('app.routes', [])
 
   .state('menu.finanzstatus', {
     url: '/finanzmanger',
+    cache: false,
     views: {
       'side-menu21': {
         templateUrl: 'templates/finanzstatus.html',
@@ -48,6 +60,7 @@ angular.module('app.routes', [])
 
   .state('menu.empfehlung', {
     url: '/empfehlung',
+    cache: false,
     views: {
       'side-menu21': {
         templateUrl: 'templates/empfehlung.html',
@@ -58,6 +71,7 @@ angular.module('app.routes', [])
 
   .state('menu.empfehlung2', {
     url: '/empfehlung2',
+    cache: false,
     views: {
       'side-menu21': {
         templateUrl: 'templates/empfehlung2.html',
@@ -68,6 +82,7 @@ angular.module('app.routes', [])
 
     .state('menu.empfehlung3', {
       url: '/empfehlung3',
+      cache: false,
       views: {
         'side-menu21': {
           templateUrl: 'templates/empfehlung3.html',
@@ -78,6 +93,7 @@ angular.module('app.routes', [])
 
   .state('menu.kontoverwaltung', {
     url: '/kontoverwaltung',
+    cache: false,
     views: {
       'side-menu21': {
         templateUrl: 'templates/kontoverwaltung.html',
@@ -87,6 +103,7 @@ angular.module('app.routes', [])
   })
     .state('menu.impressum', {
       url: '/impressum',
+      cache: false,
       views: {
         'side-menu21': {
           templateUrl: 'templates/impressum.html',
@@ -97,6 +114,7 @@ angular.module('app.routes', [])
 
   .state('menu.umbuchung', {
     url: '/umbuchung',
+    cache: false,
     views: {
       'side-menu21': {
         templateUrl: 'templates/umbuchung.html',
@@ -107,6 +125,7 @@ angular.module('app.routes', [])
 
   .state('menu.kredit', {
     url: '/kredit',
+    cache: false,
     views: {
       'side-menu21': {
         templateUrl: 'templates/kredit.html',
@@ -117,6 +136,7 @@ angular.module('app.routes', [])
 
   .state('menu.kredit2', {
     url: '/kreditangebot',
+    cache: false,
     views: {
       'side-menu21': {
         templateUrl: 'templates/kredit2.html',
