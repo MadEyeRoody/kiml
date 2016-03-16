@@ -1,17 +1,6 @@
 angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
-
-.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup, $ionicModal) {
-    var deviceInformation = ionic.Platform.device();
-    var isWebView = ionic.Platform.isWebView();
-
-    if(isWebView) {
-      $scope.barcodeScannerVisibility=true;
-    }
-    else {
-      $scope.barcodeScannerVisibility=false;
-    }
-
+  .controller('homeCtrl', function($scope) {
     //Start Values
     $scope.formdata = [];
     $scope.formdata.betragValue = NaN;
@@ -28,11 +17,32 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     window.localStorage.setItem("laufzeit", 18);
     window.localStorage.setItem("amount",0);
     window.localStorage.setItem("financeType",'ohne');
+    window.localStorage.setItem("prognoseTarget",'zum Ende des Monats')
     window.localStorage.setItem("prognose", 202.00);
     window.localStorage.setItem("prognoseReason", 'Versicherungen');
     window.localStorage.setItem("minRemaining", 200.00);
     //End Start Values
-    console.log(window.localStorage.getItem("minRemaining"));
+
+  })
+
+.controller('kIMLKannIchsMirLeistenCtrl', function($scope, $state,$cordovaBarcodeScanner,$ionicPlatform, $ionicPopup, $ionicModal) {
+
+  if( window.localStorage.getItem("prognoseTarget")=='zum Ende des Monats'){
+    window.localStorage.setItem("prognose", 202.00);
+  } else {
+    window.localStorage.setItem("prognose", 202.00);
+  }
+
+    var isWebView = ionic.Platform.isWebView();
+
+    if(isWebView) {
+      $scope.barcodeScannerVisibility=true;
+    }
+    else {
+      $scope.barcodeScannerVisibility=false;
+    }
+
+
     $scope.checkAmount = function(betrag) {
 
       var betragValue = parseFloat(betrag);
@@ -114,7 +124,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
           });
       });
     };
-    
+
     function getPreisToBarcode(format,data) {
     	//mock impl.
     	if("EAN_13"===format && "9783642111853"===data) {
@@ -162,6 +172,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.amount = parseFloat(window.localStorage.getItem("amount"));
     $scope.konto1 = parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
+    $scope.prognoseTarget = (window.localStorage.getItem("prognoseTarget"));
     $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
     $scope.amount=$scope.amount.toFixed(2);
     console.log($scope.erwarteterStand);
@@ -213,6 +224,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.amount = parseFloat((window.localStorage.getItem("amount")));
     $scope.konto1 = parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
+    $scope.prognoseTarget = (window.localStorage.getItem("prognoseTarget"));
     $scope.minAmount = parseFloat((window.localStorage.getItem("minRemaining")));
     $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
     $scope.fehlbetrag = (-($scope.erwarteterStand - $scope.minAmount)).toFixed(2);
@@ -305,6 +317,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.amount = parseFloat((window.localStorage.getItem("amount")));
     $scope.konto1 =parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
     $scope.prognose = parseFloat((window.localStorage.getItem("prognose")));
+    $scope.prognoseTarget = (window.localStorage.getItem("prognoseTarget"));
     $scope.minAmount = parseFloat((window.localStorage.getItem("minRemaining")));
     $scope.erwarteterStand = (Math.round(($scope.konto1 - ($scope.amount + $scope.prognose))*100)/100).toFixed(2);
     $scope.fehlbetrag = (-($scope.erwarteterStand - $scope.minAmount)).toFixed(2);
@@ -402,12 +415,30 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     $scope.konto3IBAN=window.localStorage.getItem("Konto3IBAN");
     $scope.minRemaining=parseFloat(window.localStorage.getItem("minRemaining")).toFixed(2);
 
-    $scope.save=function(choice, untergrenze){
+    $scope.save=function(choice, untergrenze, target){
       window.localStorage.setItem("primeKonto", choice );
       window.localStorage.setItem("minRemaining",untergrenze);
+      window.localStorage.setItem("prognoseTarget",target)
       window.localStorage.setItem('refresh',1);
       $state.go("menu.kIMLKannIchsMirLeisten");
     };
+
+    $scope.changePrognoseTarget = function(target){
+      $scope.prognoseTarget = target;
+    }
+    $scope.demo = function(target){
+      var alertPopup = $ionicPopup.alert({
+        title: 'Not Implemented yet',
+        template: 'Diese funktion ist in der Demo Anwendung nicht verfügbar'
+      });
+
+      alertPopup.then(function(res) {
+
+        console.log('no Input');
+
+      });
+    }
+
 
   })
 
