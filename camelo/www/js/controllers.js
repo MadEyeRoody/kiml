@@ -1,5 +1,6 @@
 angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
 
+
   .controller('homeCtrl', function($scope,$state) {
     //Start Values
     $scope.formdata = [];
@@ -21,6 +22,7 @@ angular.module('app.controllers', ['ionic','ngCordova','nvd3'])
     window.localStorage.setItem("prognose", 202.00);
     window.localStorage.setItem("prognoseReason", 'Versicherungen');
     window.localStorage.setItem("minRemaining", 200.00);
+    window.localStorage.setItem("height", 550);
     //End Start Values
 $state.go('menu.kIMLKannIchsMirLeisten')
   })
@@ -67,31 +69,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
         window.localStorage.setItem("amount", betragValue)
       } else {
 
-        $ionicModal.fromTemplateUrl('/modal/inputModal.html', {
-          scope: $scope,
-          animation: 'slide-in-up'
-        }).then(function(modal) {
-          $scope.modal = modal;
-        });
-        $scope.openModal = function() {
-          $scope.modal.show();
-        };
-        $scope.closeModal = function() {
-          $scope.modal.hide();
-        };
-        //Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function() {
-          $scope.modal.remove();
-        });
-        // Execute action on hide modal
-        $scope.$on('modal.hidden', function() {
-          // Execute action
-        });
-        // Execute action on remove modal
-        $scope.$on('modal.removed', function() {
-          // Execute action
-        });
-        /*
+
         var alertPopup = $ionicPopup.alert({
           title: 'Kein Betrag eingegeben',
           template: 'Bitte gib einen Betrag ein!'
@@ -101,12 +79,16 @@ $state.go('menu.kIMLKannIchsMirLeisten')
           //window.localStorage.setItem("Konto1",window.localStorage.getItem("Konto1")+$scope.fehlbetrag)
           console.log('no Input');
 
-        });*/
+        });
       }
       ;
     }
+
+
+
+
     $scope.scanBarCode = function() {
-    	getPreisToBarcode("EAN_13","9783642111853");
+    	//getPreisToBarcode("EAN_13","9783642111853");
       $ionicPlatform.ready(function() {
         $cordovaBarcodeScanner
           .scan()
@@ -218,7 +200,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
 
   })
 
-  .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup) {
+  .controller('empfehlung2Ctrl', function($scope, $state,$ionicPopup, $ionicModal) {
     $scope.todoChoice = "zur Wunschliste hinzufügen";
     window.localStorage.setItem('refresh',1)
     $scope.amount = parseFloat((window.localStorage.getItem("amount")));
@@ -237,6 +219,8 @@ $state.go('menu.kIMLKannIchsMirLeisten')
     };
 
     $scope.notify = function(){
+      $scope.openModal();
+      /*
       var alertPopup = $ionicPopup.alert({
         title: 'Hinweis',
         template: 'Aufgrund Deiner Präferenzen (Minimalbetrag: '+ $scope.minAmount.toFixed(2) +' €) und noch prognostizerter Abbuchungen ('+$scope.prognose.toFixed(2)+' € für Versicherungen) fehlen Dir ' +$scope.fehlbetrag+' €'
@@ -244,7 +228,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
 
       alertPopup.then(function (res) {
         console.log('Information Shown');
-      });
+      });*/
     };
 
     $scope.changeTodo = function(target){
@@ -292,7 +276,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
 
           var alertPopup = $ionicPopup.alert({
             title: 'Not Implemented yet',
-            template: 'Diese funktion ist in der Demo Anwendung nicht verfügbar'
+            template: 'Diese Funktion ist in der Demo nicht verfügbar'
           });
 
           alertPopup.then(function(res) {
@@ -308,6 +292,36 @@ $state.go('menu.kIMLKannIchsMirLeisten')
 
 
     };
+
+    $ionicModal.fromTemplateUrl('modalEmpfehlung2.html', {
+      scope: $scope,
+
+      animation: 'slide-in-up',
+
+    }).then(function(modal) {
+      $scope.modal = modal;
+      console.log(modal);
+    });
+    $scope.openModal = function() {
+      $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+
+      $scope.modal.hide();
+    };
+    //Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+
+      $scope.modal.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function() {
+      // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on('modal.removed', function() {
+      // Execute action
+    });
 
   })
 
@@ -384,7 +398,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
 
           var alertPopup = $ionicPopup.alert({
             title: 'Not Implemented yet',
-            template: 'Diese funktion ist in der Demo Anwendung nicht verfügbar'
+            template: 'Diese Funktion ist in der Demo nicht verfügbar'
           });
 
           alertPopup.then(function(res) {
@@ -429,7 +443,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
     $scope.demo = function(target){
       var alertPopup = $ionicPopup.alert({
         title: 'Not Implemented yet',
-        template: 'Diese funktion ist in der Demo Anwendung nicht verfügbar'
+        template: 'Diese Funktion ist in der Demo nicht verfügbar'
       });
 
       alertPopup.then(function(res) {
@@ -569,6 +583,38 @@ $state.go('menu.kIMLKannIchsMirLeisten')
 
 
   .controller('multiChartCtrl', function($scope){
+
+    $scope.init = function(value) {
+      $scope.options = {
+        chart: {
+          type: 'lineChart',
+          height: value,
+          duration:1,
+          margin : {
+            left: 50
+
+          },
+
+          duration: 700,
+          forceY:0.00,
+          xAxis: {
+            tickValues: tickMarks,
+            tickFormat: function(d){
+              return d3.time.format("%b")(new Date(d));
+            }
+          },
+          yAxis: {
+            tickFormat: function(d){
+              return d3.format("$ , .2f")(d);
+            }
+          },
+
+        }
+      };
+      update();
+    }
+
+
     var financeType = window.localStorage.getItem("financeType");
     $scope.financeType = financeType;
     var kaufbetrag = parseFloat(window.localStorage.getItem("amount"));
@@ -579,13 +625,9 @@ $state.go('menu.kIMLKannIchsMirLeisten')
     var areaPrime = true;
     var areaGesamt = true;
 
-
-    console.log(kaufbetrag);
-
     var tickMarks = [new Date(2016,0,1),new Date(2016,1,1),new Date(2016,2,1),
       new Date(2016,3,1),new Date(2016,4,1),new Date(2016,5,1),new Date(2016,6,1),
       new Date(2016,7,1),new Date(2016,8,1),new Date(2016,9,1),new Date(2016,10,1),new Date(2016,11,1)]
-
 
 
     $scope.config = {
@@ -594,33 +636,6 @@ $state.go('menu.kIMLKannIchsMirLeisten')
       deepWatchDataDepth: 2,
     }
 
-
-    $scope.options = {
-      chart: {
-        type: 'lineChart',
-        height: 550,
-        duration:1,
-        margin : {
-          left: 50
-
-        },
-
-        duration: 700,
-        forceY:0.00,
-        xAxis: {
-          tickValues: tickMarks,
-          tickFormat: function(d){
-            return d3.time.format("%b")(new Date(d));
-          }
-        },
-        yAxis: {
-          tickFormat: function(d){
-            return d3.format("$ , .2f")(d);
-          }
-        },
-
-      }
-    };
     update();
 
 
@@ -647,7 +662,6 @@ $state.go('menu.kIMLKannIchsMirLeisten')
       var kaufbetrag = parseFloat(window.localStorage.getItem("amount"));
       var gesamtsaldo = parseFloat(window.localStorage.getItem("gesamtsaldo"));
       var saldoPrime = parseFloat(window.localStorage.getItem("Konto"+window.localStorage.getItem("primeKonto")));
-      console.log(kaufbetrag,gesamtsaldo,saldoPrime);
 
       if(financeType == "gelb" || financeType == "rot"){
         disabled = false;

@@ -2,12 +2,11 @@
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
 
 
-
         <div ng-app="app.controllers">
 
-          <div ng-controller="multiChartCtrl">
+          <div ng-controller="multiChartCtrl" ng-init="init(550)">
             {{update()}}
-            <nvd3 options="options" data="data" config="config" events="events" config="config" on-ready="callback" ></nvd3>
+            <nvd3  style="height: 550px" options="options" data="data" config="config" events="events"  on-ready="callback" ></nvd3>
           </div>
         </div>
 

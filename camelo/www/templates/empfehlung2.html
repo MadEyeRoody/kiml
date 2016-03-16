@@ -44,3 +44,35 @@
   </ion-footer-bar>
 
 </ion-view>
+
+
+<script id="modalEmpfehlung2.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-stable">
+      <h1 class="title">Hinweis</h1>
+      <button class="button button-clear button-primary" ng-click="modal.hide()">Abbrechen</button>
+    </ion-header-bar>
+    <ion-content class="padding">
+
+      Aufgrund Deiner Präferenzen (Minimalbetrag): {{minAmount.toFixed(2)}} € </br></br>
+
+      sowie noch prognostizerter Abbuchungen: {{prognose.toFixed(2)}} € </br></br>
+
+      fehlen Dir {{fehlbetrag}} €
+      </br></br>
+
+      Siehe deinen Finanzstatus:
+      </div>
+      <a ui-sref="menu.finanzstatus">
+      <div ng-app="app.controllers">
+
+        <div ng-controller="multiChartCtrl" ng-init="init(250)">
+          {{update()}}
+          <nvd3  options="options" data="data" config="config" events="events" on-ready="callback" ></nvd3>
+        </div>
+      </div>
+      </a>
+      <button class="button button-full button-positive" ng-click="c">Ok</button>
+    </ion-content>
+  </ion-modal-view>
+</script>
