@@ -2,7 +2,7 @@ angular
     .module('app.controllers')
     .controller(
         'empfehlung3Ctrl',
-        function($scope, $state, $ionicPopup) {
+        function($scope, $state, $ionicPopup, $ionicModal) {
           $scope.todoChoice = "zur Wunschliste hinzufügen";
           window.localStorage.setItem('refresh', 1)
           $scope.amount = parseFloat((window.localStorage.getItem("amount")));

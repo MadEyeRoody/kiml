@@ -2,7 +2,7 @@ angular
     .module('app.controllers')
     .controller(
         'empfehlungCtrl',
-        function($scope, $state, $ionicPopup) {
+        function($scope, $state, $ionicPopup, $ionicModal) {
           window.localStorage.setItem('refresh', 1)
           $scope.amount = parseFloat(window.localStorage.getItem("amount"));
           $scope.konto1 = parseFloat(window.localStorage.getItem("Konto"
@@ -14,6 +14,8 @@ angular
               .round(($scope.konto1 - ($scope.amount + $scope.prognose)) * 100) / 100)
               .toFixed(2);
           $scope.amount = $scope.amount.toFixed(2);
+          $scope.minAmount = parseFloat((window.localStorage
+            .getItem("minRemaining")));
           window.localStorage.setItem("financeType", 'gruen');
           console.log($scope.erwarteterStand);
           $scope.startFinance = function() {
