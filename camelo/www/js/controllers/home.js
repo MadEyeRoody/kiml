@@ -26,6 +26,22 @@ angular.module('app.controllers')
           window.localStorage.setItem("prognoseReason", 'Versicherungen');
           window.localStorage.setItem("minRemaining", 200.00);
           window.localStorage.setItem("height", 550);
+
+          var wunschliste = [ {
+            name : "Fahrrad",
+            betrag : 500.00
+          }, {
+            name : "Fernseher",
+            betrag : 1200.00
+          }, {
+            name : "Tablet",
+            betrag : 499.00
+          } ];
+
+          // Start Values for wishlist
+          window.localStorage.setItem("wunschliste", JSON
+              .stringify(wunschliste));
+
           // End Start Values
           $state.go('menu.kIMLKannIchsMirLeisten')
         });
