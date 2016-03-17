@@ -67,7 +67,6 @@
       <div ng-app="app.controllers">
 
         <div ng-controller="multiChartCtrl" ng-init="init(250, false)">
-          {{update()}}
           <nvd3  options="options" data="data" config="config" events="events" on-ready="callback" ></nvd3>
         </div>
       </div>

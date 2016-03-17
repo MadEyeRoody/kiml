@@ -43,7 +43,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
     else {
       $scope.barcodeScannerVisibility=false;
     }
-    
+
     $scope.formdata = [];
 
     $scope.checkAmount = function(betrag) {
@@ -84,7 +84,7 @@ $state.go('menu.kIMLKannIchsMirLeisten')
       }
       ;
     }
-    
+
     $scope.scanBarCode = function() {
       $ionicPlatform.ready(function() {
         $cordovaBarcodeScanner
@@ -103,26 +103,25 @@ $state.go('menu.kIMLKannIchsMirLeisten')
           });
       });
     };
-    
+
     $scope.betragChanged = function () {
     	$scope.artikelAnzeigeVisibility=false;
     };
-    
-    function getPreisToBarcode(format,data) {
-    	//mock impl.
-    	if("EAN_13"===format && "9783642111853"===data) {
-    		$scope.formdata.betragValue=49.99;
-   		 	$scope.artikelAnzeigeVisibility=true;
-   		 	$scope.artikel="Taschenbuch 'Einführung in die Kryptographie'";
-    	}
-    	else {
-    		var alertPopup = $ionicPopup.alert({
-    	      title: "Kein Preis gefunden",
-    	      template: "Zu dem gescannten Artikel konnte kein Preis ermittelt werden. Bitte gib einen Betrag ein!"
-    	    });
-    	}
+
+  function getPreisToBarcode(format,data) {
+    //mock impl.
+    if("UPC_A"===format && "888462108799"===data) {
+      $scope.formdata.betragValue=1599.99;
     }
-  })
+    else {
+      var alertPopup = $ionicPopup.alert({
+        title: "Kein Preis gefunden",
+        //template: "Zu dem gescannten Artikel konnte kein Preis ermittelt werden. Bitte gib einen Betrag ein!"
+        template: format + data
+      });
+    }
+  }
+})
 
 
   .controller('wunschlisteCtrl', function($scope) {
@@ -644,8 +643,6 @@ $state.go('menu.kIMLKannIchsMirLeisten')
       deepWatchData: true,
       deepWatchDataDepth: 2,
     }
-
-    update();
 
 
 
