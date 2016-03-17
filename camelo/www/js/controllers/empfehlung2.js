@@ -29,16 +29,7 @@ angular
 
           $scope.notify = function() {
             $scope.openModal();
-            /*
-             * var alertPopup = $ionicPopup.alert({ title: 'Hinweis', template:
-             * 'Aufgrund Deiner Präferenzen (Minimalbetrag: '+
-             * $scope.minAmount.toFixed(2) +' €) und noch prognostizerter
-             * Abbuchungen ('+$scope.prognose.toFixed(2)+' € für Versicherungen)
-             * fehlen Dir ' +$scope.fehlbetrag+' €' });
-             * 
-             * alertPopup.then(function (res) { console.log('Information
-             * Shown'); });
-             */
+
           };
 
           $scope.changeTodo = function(target) {
