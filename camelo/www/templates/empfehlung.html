@@ -3,7 +3,7 @@
 
         <h1>Greif zu!</h1>
         <div style="text-align:center;">
-            <img src="img/gruen.png" width="50%" height="auto">
+            <img src="img/gruen.png" width="50%" height="auto"><button ng-click="notify()" class="button button-stable button-clear  icon ion-information-circled"></button>
         </div>
 
 
@@ -33,3 +33,31 @@
       <button  class="button button-energized button-block" ng-click="doneGreen()">Fertig</button>
     </div>
 </ion-view>
+
+<script id="modalEmpfehlung.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-stable">
+      <h1 class="title">Hinweis</h1>
+      <button class="button button-clear button-primary" ng-click="modal.hide()">OK</button>
+    </ion-header-bar>
+    <ion-content >
+      <ion-list>
+        <ion-item><span style="color: #0066B3">Dein Minimalbetrag:</span> {{minAmount.toFixed(2)}} € </ion-item>
+        <ion-item><span style="color: #0066B3">prognostizerte Abbuchungen:</span>  {{prognose.toFixed(2)}} € </ion-item>
+      </ion-list>
+
+      </br></br>
+
+      <span style="color: #0066B3; padding-left: 10px" > Siehe deinen Finanzstatus:</span>
+      </div>
+      <a ui-sref="menu.finanzstatus">
+        <div ng-app="app.controllers">
+
+          <div ng-controller="multiChartCtrl" ng-init="init(250, false)">
+            <nvd3  options="options" data="data" config="config" events="events" on-ready="callback" ></nvd3>
+          </div>
+        </div>
+      </a>
+    </ion-content>
+  </ion-modal-view>
+</script>

@@ -2,7 +2,7 @@ angular
     .module('app.controllers')
     .controller(
         'empfehlung3Ctrl',
-        function($scope, $state, $ionicPopup) {
+        function($scope, $state, $ionicPopup, $ionicModal) {
           $scope.todoChoice = "zur Wunschliste hinzufügen";
           window.localStorage.setItem('refresh', 1)
           $scope.amount = parseFloat((window.localStorage.getItem("amount")));
@@ -28,14 +28,17 @@ angular
           };
 
           $scope.notify = function() {
-            var alertPopup = $ionicPopup
+
+            $scope.openModal();
+
+            /*var alertPopup = $ionicPopup
                 .alert({
                   title : 'Hinweis',
                   template : 'Heute kannst du es dir noch nicht leisten. Dir fehlen noch '
                       + $scope.fehlbetrag
                       + ' €! Es sind keine Umbuchungsmöglichkeiten vorhanden'
                 });
-
+            */
             alertPopup.then(function(res) {
               console.log('Information Shown');
             });
@@ -99,4 +102,35 @@ angular
               }
             }
           };
+          $ionicModal.fromTemplateUrl('modalEmpfehlung3.html', {
+            scope : $scope,
+
+            animation : 'slide-in-up',
+
+          }).then(function(modal) {
+            $scope.modal = modal;
+            $scope.$broadcast('doRefresh');
+            console.log(modal);
+          });
+          $scope.openModal = function() {
+            $scope.modal.show();
+            $scope.$broadcast('doRefresh');
+          };
+          $scope.closeModal = function() {
+
+            $scope.modal.hide();
+          };
+          // Cleanup the modal when we're done with it!
+          $scope.$on('$destroy', function() {
+
+            $scope.modal.remove();
+          });
+          // Execute action on hide modal
+          $scope.$on('modal.hidden', function() {
+            // Execute action
+          });
+          // Execute action on remove modal
+          $scope.$on('modal.removed', function() {
+            // Execute action
+          });
         });

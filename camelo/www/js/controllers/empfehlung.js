@@ -2,7 +2,7 @@ angular
     .module('app.controllers')
     .controller(
         'empfehlungCtrl',
-        function($scope, $state, $ionicPopup) {
+        function($scope, $state, $ionicPopup, $ionicModal) {
           window.localStorage.setItem('refresh', 1)
           $scope.amount = parseFloat(window.localStorage.getItem("amount"));
           $scope.konto1 = parseFloat(window.localStorage.getItem("Konto"
@@ -14,6 +14,8 @@ angular
               .round(($scope.konto1 - ($scope.amount + $scope.prognose)) * 100) / 100)
               .toFixed(2);
           $scope.amount = $scope.amount.toFixed(2);
+          $scope.minAmount = parseFloat((window.localStorage
+            .getItem("minRemaining")));
           window.localStorage.setItem("financeType", 'gruen');
           console.log($scope.erwarteterStand);
           $scope.startFinance = function() {
@@ -58,4 +60,42 @@ angular
               $state.go('menu.kIMLKannIchsMirLeisten');
             }
           };
+
+          $scope.notify = function() {
+            $scope.openModal();
+
+          };
+
+
+          $ionicModal.fromTemplateUrl('modalEmpfehlung.html', {
+            scope : $scope,
+
+            animation : 'slide-in-up',
+
+          }).then(function(modal) {
+            $scope.modal = modal;
+            $scope.$broadcast('doRefresh');
+            console.log(modal);
+          });
+          $scope.openModal = function() {
+            $scope.modal.show();
+            $scope.$broadcast('doRefresh');
+          };
+          $scope.closeModal = function() {
+
+            $scope.modal.hide();
+          };
+          // Cleanup the modal when we're done with it!
+          $scope.$on('$destroy', function() {
+
+            $scope.modal.remove();
+          });
+          // Execute action on hide modal
+          $scope.$on('modal.hidden', function() {
+            // Execute action
+          });
+          // Execute action on remove modal
+          $scope.$on('modal.removed', function() {
+            // Execute action
+          });
         });
