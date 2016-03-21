@@ -1,7 +1,9 @@
 <ion-view title="Kontoverwaltung" hide-back-button="true">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
+      </br>
         <form class="list" ng-submit="save(kontoChoice, minRemaining, prognoseTarget)">
-          <div> <span class="input-label" style="color: #0066B3">Wähle dein Primärkonto:</span></div>
+          <div> <span class="kiml-text" >Wähle dein Primärkonto:</span></div>
+          </br>
           <ion-radio ng-model="kontoChoice" ng-value="1" name="konto1">{{konto1Bez}}: {{konto1}} €
             </br> <span style="font-size: smaller">{{konto1IBAN}}</span>
           </ion-radio>
@@ -15,8 +17,12 @@
           <div class="button-bar">
 
 
-            <button type="button" class="button button-stable  button-block icon ion-close-circled" ng-click="demo()"></button>
-            <button type="button" class="button button-energized button-block icon ion-plus-circled" ng-click="demo()"></button>
+            <button type="button" class="button button-icon " ng-click="demo()">
+              <img src="img/Minus.svg"/>
+            </button>
+            <button type="button" class="button button-icon " ng-click="demo()">
+              <img src="img/Plus.svg"/>
+            </button>
           </div>
 
           </br></br>

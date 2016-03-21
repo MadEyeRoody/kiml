@@ -20,14 +20,14 @@ $button-stable-text:              #fff !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 $big-bg:      '../img/KIML-background2.png';
-.body{
-  background-color: #fff6e5;
+
+.item-complex .item-content, .item-radio .item-conten {
+  background: transparent !important;
 }
-
-
 
 .kiml-text{
   color: #a0509a;
+  font-size: large;
 }
 
 .bar-footer {
@@ -50,7 +50,7 @@ $big-bg:      '../img/KIML-background2.png';
 
 h1 {
   text-align: center;
-  color: #a0509a;
+  color: #a0509a !important;
 }
 
 h2 {

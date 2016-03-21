@@ -17,6 +17,7 @@ angular.module('app.controllers').controller(
       $scope.minRemaining = parseFloat(
           window.localStorage.getItem("minRemaining")).toFixed(2);
 
+      $scope.prognoseTarget = window.localStorage.getItem("prognoseTarget");
       $scope.save = function(choice, untergrenze, target) {
         window.localStorage.setItem("primeKonto", choice);
         window.localStorage.setItem("minRemaining", untergrenze);
