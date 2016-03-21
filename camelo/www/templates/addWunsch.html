@@ -1,0 +1,19 @@
+<ion-view title="Neuer Wunsch" hide-back-button="true">
+    <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
+		<form ng-submit="addWunsch(newWish)">
+			<div  style="height:58px" class="item item-input-inset" >
+             	<label class=" item-input-wrapper" name="name" style="background: transparent">
+             		<span class="input-label">Name:</span>
+			   		<input type="text" ng-model="newWish.name" />
+			   	</label>
+			 </div>
+			 <div  style="height:58px" class="item item-input-inset" >
+			   	<label class=" item-input-wrapper" name="betrag" style="background: transparent">
+			   		<span class="input-label">Betrag in €:</span>
+			   		<input type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="newWish.betrag" />
+			   	</label>
+			 </div>
+			 <button type="submit" class="button button-energized button-block">Wunsch hinzuf&uuml;gen</button>
+  		</form>
+    </ion-content>
+</ion-view>

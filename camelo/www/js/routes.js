@@ -145,6 +145,17 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('menu.addWunsch', {
+    url: '/addWunsch',
+    cache: false,
+    views: {
+      'side-menu21': {
+        templateUrl: 'templates/addWunsch.html',
+        controller: 'addWunschCtrl'
+      }
+    }
+  })
+
 $urlRouterProvider.otherwise('/menu/home')
 
 
