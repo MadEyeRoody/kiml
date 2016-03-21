@@ -10,17 +10,17 @@
 
         </label>
     </div></br></br></br></br>
-      <h5 style="color: #0066B3">Von welchem Konto soll umgebucht werden?</h5>
+      <span class="kiml-text" >Von welchem Konto soll umgebucht werden?</span>
         <form class="list">
-          <ion-radio ng-if="isKonto1" ng-model="kontoChoice" ng-value="1" name="konto1" ng-change="changeKonto(kontoChoice)">{{konto1Bez}}: {{konto1}} €
+          <ion-radio ng-show="isKonto1" ng-model="kontoChoice" ng-value="1" name="konto1" ng-change="changeKonto(kontoChoice)">{{konto1Bez}}: {{konto1}} €
             </br> <span style="font-size: smaller">{{konto1IBAN}}</span>
           </ion-radio>
 
-          <ion-radio ng-if="isKonto2" ng-model="kontoChoice" ng-value="2" name="konto2" ng-change="changeKonto(kontoChoice)">{{konto2Bez}}: {{konto2}} €
+          <ion-radio ng-show="isKonto2" ng-model="kontoChoice" ng-value="2" name="konto2" ng-change="changeKonto(kontoChoice)">{{konto2Bez}}: {{konto2}} €
             </br> <span style="font-size: smaller">{{konto2IBAN}}</span>
             </ion-radio>
 
-            <ion-radio ng-if="isKonto3" ng-model="kontoChoice" ng-value="3" name="konto3" ng-change="changeKonto(kontoChoice)">{{konto3Bez}}: {{konto3}} €
+            <ion-radio ng-show="isKonto3" ng-model="kontoChoice" ng-value="3" name="konto3" ng-change="changeKonto(kontoChoice)">{{konto3Bez}}: {{konto3}} €
               </br> <span style="font-size: smaller">{{konto3IBAN}}</span>
             </ion-radio>
 

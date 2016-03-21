@@ -14,11 +14,9 @@ angular.module('app.controllers').controller(
         });
 
         alertPopup.then(function(res) {
-          window.localStorage.setItem("Konto1", parseFloat(
-              window.localStorage.getItem("Konto1")).toFixed(2)
-              + $scope.fehlbetrag)
-          console.log('Kreditantrag durchgefÃ¼hrt');
-          $state.go('menu.kIMLKannIchsMirLeisten');
+          window.localStorage.setItem("Konto1", parseFloat(window.localStorage.getItem("Konto1")) + parseFloat($scope.fehlbetrag))
+          console.log('Kreditantrag durchgeführt');
+          $state.go('menu.empfehlung');
         });
       }
     });
