@@ -62,7 +62,7 @@ angular
               } else {
 
                 var alertPopup = $ionicPopup.alert({
-                  title : 'Not Implemented yet',
+                  title : 'Hinweis',
                   template : 'Diese Funktion ist in der Demo nicht verfügbar'
                 });
 

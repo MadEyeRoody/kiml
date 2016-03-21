@@ -31,7 +31,7 @@ angular.module('app.controllers').controller(
       }
       $scope.demo = function(target) {
         var alertPopup = $ionicPopup.alert({
-          title : 'Not Implemented yet',
+          title : 'Hinweis',
           template : 'Diese Funktion ist in der Demo nicht verfügbar'
         });
 
