@@ -2,7 +2,7 @@ angular
     .module('app.controllers')
     .controller(
         'empfehlung2Ctrl',
-        function($scope, $state, $ionicPopup, $ionicModal) {
+        function($scope, $state, $ionicPopup, $ionicModal,$ionicPopover) {
           $scope.todoChoice = "zur Wunschliste hinzufügen";
           window.localStorage.setItem('refresh', 1)
           $scope.amount = parseFloat((window.localStorage.getItem("amount")));
@@ -22,10 +22,6 @@ angular
           window.localStorage.setItem("fehlbetrag", $scope.fehlbetrag);
           $scope.amount = $scope.amount.toFixed(2);
 
-          $scope.startFinance = function() {
-            window.localStorage.setItem("financeType", 'gelb');
-            $state.go('menu.finanzstatus');
-          };
 
           $scope.notify = function() {
             $scope.openModal();
@@ -39,7 +35,6 @@ angular
           $scope.doneYellow = function() {
             target = $scope.todoChoice;
             if (target) {
-              console.log(target);
               if (target == "zur Wunschliste hinzufügen") {
                 var myPopup = $ionicPopup.show({
                   template : '<input type="text" ng-model="wishlist">',
@@ -75,6 +70,9 @@ angular
               } else if (target == "Kredit beantragen") {
                 window.localStorage.setItem("kreditBack", 2);
                 $state.go('menu.kredit')
+              }else if(target=="Finanzstatus anzeigen"){
+                window.localStorage.setItem("financeType", 'gelb');
+                $state.go('menu.finanzstatus');
               } else {
 
                 var alertPopup = $ionicPopup.alert({
@@ -125,4 +123,34 @@ angular
           $scope.$on('modal.removed', function() {
             // Execute action
           });
+
+
+
+          $ionicPopover.fromTemplateUrl('popover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
+          $scope.openPopover = function($event) {
+            $scope.popover.show($event);
+          };
+          $scope.closePopover = function(action) {
+            $scope.todoChoice=action;
+            $scope.popover.hide();
+          };
+          //Cleanup the popover when we're done with it!
+          $scope.$on('$destroy', function() {
+            $scope.popover.remove();
+          });
+          // Execute action on hide popover
+          $scope.$on('popover.hidden', function() {
+            // Execute action
+          });
+          // Execute action on remove popover
+          $scope.$on('popover.removed', function() {
+            // Execute action
+          });
+
+
+
         });

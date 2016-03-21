@@ -4,43 +4,60 @@
       <div style="text-align:center;">
             <img src="img/gelb.png" >
         </div>
+      </br></br>
       <div class="row">
-        <div class="col col-30"> <span style="text-align: left; color: #0066B3; ">Kaufbetrag:</span></div>
-        <div class="col"> {{amount}} €</div>
+        <div class="col col-50"> <span class="kiml-text">Kaufbetrag:</span></div>
+        <div class="col col-offset-10"> {{amount}} €</div>
       </div>
       <div class="row">
-        <div class="col col-30"> <span style="text-align: right; color: #0066B3; ">prognostizierter Saldo </br>Primärkonto  {{prognoseTarget}}:</span></div>
-        <div class="col"> </br> {{erwarteterStand}} € <button ng-click="notify()" class=" button-clear  icon ion-information-circled"></button></div>
+        <div class="col col-50"> <span class="kiml-text">prognostizierter Saldo </br>Primärkonto  {{prognoseTarget}}:</span></div>
+        <div class="col col-offset-10"> </br> {{erwarteterStand}} €
+          <button ng-click="notify()" style="padding-left: 50px; margin-top: -20px" class="button button-clear  icon ">
+            <img src="img/Info.svg" /></button></div>
       </div>
 
-      </br>
-
-        </br>
-
-          <div class="list">
-
-            <label class="item item-input item-select">
-              <div class="input-label">
-                Was willst du tun?
-              </div>
-              <select ng-model="todoChoice" ng-options="item for item in ['zur Wunschliste hinzufügen','Umbuchen', 'Kredit beantragen','Daueraufträge anzeigen','Terminüberweisungen anzeigen','Sparplan anlegen']" ng-change="changeTodo(todoChoice)">
-              </select>
-            </label>
-            </br></br>
-            </br>
-          </div>
-
-</br></br></br>
 
     </ion-content>
-  <ion-footer-bar>
-    <div class="button-bar">
+  <ion-footer-bar style="height: 130px; width: 98%; background: transparent" title="Was willst du tun?">
+    <div class="button-bar-inline" style= "height: 65px">
+    <a class="button button-light button-block col-offset-20" style="position: fixed; font-size: x-large; width: 59%; color: #a0509a;border-color: #56bcb1;">
+      Was willst du tun?
+    </a>
+  </div>
 
-      <button ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Abbrechen</button>
+      <div class="row">
 
-      <button type="button" class="button button-stable  button-block  icon ion-arrow-graph-up-right" ng-click="startFinance()"></button>
-      <button type="button" class="button button-energized button-block" ng-click="doneYellow()">weiter</button>
-    </div>
+
+
+        <div class="col col-center col-10">   <button ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-clear icon ">
+          <img src="img/circleLeft.svg" />
+        </button>
+        </div>
+        <!--
+                   <label  class="item item-input item-select col col 60">
+                     <div class="input-label">
+
+                     </div>
+
+                   <select  ng-model="todoChoice" ng-options="item for item in ['zur Wunschliste hinzufügen','Umbuchen', 'Kredit beantragen','Daueraufträge anzeigen','Terminüberweisungen anzeigen','Sparplan anlegen']" ng-change="changeTodo(todoChoice)">
+                   </select>
+</label>
+<button type="button" class="button button-stable  button-block  icon" ng-click="startFinance()"><img style="height: 90%; margin-top: 2px" src="img/Bullish.svg" /></button>
+        -->
+        <button ng-model="todoChoice" style="font-size: large;border-color: #56bcb1;" class="button button-light col col-center col-80" ng-click="openPopover($event)">{{todoChoice}}
+        <img src="img/sort_down.svg" style="height: 30px; position: absolute">
+        </button>
+
+        <div class="col col-center col-10">    <button type="button" class="button button-clear icon" ng-click="doneYellow()">
+          <img src="img/circleRight.svg"/>
+        </button>
+        </div>
+      </div>
+
+
+
+
+
   </ion-footer-bar>
 
 </ion-view>
@@ -54,14 +71,14 @@
     </ion-header-bar>
     <ion-content >
       <ion-list>
-        <ion-item><span style="color: #0066B3">Dein Minimalbetrag:</span> {{minAmount.toFixed(2)}} € </ion-item>
-        <ion-item><span style="color: #0066B3">prognostizerte Abbuchungen:</span>  {{prognose.toFixed(2)}} € </ion-item>
-        <ion-item><span style="color: #0066B3">Fehlbetrag:</span> {{fehlbetrag}} €</ion-item>
+        <ion-item><span class="kiml-text">Dein Minimalbetrag:</span> {{minAmount.toFixed(2)}} € </ion-item>
+        <ion-item><span class="kiml-text">prognostizerte Abbuchungen:</span>  {{prognose.toFixed(2)}} € </ion-item>
+        <ion-item><span class="kiml-text">Fehlbetrag:</span> {{fehlbetrag}} €</ion-item>
       </ion-list>
 
       </br></br>
 
-     <span style="color: #0066B3; padding-left: 10px"> Siehe deinen Finanzstatus:</span>
+     <span class="kiml-text" style="padding-left: 10px"> Siehe deinen Finanzstatus:</span>
       </div>
       <a ui-sref="menu.finanzstatus">
       <div ng-app="app.controllers">
@@ -73,4 +90,35 @@
       </a>
     </ion-content>
   </ion-modal-view>
+</script>
+
+<script id="popover.html" type="text/ng-template">
+  <ion-popover-view  style="width: 50%; height: auto; background-color: #fff">
+    <ion-header-bar style="background-color: #a0509a; position: relative"> <h1 class="title" style="color: #fff" >Was willst du tun?</h1></ion-header-bar>
+    <ion-content style=" top:0;position: relative">
+      <div class="list">
+        <button class="item button-light button-block" ng-click="closePopover('zur Wunschliste hinzufügen')">
+          zur Wunschliste hinzufügen
+        </button>
+        <button class="item button-light button-block" ng-click="closePopover('Finanzstatus anzeigen')">
+          Finanzstatus anzeigen
+        </button>
+        <button class="item button-light button-block" ng-click="closePopover('Umbuchen')">
+          Umbuchen
+        </button>
+        <button class="item button-light button-block" ng-click="closePopover('Kredit beantragen')">
+          Kredit beantragen
+        </button>
+        <button class="item button-light button-block" ng-click="closePopover('Daueraufträge anzeigen')">
+          Daueraufträge anzeigen
+        </button>
+        <button class="item button-light button-block" ng-click="closePopover('Terminüberweisungen anzeigen')">
+          Terminüberweisungen anzeigen
+        </button>
+        <button class="item button-light button-block" ng-click="closePopover('Sparplan anlegen')">
+          Sparplan anlegen
+        </button>
+      </div>
+    </ion-content>
+  </ion-popover-view>
 </script>

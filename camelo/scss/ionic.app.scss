@@ -6,20 +6,42 @@ For example, you might change some of the default colors:
 */
 
 $light:                           #fff !default;
-$stable:                          #0066B3 !default;
-$positive:                        #ff6600 !default;
+$stable:                          #a0509a !default;
+$positive:                        #a0509a !default;
 $calm:                            #000 !default;
 $balanced:                        #000 !default;
-$energized:                       #ff6600 !default;
+$energized:                       #a0509a !default;
 $assertive:                       #000 !default;
 $royal:                           #000 !default;
-$dark:                            #0066b3 !default;
+$dark:                            #a0509a !default;
 $button-stable-text:              #fff !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
-$big-bg:      '../img/Volksbank_Logo.png';
+$big-bg:      '../img/KIML-background2.png';
+.body{
+  background-color: #fff6e5;
+}
+
+
+
+.kiml-text{
+  color: #a0509a;
+}
+
+.bar-footer {
+  bottom: 0;
+  border-top-width: 1px;
+  height: 85px;
+  border-bottom-width: 0;
+  background-position: top;
+  background: transparent;
+  position: absolute;
+  width: 97.5%;
+  }
+.bar-footer.item-input-inset {
+  position: fixed; }
 
 .scroll-bg {
   background: url($big-bg) no-repeat center center fixed;
@@ -28,6 +50,7 @@ $big-bg:      '../img/Volksbank_Logo.png';
 
 h1 {
   text-align: center;
+  color: #a0509a;
 }
 
 h2 {

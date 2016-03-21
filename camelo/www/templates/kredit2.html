@@ -4,14 +4,14 @@
         <form class="list"></form>
         <h2>Angebot:</h2>
         <ion-list>
-            <ion-item><span style="color: #0066B3">Kreditbetrag:</span> {{fehlbetrag}} €</ion-item>
-            <ion-item><span style="color: #0066B3">Laufzeit:</span> {{laufzeit}} Monate</ion-item>
-            <ion-item><span style="color: #0066B3">Rate:</span> {{rate}} €</ion-item>
+            <ion-item><span class="kiml-text" >Kreditbetrag:</span> {{fehlbetrag}} €</ion-item>
+            <ion-item><span class="kiml-text" >Laufzeit:</span> {{laufzeit}} Monate</ion-item>
+            <ion-item><span class="kiml-text" >Rate:</span> {{rate}} €</ion-item>
         </ion-list>
 
     </ion-content>
-  <ion-footer-bar>
-    <div class="button-bar">
+  <ion-footer-bar style="height: 65px; width: 98%; background: transparent">
+    <div class="button-bar" style= "height: 65px">
 
       <button ui-sref="menu.kredit" class="button button-light button-block  icon-left ion-android-arrow-back">abbrechen</button>
       <button class="button button-energized button-block " ng-click="order()">Kostenpflichtig bestellen!</button>

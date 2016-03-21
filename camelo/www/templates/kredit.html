@@ -11,7 +11,7 @@
           </br></br>
       </br></br></br>
         <form class="list">
-            <ion-label style="color: #0066B3">Laufzeit in Monaten: </ion-label>
+            <ion-label class="kiml-text">Laufzeit in Monaten: </ion-label>
             <ion-item class="range range-positive">{{laufzeit}}
                 <input type="range"  min="6" max="36" name="RangeLaufzeit" ng-model="laufzeit" ng-change="saveLaufzeit(laufzeit)">
             </ion-item>
@@ -22,8 +22,8 @@
 
     </ion-content>
 
-  <ion-footer-bar>
-    <div class="button-bar">
+  <ion-footer-bar style="height: 65px; width: 98%; background: transparent">
+    <div class="button-bar" style= "height: 65px">
       <button ui-sref="{{kreditBack}}" class="button button-light button-block  icon-left ion-android-arrow-back">zurück</button>
       <button ui-sref="menu.kredit2" class="button button-energized button-block  icon-right ion-android-arrow-forward">weiter</button>
 
