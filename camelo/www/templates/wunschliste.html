@@ -1,10 +1,14 @@
 <ion-view title="Wunschliste" hide-back-button="true">
 	<ion-nav-buttons side="secondary">
-    	<button class="button button-clear icon ion-android-add" ng-click="onAdd()"></button>
+		<button class="button button-clear icon" ng-class="edit?'ion-android-done':'ion-edit'" ng-click="swapEdit()"></button>
+    	<button class="button button-clear icon ion-plus" ng-click="onAdd()"></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-        <ion-list>
-            <ion-item ng-repeat="item in wunschliste">{{item.name}} - {{item.betrag}}€</ion-item>
+        <ion-list show-delete="edit"> 
+            <ion-item ng-repeat="item in wunschliste">
+            	{{item.name}} - {{item.betrag}}€
+            	<ion-delete-button class="ion-android-delete" ng-click="wunschliste.splice($index, 1)"></ion-delete-button>
+           	</ion-item>
         </ion-list>
     </ion-content>
 </ion-view>
