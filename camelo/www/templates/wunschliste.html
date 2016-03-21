@@ -1,6 +1,9 @@
 <ion-view title="Wunschliste" hide-back-button="true">
+	<ion-nav-buttons side="secondary">
+    	<button class="button button-clear icon ion-android-add" ng-click="onAdd()"></button>
+    </ion-nav-buttons>
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-        <ion-list >
+        <ion-list>
             <ion-item ng-repeat="item in wunschliste">{{item.name}} - {{item.betrag}}€</ion-item>
         </ion-list>
     </ion-content>
