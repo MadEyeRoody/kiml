@@ -18,22 +18,40 @@
           <img src="img/Info.svg" /></button></div>
       </div>
 
-      </br></br>
-          <ion-toggle  ng-model="wishlist" ng-checked="wishlist" name="wishlist" ng-change="changeTodo(wishlist)">zur Wunschliste hinzufügen</ion-toggle>
-
-
-
-      </br></br></br>
 
     </ion-content>
-  <ion-footer-bar style="height: 65px; width: 98%; background: transparent">
-    <div class="button-bar" style= "height: 65px">
-
-      <button ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-energized button-block ">Abbrechen</button>
-
-      <button class="button button-stable  button-block  icon " ng-click="startFinance()"><img style="height: 90%; margin-top: 2px" src="img/Bullish.svg" /></button>
-      <button  class="button button-energized button-block" ng-click="doneGreen()">Fertig</button>
+  <ion-footer-bar style="height: 130px; width: 98%; background: transparent" title="Was willst du tun?">
+    <div class="button-bar-inline" style= "height: 65px">
+      <label class="button button-clear button-block col-offset-20" style="position: fixed; font-size: x-large; width: 59%; color: #a0509a; font-weight: bold">
+        Was willst du tun?
+      </label>
     </div>
+
+    <div class="row">
+
+
+
+      <div class="col col-center col-10">   <button ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-clear icon ">
+        <img src="img/circleLeft.svg" />
+      </button>
+      </div>
+
+      <button ng-model="todoChoice" style="font-size: large;" class="button button-light col col-center col-80" ng-click="openPopover($event)">{{todoChoice}}
+        <img src="img/sort_down.svg" style="height: 30px; position: absolute">
+      </button>
+
+      <div class="col col-center col-10">    <button type="button" class="button button-clear icon" ng-click="doneGreen()">
+        <img src="img/circleRight.svg"/>
+      </button>
+      </div>
+    </div>
+
+
+
+
+
+  </ion-footer-bar>
+
 </ion-view>
 
 <script id="modalEmpfehlung.html" type="text/ng-template">
@@ -62,4 +80,20 @@
       </a>
     </ion-content>
   </ion-modal-view>
+</script>
+
+<script id="popover.html" type="text/ng-template">
+  <ion-popover-view  style="width: 50%; height: auto; background-color: #fff">
+    <ion-header-bar style="background-color: #a0509a; position: relative"> <h2 class="title" style="color: #fff" >Was willst du tun?</h2></ion-header-bar>
+    <ion-content style=" top:0;position: relative">
+      <div class="list">
+        <button class="item button-light button-block" ng-click="closePopover('zur Wunschliste hinzufügen')">
+          zur Wunschliste hinzufügen
+        </button>
+        <button class="item button-light button-block" ng-click="closePopover('Finanzstatus anzeigen')">
+          Finanzstatus anzeigen
+        </button>
+      </div>
+    </ion-content>
+  </ion-popover-view>
 </script>

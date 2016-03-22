@@ -2,7 +2,7 @@ angular
     .module('app.controllers')
     .controller(
         'empfehlung3Ctrl',
-        function($scope, $state, $ionicPopup, $ionicModal) {
+        function($scope, $state, $ionicPopup, $ionicModal, $ionicPopover) {
           $scope.todoChoice = "zur Wunschliste hinzufügen";
           window.localStorage.setItem('refresh', 1)
           $scope.amount = parseFloat((window.localStorage.getItem("amount")));
@@ -22,10 +22,7 @@ angular
           window.localStorage.setItem("financeType", 'rot');
           $scope.amount = $scope.amount.toFixed(2);
 
-          $scope.startFinance = function() {
-            window.localStorage.setItem("financeType", 'rot');
-            $state.go('menu.finanzstatus');
-          };
+
 
           $scope.notify = function() {
 
@@ -87,10 +84,13 @@ angular
                 window.localStorage.setItem("kreditBack", 3);
                 $state.go('menu.kredit')
 
-              } else {
+              }else if(target=="Finanzstatus anzeigen"){
+                window.localStorage.setItem("financeType", 'rot');
+                $state.go('menu.finanzstatus');
+              }  else {
 
                 var alertPopup = $ionicPopup.alert({
-                  title : 'Not Implemented yet',
+                  title : 'Hinweis',
                   template : 'Diese Funktion ist in der Demo nicht verfügbar'
                 });
 
@@ -131,6 +131,31 @@ angular
           });
           // Execute action on remove modal
           $scope.$on('modal.removed', function() {
+            // Execute action
+          });
+
+          $ionicPopover.fromTemplateUrl('popover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
+          $scope.openPopover = function($event) {
+            $scope.popover.show($event);
+          };
+          $scope.closePopover = function(action) {
+            $scope.todoChoice=action;
+            $scope.popover.hide();
+          };
+          //Cleanup the popover when we're done with it!
+          $scope.$on('$destroy', function() {
+            $scope.popover.remove();
+          });
+          // Execute action on hide popover
+          $scope.$on('popover.hidden', function() {
+            // Execute action
+          });
+          // Execute action on remove popover
+          $scope.$on('popover.removed', function() {
             // Execute action
           });
         });

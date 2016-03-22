@@ -10,29 +10,52 @@
 
         </label>
     </div></br></br></br></br>
-      <h5 style="color: #0066B3">Von welchem Konto soll umgebucht werden?</h5>
+      <span class="kiml-text" >Von welchem Konto soll umgebucht werden?</span>
         <form class="list">
-          <ion-radio ng-if="isKonto1" ng-model="kontoChoice" ng-value="1" name="konto1" ng-change="changeKonto(kontoChoice)">{{konto1Bez}}: {{konto1}} €
+          <ion-radio ng-show="isKonto1" ng-model="kontoChoice" ng-value="1" name="konto1" ng-change="changeKonto(kontoChoice)">{{konto1Bez}}: {{konto1}} €
             </br> <span style="font-size: smaller">{{konto1IBAN}}</span>
           </ion-radio>
 
-          <ion-radio ng-if="isKonto2" ng-model="kontoChoice" ng-value="2" name="konto2" ng-change="changeKonto(kontoChoice)">{{konto2Bez}}: {{konto2}} €
+          <ion-radio ng-show="isKonto2" ng-model="kontoChoice" ng-value="2" name="konto2" ng-change="changeKonto(kontoChoice)">{{konto2Bez}}: {{konto2}} €
             </br> <span style="font-size: smaller">{{konto2IBAN}}</span>
             </ion-radio>
 
-            <ion-radio ng-if="isKonto3" ng-model="kontoChoice" ng-value="3" name="konto3" ng-change="changeKonto(kontoChoice)">{{konto3Bez}}: {{konto3}} €
+            <ion-radio ng-show="isKonto3" ng-model="kontoChoice" ng-value="3" name="konto3" ng-change="changeKonto(kontoChoice)">{{konto3Bez}}: {{konto3}} €
               </br> <span style="font-size: smaller">{{konto3IBAN}}</span>
             </ion-radio>
 
         </form>
 
     </ion-content>
-  <ion-footer-bar style="height: 65px; width: 98%; background: transparent">
-    <div class="button-bar" style="height: 65px">
 
-      <button ui-sref="menu.empfehlung2" class="button button-light button-block  icon-left ion-android-arrow-back">zurück</button>
-      <button class="button button-energized button-block " ng-click="umbuchen()">Umbuchen</button>
-
+  <ion-footer-bar style="height: 130px; width: 98%; background: transparent" title="Was willst du tun?">
+    <div class="button-bar-inline" style= "height: 65px">
+      <label class="button button-clear button-block col-offset-20" style="position: fixed; font-size: x-large; width: 59%; color: #a0509a; font-weight: bold">
+        Was willst du tun?
+      </label>
     </div>
+
+    <div class="row">
+
+
+
+      <div class="col col-center col-10">   <button ui-sref="menu.empfehlung2" class="button button-clear icon ">
+        <img src="img/circleLeft.svg"/>
+      </button>
+      </div>
+
+      <button ng-model="todoChoice" style="font-size: large;" class="button button-light col col-center col-80" disabled>Umbuchen
+      </button>
+
+      <div class="col col-center col-10">    <button type="button" class="button button-clear" ng-click="umbuchen()">
+        <img src="img/circleRight.svg"/>
+      </button>
+      </div>
+    </div>
+
+
+
+
+
   </ion-footer-bar>
 </ion-view>

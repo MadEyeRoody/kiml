@@ -1,28 +1,34 @@
 <ion-view title="Kontoverwaltung" hide-back-button="true">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-        <form class="list" ng-submit="save(kontoChoice, minRemaining, prognoseTarget)">
-          <div> <span class="input-label" style="color: #0066B3">Wähle dein Primärkonto:</span></div>
-          <ion-radio ng-model="kontoChoice" ng-value="1" name="konto1">{{konto1Bez}}: {{konto1}} €
+      </br>
+
+          <div> <span class="kiml-text" >Wähle dein Primärkonto:</span></div>
+          </br>
+          <ion-radio ng-model="kontoChoice" ng-change="changeKonto(kontoChoice)" ng-value="1" name="konto1">{{konto1Bez}}: {{konto1}} €
             </br> <span style="font-size: smaller">{{konto1IBAN}}</span>
           </ion-radio>
-          <ion-radio ng-model="kontoChoice" ng-value="2" name="konto2">{{konto2Bez}}: {{konto2}} €
+          <ion-radio ng-model="kontoChoice" ng-change="changeKonto(kontoChoice)"  ng-value="2" name="konto2">{{konto2Bez}}: {{konto2}} €
             </br> <span style="font-size: smaller">{{konto2IBAN}}</span>
           </ion-radio>
-          <ion-radio ng-model="kontoChoice" ng-value="3" name="konto3">{{konto3Bez}}: {{konto3}} €
+          <ion-radio ng-model="kontoChoice" ng-change="changeKonto(kontoChoice)"  ng-value="3" name="konto3">{{konto3Bez}}: {{konto3}} €
             </br> <span style="font-size: smaller">{{konto3IBAN}}</span>
           </ion-radio>
 
           <div class="button-bar">
 
 
-            <button type="button" class="button button-stable  button-block icon ion-close-circled" ng-click="demo()"></button>
-            <button type="button" class="button button-energized button-block icon ion-plus-circled" ng-click="demo()"></button>
+            <button type="button" class="button button-icon " ng-click="demo()">
+              <img src="img/Minus.svg"/>
+            </button>
+            <button type="button" class="button button-icon " ng-click="demo()">
+              <img src="img/Plus.svg"/>
+            </button>
           </div>
 
           </br></br>
           <label class="item item-input" name="untergrenze">
                 <span class="input-label">Untergrenze in €:</span>
-                <input type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="minRemaining">
+                <input type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="minRemaining" ng-change="changeRemaining(minRemaining)" >
             </label>
           </br>
             <label class="item item-input item-select">
@@ -35,8 +41,37 @@
             </br></br>
 
 
-          <button type="submit" class="button button-energized button-block ">Speichern</button>
-        </form>
 
     </ion-content>
+
+  <ion-footer-bar style="height: 130px; width: 98%; background: transparent" title="Was willst du tun?">
+    <div class="button-bar-inline" style= "height: 65px">
+      <label class="button button-clear button-block col-offset-20" style="position: fixed; font-size: x-large; width: 59%; color: #a0509a; font-weight: bold">
+        Was willst du tun?
+      </label>
+    </div>
+
+    <div class="row">
+
+
+
+      <div class="col col-center col-10">   <button ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-clear icon ">
+        <img src="img/circleLeft.svg"/>
+      </button>
+      </div>
+
+      <button ng-model="todoChoice" style="font-size: large;" class="button button-light col col-center col-80" disabled>Speichern
+      </button>
+
+      <div class="col col-center col-10">    <button type="button" class="button button-clear" ng-click="save()">
+        <img src="img/circleRight.svg"/>
+      </button>
+      </div>
+    </div>
+
+
+
+
+
+  </ion-footer-bar>
 </ion-view>

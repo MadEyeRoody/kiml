@@ -70,7 +70,9 @@ angular
               });
 
               alertPopup.then(function(res) {
-                console.log('Umbuchung durchgefÃ¼hrt');
+                window.localStorage.setItem("Konto1", parseFloat(window.localStorage.getItem("Konto1")) + parseFloat($scope.fehlbetrag))
+                window.localStorage.setItem("Konto"+kontoChoice, parseFloat(window.localStorage.getItem("Konto"+kontoChoice)) - parseFloat($scope.fehlbetrag))
+                console.log('Umbuchung durchgeführt');
                 $state.go('menu.empfehlung');
               });
 

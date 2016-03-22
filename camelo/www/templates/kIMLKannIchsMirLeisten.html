@@ -1,7 +1,7 @@
 <ion-view title="Demo" hide-back-button="true">
 
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-   <h1 > Kann ichs mir Leisten?</h1>
+   <h1 >Kann ich's mir Leisten? </h1>
 	  <div style="height:50px">
       	<div class="row" ng-show="artikelAnzeigeVisibility">
         	<div class="col col-33"> <span style="text-align: left; color: #0066B3; ">Mein Wunsch:</span></div>
@@ -12,22 +12,22 @@
       <form  ng-submit="checkAmount(formdata.betragValue)" >
            <div  style="height:80px; width: 70%; margin-left: 15%" class="item item-input-inset " >
              <label class=" item-input-wrapper" name="betrag" style="background: transparent; " >
-                <input style="width: 80%" type="tel" pattern="\d*[0-9](\.\d{1,2})?$" style="font-size: x-large; " placeholder="Betrag in €" ng-model="formdata.betragValue" ng-change="betragChanged()" />
+                <input style="width: 80%; font-size: x-large;" type="tel" pattern="\d*[0-9](\.\d{1,2})?$" placeholder="Betrag in €" ng-model="formdata.betragValue" ng-change="betragChanged()" />
             </label>
              <button  type="button" class="button  button-clear icon" ng-show="barcodeScannerVisibility"- ng-click="scanBarCode()">
                <img src="img/Barcode.svg" />
              </button>
              </div>
             </br>
-        </br></br></br>
-            <button type="submit" class="button button-icon" style="margin-left: 40%;">
-              <img src="img/Ok.png"\>
+        </br>
+            <button type="submit" class="button button-energized button-block" style="margin-left: 30%; width: 40%; height: 60px; font-size: x-large">
+              Sags mir!
             </button>
         </form>
 
 
 
-         </br></br></br></br></br>
+         </br></br></br></br></br></br></br></br>
 
 
         <video width="98%" autobuffer style="bottom: 70px"  controls="controls" poster="img/vidBack.png" tabindex="0" >

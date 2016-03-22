@@ -17,7 +17,11 @@ angular.module('app.controllers').controller(
       $scope.minRemaining = parseFloat(
           window.localStorage.getItem("minRemaining")).toFixed(2);
 
+      $scope.prognoseTarget = window.localStorage.getItem("prognoseTarget");
       $scope.save = function(choice, untergrenze, target) {
+        choice=$scope.kontoChoice;
+        untergrenze = $scope.minRemaining;
+        target = $scope.prognoseTarget;
         window.localStorage.setItem("primeKonto", choice);
         window.localStorage.setItem("minRemaining", untergrenze);
         window.localStorage.setItem("prognoseTarget", target)
@@ -30,12 +34,19 @@ angular.module('app.controllers').controller(
       }
       $scope.demo = function(target) {
         var alertPopup = $ionicPopup.alert({
-          title : 'Not Implemented yet',
+          title : 'Hinweis',
           template : 'Diese Funktion ist in der Demo nicht verfügbar'
         });
 
         alertPopup.then(function(res) {
           console.log('no Input');
         });
+      }
+
+      $scope.changeKonto = function(value){
+        $scope.kontoChoice = value;
+      }
+      $scope.changeRemaining= function(value){
+        $scope.minRemaining = value;
       }
     });

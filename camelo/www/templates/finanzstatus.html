@@ -11,18 +11,37 @@
         </div>
 
 
-      <button class="button button-energized button-block " ng-click="resetFinanceType()" >Kaufpreis zurücksetzen</button>
-      <!--
- <div class="ct-chart ct-perfect-fourth"></div>
-    <div ng-app="app.directives" ng-controller="finanzstatusCtrl">
 
-   <div d3-bars bar-height="20" bar-padding="5"></div>
-
-  </div>
-    <nvd3 options="options" data="data"></nvd3>
-   <div style="text-align:center;">
-         <img src="img/finanzstatus-{{financeType}}.png" width="100%" height="auto">
-     </div> -->
 
     </ion-content>
+  <ion-footer-bar style="height: 130px; width: 98%; background: transparent" title="Was willst du tun?">
+    <div class="button-bar-inline" style= "height: 65px">
+      <label class="button button-clear button-block col-offset-20" style="position: fixed; font-size: x-large; width: 59%; color: #a0509a; font-weight: bold">
+        Was willst du tun?
+      </label>
+    </div>
+
+    <div class="row">
+
+
+
+      <div class="col col-center col-10">   <button ui-sref="menu.kIMLKannIchsMirLeisten" class="button button-clear icon ">
+        <img src="img/circleLeft.svg"/>
+      </button>
+      </div>
+
+      <button ng-model="todoChoice" style="font-size: large;" class="button button-light col col-center col-80" disabled>Kaufpreis zurücksetzen
+      </button>
+
+      <div class="col col-center col-10">    <button type="button" class="button button-clear" ng-click="resetFinanceType()">
+        <img src="img/Ok.svg"/>
+      </button>
+      </div>
+    </div>
+
+
+
+
+
+  </ion-footer-bar>
 </ion-view>
