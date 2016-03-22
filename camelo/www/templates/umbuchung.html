@@ -27,12 +27,35 @@
         </form>
 
     </ion-content>
-  <ion-footer-bar style="height: 65px; width: 98%; background: transparent">
-    <div class="button-bar" style="height: 65px">
 
-      <button ui-sref="menu.empfehlung2" class="button button-light button-block  icon-left ion-android-arrow-back">zurück</button>
-      <button class="button button-energized button-block " ng-click="umbuchen()">Umbuchen</button>
-
+  <ion-footer-bar style="height: 130px; width: 98%; background: transparent" title="Was willst du tun?">
+    <div class="button-bar-inline" style= "height: 65px">
+      <label class="button button-clear button-block col-offset-20" style="position: fixed; font-size: x-large; width: 59%; color: #a0509a; font-weight: bold">
+        Was willst du tun?
+      </label>
     </div>
+
+    <div class="row">
+
+
+
+      <div class="col col-center col-10">   <button ui-sref="menu.empfehlung2" class="button button-clear icon ">
+        <img src="img/circleLeft.svg"/>
+      </button>
+      </div>
+
+      <button ng-model="todoChoice" style="font-size: large;" class="button button-light col col-center col-80" disabled>Umbuchen
+      </button>
+
+      <div class="col col-center col-10">    <button type="button" class="button button-clear" ng-click="umbuchen()">
+        <img src="img/circleRight.svg"/>
+      </button>
+      </div>
+    </div>
+
+
+
+
+
   </ion-footer-bar>
 </ion-view>

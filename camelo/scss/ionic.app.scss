@@ -19,7 +19,13 @@ $button-stable-text:              #fff !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
-$big-bg:      '../img/KIML-background2.png';
+$big-bg:      '../img/KIML-background.png';
+
+.body{
+  background-attachment: fixed !important;
+  background-repeat:no-repeat !important;
+  background-position:center !important;
+}
 
 .item-complex .item-content, .item-radio .item-conten {
   background: transparent !important;

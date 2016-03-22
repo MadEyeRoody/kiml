@@ -1,7 +1,7 @@
 angular.module('app.controllers')
     .controller(
         'homeCtrl',
-        function($scope, $state, wishlist) {
+        function($scope, $state, wishlist, $timeout) {
           // Start Values
           $scope.formdata = [];
           $scope.formdata.betragValue = NaN;
@@ -26,11 +26,15 @@ angular.module('app.controllers')
           window.localStorage.setItem("prognoseReason", 'Versicherungen');
           window.localStorage.setItem("minRemaining", 200.00);
           window.localStorage.setItem("height", 550);
-          
+
           wishlist.add("Fahrrad",600);
           wishlist.add("Fernseher",1100);
           wishlist.add("Tablet",399.99);
-          
+
           // End Start Values
-          $state.go('menu.kIMLKannIchsMirLeisten');
+          $timeout(function() {
+            $state.go('menu.kIMLKannIchsMirLeisten');
+          }, 5200);
+
+          //
         });
