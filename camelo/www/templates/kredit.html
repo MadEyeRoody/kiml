@@ -2,23 +2,28 @@
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
       </br></br>     </br></br></br>
             <label class="item item-input" name="gesamtbetrag">
-                <span class="input-label">Zu zahlender Betrag:</span> {{gesamtbetrag}} €
+              <span class="kiml-text-bold col col-80 ">Zu zahlender Betrag:</span> <span class="kiml-text col col 20"> {{gesamtbetrag}} €</span>
             </label>
             <label class="item item-input" name="fehlbetrag">
-                <span class="input-label">Fehlbetrag:</span> {{fehlbetrag}} €
+              <span class="kiml-text-bold col col-80 ">Fehlbetrag:</span> <span class="kiml-text col col 20"> {{fehlbetrag}} €</span>
 
             </label>
           </br></br>
       </br></br></br>
-        <form class="list">
-            <ion-label class="kiml-text">Laufzeit in Monaten: </ion-label>
-            <ion-item class="range range-positive">{{laufzeit}}
+
+            <ion-label class="kiml-text-header">Laufzeit in Monaten: </ion-label>
+      </br></br>
+            <ion-item class="range range-positive" ><span class="kiml-text">{{laufzeit}}</span>
                 <input type="range"  min="6" max="36" name="RangeLaufzeit" ng-model="laufzeit" ng-change="saveLaufzeit(laufzeit)">
             </ion-item>
           </br>
-          <ion-item class="item-divider">Monatliche Rate: {{rate}} €</ion-item>
+          <ion-item class="item-divider">
+            <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0; width: 105%;">
+            <span class="kiml-text-bold col col-80  ">Monatliche Rate:</span> <span class="kiml-text col col-20"> {{rate}} €</span>
+          </label>
+          </ion-item>
 
-        </form>
+
 
     </ion-content>
 

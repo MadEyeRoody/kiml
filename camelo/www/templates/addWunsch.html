@@ -3,17 +3,17 @@
 		<form ng-submit="addWunsch(newWish)">
 			<div  style="height:58px" class="item item-input-inset" >
              	<label class=" item-input-wrapper" name="name" style="background: transparent">
-             		<span class="input-label">Name:</span>
-			   		<input type="text" ng-model="newWish.name" />
+             		<span class="kiml-text-bold">Name:</span>
+			   		<input style="text-align: right; color: #a0509a; font-size: large;" type="text" ng-model="newWish.name" />
 			   	</label>
 			 </div>
 			 <div  style="height:58px" class="item item-input-inset" >
 			   	<label class=" item-input-wrapper" name="betrag" style="background: transparent">
-			   		<span class="input-label">Betrag in €:</span>
-			   		<input type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="newWish.betrag" />
+			   		<span class="kiml-text-bold">Betrag in €:</span>
+			   		<input style="text-align: right; color: #a0509a; font-size: large;" type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="newWish.betrag" />
 			   	</label>
 			 </div>
-			 <button type="submit" class="button button-energized button-block">Wunsch hinzuf&uuml;gen</button>
+			 <button type="submit" class="button button-energized button-block">Wunsch hinzufügen</button>
   		</form>
     </ion-content>
 </ion-view>

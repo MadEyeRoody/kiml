@@ -1,12 +1,12 @@
 <ion-view title="Kredit" hide-back-button="true">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
       </br></br>     </br></br></br>
-        <form class="list"></form>
-        <h2>Angebot:</h2>
+
+        <span class="kiml-text-header">Angebot</span></br></br>
         <ion-list>
-            <ion-item><span class="kiml-text" >Kreditbetrag:</span> {{fehlbetrag}} €</ion-item>
-            <ion-item><span class="kiml-text" >Laufzeit:</span> {{laufzeit}} Monate</ion-item>
-            <ion-item><span class="kiml-text" >Rate:</span> {{rate}} €</ion-item>
+         <label class="item item-input"> <span class="kiml-text-bold col col-80 ">Kreditbetrag:</span><span class="kiml-text col col 20"> {{fehlbetrag}} €</span></label>
+          <label class="item item-input"> <span class="kiml-text-bold col col-80 ">Laufzeit:</span> <span class="kiml-text col col 20">{{laufzeit}} Monate</span></label>
+          <label class="item item-input">  <span class="kiml-text-bold col col-80 ">Rate:</span> <span class="kiml-text col col 20">{{rate}} €</span></label>
         </ion-list>
 
     </ion-content>
@@ -23,7 +23,7 @@
 
 
       <div class="col col-center col-10">   <button ui-sref="menu.kredit"  class="button button-clear icon ">
-        <img src="img/circleLeft.svg"/>
+        <img src="img/circleLeft2.svg"/>
       </button>
       </div>
 
