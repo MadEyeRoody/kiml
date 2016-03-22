@@ -3,28 +3,41 @@
       </br></br>
     <div>
         <label class="item item-input" name="gesamtbetrag">
-          <span class="input-label">Zu zahlender Betrag:</span> {{gesamtbetrag}} €
+          <span class=" col col-80 kiml-text-bold">Zu zahlender Betrag</span> <span class="kiml-text col col 20"> {{gesamtbetrag}} €</span>
         </label>
-        <label class="item item-input" name="fehlbetrag">
-          <span class="input-label">Fehlbetrag:</span> {{fehlbetrag}} €
+        <label class="   item item-input" name="fehlbetrag">
+          <span class="kiml-text-bold col col-80 ">Fehlbetrag</span>  <span class="kiml-text col col 20">{{fehlbetragDisplay}} €</span>
 
         </label>
     </div></br></br></br></br>
-      <span class="kiml-text" >Von welchem Konto soll umgebucht werden?</span>
-        <form class="list">
-          <ion-radio ng-show="isKonto1" ng-model="kontoChoice" ng-value="1" name="konto1" ng-change="changeKonto(kontoChoice)">{{konto1Bez}}: {{konto1}} €
-            </br> <span style="font-size: smaller">{{konto1IBAN}}</span>
+      <span class="kiml-text-header" >Von welchem Konto soll umgebucht werden?</span>
+      </br></br>
+
+          <ion-radio ng-show="isKonto1" ng-model="kontoChoice" ng-value="1" name="konto1" ng-change="changeKonto(kontoChoice)">
+            <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0; width: 110%;">
+            <span class=" col col-80 kiml-text-bold">{{konto1Bez}}:</span>
+             <span class="col col-20 kiml-text" >{{konto1}} €</span>
+            </label>
+           <span class="kiml-text-small" >{{konto1IBAN}}</span>
           </ion-radio>
 
-          <ion-radio ng-show="isKonto2" ng-model="kontoChoice" ng-value="2" name="konto2" ng-change="changeKonto(kontoChoice)">{{konto2Bez}}: {{konto2}} €
-            </br> <span style="font-size: smaller">{{konto2IBAN}}</span>
+          <ion-radio ng-show="isKonto2" ng-model="kontoChoice" ng-value="2" name="konto2" ng-change="changeKonto(kontoChoice)">
+            <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0; width: 110%;">
+              <span class=" col col-80 kiml-text-bold">{{konto2Bez}}:</span>
+              <span class="col col-20 kiml-text" >{{konto2}} €</span>
+            </label>
+            <span class="kiml-text-small">{{konto2IBAN}}</span>
             </ion-radio>
 
-            <ion-radio ng-show="isKonto3" ng-model="kontoChoice" ng-value="3" name="konto3" ng-change="changeKonto(kontoChoice)">{{konto3Bez}}: {{konto3}} €
-              </br> <span style="font-size: smaller">{{konto3IBAN}}</span>
+            <ion-radio ng-show="isKonto3" ng-model="kontoChoice" ng-value="3" name="konto3" ng-change="changeKonto(kontoChoice)">
+              <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0; width: 110%;">
+                <span class=" col col-80 kiml-text-bold">{{konto1Bez}}:</span>
+                <span class="col col-20 kiml-text" >{{konto1}} €</span>
+              </label>
+              <span class="kiml-text-small">{{konto3IBAN}}</span>
             </ion-radio>
 
-        </form>
+
 
     </ion-content>
 

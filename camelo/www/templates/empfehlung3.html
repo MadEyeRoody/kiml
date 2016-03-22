@@ -6,14 +6,23 @@
         </div>
       </br></br>
       <div class="row">
-        <div class="col col-50"> <span class="kiml-text">Kaufbetrag:</span></div>
-        <div class="col col-offset-10"> {{amount}} €</div>
+        <div class="col col-50"> <span class="kiml-text-bold">Kaufbetrag</span></div>
+        <div class="col col-offset-10 kiml-text" style="text-align: right"> {{amount}} €
+        </div>
+        <div class=" col col-10 ">
+          <img src="img/transparent.png">
+        </div>
+
       </div>
+      </br>
+
+      </br>
       <div class="row">
-        <div class="col col-50"> <span class="kiml-text">prognostizierter Saldo </br>Primärkonto  {{prognoseTarget}}:</span></div>
-        <div class="col col-offset-10"> </br> {{erwarteterStand}} €
-          <button ng-click="notify()" style="padding-left: 50px; margin-top: -20px" class="button button-clear  icon ">
-            <img src="img/Info.svg" /></button></div>
+        <div class="col col-50"> <span class="kiml-text-bold">prognostizierter Saldo  </br>  {{prognoseTarget}}</span></div>
+        <div class="col col-offset-10 kiml-text" style="text-align: right"> </br> {{erwarteterStand}} €
+        </div>
+        <button ng-click="notify()" style="" class="button button-clear col col-10  icon ">
+          <img src="img/Info.svg" /></button>
       </div>
 
 

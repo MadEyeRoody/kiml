@@ -5,6 +5,7 @@ angular
         function($scope, $ionicPopup, $state) {
           $scope.fehlbetrag = parseFloat(window.localStorage
               .getItem("fehlbetrag"));
+          $scope.fehlbetragDisplay = parseFloat(window.localStorage.getItem("fehlbetrag")).toFixed(2);
           $scope.konto1 = parseFloat(window.localStorage.getItem("Konto1"))
               .toFixed(2);
           $scope.konto1Bez = window.localStorage.getItem("Konto1Bez");

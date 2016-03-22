@@ -19,7 +19,7 @@ $button-stable-text:              #fff !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
-$big-bg:      '../img/KIML-background.png';
+$big-bg:      '../img/KIML-background3.png';
 
 .body{
   background-attachment: fixed !important;
@@ -30,10 +30,27 @@ $big-bg:      '../img/KIML-background.png';
 .item-complex .item-content, .item-radio .item-conten {
   background: transparent !important;
 }
+.kiml-text-header{
+  color: #a0509a;
+  font-size: x-large;
+  font-weight: bold;
+}
 
 .kiml-text{
-  color: #a0509a;
+  //color: #a0509a;
+  color: #000000;
   font-size: large;
+}
+.kiml-text-small{
+  //color: #a0509a;
+  color: #000000;
+  font-size: medium;
+}
+.kiml-text-bold{
+  //color: #a0509a;
+  color: #000000;
+  font-size: large;
+  font-weight: bold;
 }
 
 .bar-footer {
@@ -57,6 +74,7 @@ $big-bg:      '../img/KIML-background.png';
 h1 {
   text-align: center;
   color: #a0509a !important;
+  font-weight: bold !important;
 }
 
 h2 {
