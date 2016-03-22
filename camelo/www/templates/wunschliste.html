@@ -1,10 +1,21 @@
 <ion-view title="Wunschliste" hide-back-button="true">
 	<ion-nav-buttons side="secondary">
-    	<button class="button button-clear icon ion-android-add" ng-click="onAdd()"></button>
+    	<button class="button button-clear icon" ng-class="edit?'ion-android-done':'ion-edit'" ng-click="swapEdit()"></button>
+    	<button class="button button-clear icon ion-plus" ng-click="onAdd()"></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-        <ion-list>
-            <ion-item ng-repeat="item in wunschliste"><span class="kiml-text">{{item.name}} - {{item.betrag}}â‚¬</span></ion-item>
+        <ion-list show-delete="edit" show-reorder="edit"> 
+            <ion-item ng-repeat="item in wunschliste" ng-click="onItemClicked(item)">
+            	<!-- Eigentlich müsste die Klasse item-icon-right an dem ion-item direkt hängen. 
+            	Dann spinnt aber das ganze Listen-Handlingen aus unerfindlichen Gründen... Dann lieber so :) -->
+            	<div class="item-icon-right">
+		            <span>{{item.name}} - {{item.betrag}}â‚¬</span>
+		            <i style="right:11px" class="icon ion-chevron-right"></i>
+	            </div>
+            	<ion-option-button class="button button-assertive icon ion-android-delete" ng-click="wunschliste.splice($index, 1)"></ion-option-button>
+            	<ion-delete-button class="ion-android-delete" ng-click="wunschliste.splice($index, 1)"></ion-delete-button>
+            	<ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+           	</ion-item>
         </ion-list>
     </ion-content>
 </ion-view>
