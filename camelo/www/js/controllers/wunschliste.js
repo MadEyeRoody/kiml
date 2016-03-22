@@ -1,5 +1,5 @@
 angular.module('app.controllers').controller('wunschlisteCtrl',
-    function($scope, $state, wishlist) {
+    function($scope, $state, wishlist, empfehlung) {
       $scope.wunschliste = wishlist.list;
 
       $scope.edit = false;
@@ -19,6 +19,6 @@ angular.module('app.controllers').controller('wunschlisteCtrl',
       };
 
       $scope.onItemClicked = function(item) {
-        alert(item.name);
+		empfehlung.showEmpfehlung(item.name,item.betrag);
       };
     });
