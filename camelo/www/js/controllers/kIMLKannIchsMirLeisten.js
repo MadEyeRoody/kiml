@@ -20,6 +20,7 @@ angular
           }
 
           $scope.formdata = [];
+		  $scope.artikel='';
 
           $scope.checkAmount = function(betrag) {
 			empfehlung.showEmpfehlung($scope.artikel,betrag);
