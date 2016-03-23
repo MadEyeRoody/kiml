@@ -115,7 +115,7 @@ angular.module('app.controllers')
             $scope.data = [
 
             {
-              "key" : "Saldo über alle Konten",
+              "key" : "Gesamtsaldo",
               area : true,
               yAxis : 1,
               disabled : disabled,
@@ -279,7 +279,7 @@ angular.module('app.controllers')
             },
 
             {
-              "key" : "Kaufprognose aller Konten",
+              "key" : "Prognose Gesamtsaldo",
               type : 'line',
               yAxis : 1,
               area : areaGesamt,
@@ -328,7 +328,7 @@ angular.module('app.controllers')
 
               ]
             }, {
-              "key" : "Kaufprognose Primärkonto",
+              "key" : "Prognose Primärkonto",
               type : 'line',
               yAxis : 1,
               area : areaPrime,
@@ -377,7 +377,7 @@ angular.module('app.controllers')
               ]
             }, {
 
-              "key" : "Mindestgrenze",
+              "key" : "Wohlfühlgrenze",
               type : 'line',
               yAxis : 1,
               "color" : "green",

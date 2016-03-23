@@ -5,24 +5,24 @@
           <div> <span class="kiml-text-header" >Wähle dein Primärkonto</span></div>
           </br>
       <ion-radio  ng-model="kontoChoice" ng-value="1" name="konto1" ng-change="changeKonto(kontoChoice)">
-        <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0; width: 110%;">
-          <span class=" col col-80 kiml-text-bold">{{konto1Bez}}:</span>
+        <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0px;padding-right: 0;margin-left: -5px; width: 110%;">
+          <span class=" col col-80 kiml-text-bold">{{konto1Bez}}</span>
           <span class="col col-20 kiml-text" >{{konto1}} €</span>
         </label>
         <span class="kiml-text-small" >{{konto1IBAN}}</span>
       </ion-radio>
 
       <ion-radio  ng-model="kontoChoice" ng-value="2" name="konto2" ng-change="changeKonto(kontoChoice)">
-        <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0; width: 110%;">
-          <span class=" col col-80 kiml-text-bold">{{konto2Bez}}:</span>
+        <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0;margin-left: -5px; width: 110%;">
+          <span class=" col col-80 kiml-text-bold">{{konto2Bez}}</span>
           <span class="col col-20 kiml-text" >{{konto2}} €</span>
         </label>
         <span class="kiml-text-small">{{konto2IBAN}}</span>
       </ion-radio>
 
       <ion-radio  ng-model="kontoChoice" ng-value="3" name="konto3" ng-change="changeKonto(kontoChoice)">
-        <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0; width: 110%;">
-          <span class=" col col-80 kiml-text-bold">{{konto1Bez}}:</span>
+        <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0;margin-left: -5px; width: 110%;">
+          <span class=" col col-80 kiml-text-bold">{{konto1Bez}}</span>
           <span class="col col-20 kiml-text" >{{konto1}} €</span>
         </label>
         <span class="kiml-text-small">{{konto3IBAN}}</span>
@@ -41,7 +41,7 @@
 
           </br></br>
           <label class="item item-input" name="untergrenze">
-                <span class="kiml-text-bold">Untergrenze in €</span>
+                <span class="kiml-text-bold">Wohlfühlgrenze in €</span>
                 <input style="text-align: right; color: #a0509a; font-size: large;" type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="minRemaining" ng-change="changeRemaining(minRemaining)" >
             </label>
           </br>

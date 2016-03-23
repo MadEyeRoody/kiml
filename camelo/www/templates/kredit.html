@@ -1,29 +1,39 @@
 <ion-view title="Kredit" hide-back-button="true">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
       </br></br>     </br></br></br>
-            <label class="item item-input" name="gesamtbetrag">
-              <span class="kiml-text-bold col col-80 ">Zu zahlender Betrag:</span> <span class="kiml-text col col 20"> {{gesamtbetrag}} €</span>
-            </label>
-            <label class="item item-input" name="fehlbetrag">
-              <span class="kiml-text-bold col col-80 ">Fehlbetrag:</span> <span class="kiml-text col col 20"> {{fehlbetrag}} €</span>
+            <div class="row" >
+              <span class="kiml-text-bold col col-50 ">Zu zahlender Betrag:</span> <span class="kiml-text col col-offset-20"> {{gesamtbetrag}} €</span>
+            </div>
+            <div class="row" >
+              <span class="kiml-text-bold col col-50 ">Fehlbetrag:</span> <span class="kiml-text col col-offset-20"> {{fehlbetrag}} €</span>
+              <button ng-click="notify()" style="margin-top: -35px" class="button button-clear col col-10  icon ">
+                <img src="img/Info.svg" /></button>
+              </div>
 
-            </label>
+            </div>
           </br></br>
       </br></br></br>
 
-            <ion-label class="kiml-text-header">Laufzeit in Monaten: </ion-label>
+
       </br></br>
-            <ion-item class="range range-positive" ><span class="kiml-text">{{laufzeit}}</span>
-                <input type="range"  min="6" max="36" name="RangeLaufzeit" ng-model="laufzeit" ng-change="saveLaufzeit(laufzeit)">
+      <div class="card" style="background-color: #a0509a ">
+            <ion-item style="border: transparent; background:transparent ">
+              <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0; width: 105%;">
+                <span class="kiml-text-bold-white col col-70  ">Laufzeit in Monaten:</span> <span class="kiml-text-white col col-offset-20"> {{laufzeit}}</span>
+              </label>
+              </br>
+                <input class="range-slider__range" type="range" style="width: 100%" min="6" max="36" name="RangeLaufzeit" ng-model="laufzeit" ng-change="saveLaufzeit(laufzeit)">
             </ion-item>
-          </br>
-          <ion-item class="item-divider">
+          <ion-item style="border: transparent; background: transparent ">
             <label class="item item-input" style="background:transparent; border: transparent; padding-left: 0;padding-right: 0; width: 105%;">
-            <span class="kiml-text-bold col col-80  ">Monatliche Rate:</span> <span class="kiml-text col col-20"> {{rate}} €</span>
+            <span class="kiml-text-bold-white col col-70  ">Monatliche Rate:</span> <span class="kiml-text-white col col-offset-25"> {{rate}} €</span>
+            <span class="col"> <img src="img/{{iconKredit}}.png"  style="height: 60px; position:fixed; margin-top: -35px"/>
+            </span>
+
           </label>
           </ion-item>
 
-
+      </div>
 
     </ion-content>
 

@@ -1,32 +1,35 @@
 <ion-view title="Empfehlung" hide-back-button="true">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
+      </br></br>
 
-        <h1>Greif zu!</h1>
         <div style="text-align:center;">
             <img src="img/gruen.png">
         </div>
-
+      </br>
+      <h1>Greif zu!</h1>
       </br></br>
-      <div class="row">
-        <div class="col col-50"> <span class="kiml-text-bold">Kaufbetrag</span></div>
-        <div class="col col-offset-10 kiml-text" style="text-align: right"> {{amount}} €
+
+
+      <div class="card" style="background-color: #a0509a" >
+  <div class="row">
+        <div class="col col-50"> <span class="kiml-text-bold-white">Kaufbetrag</span></div>
+        <div class="col col-offset-10 kiml-text-white" style="text-align: right"> {{amount}} €
         </div>
         <div class=" col col-10 ">
           <img src="img/transparent.png">
         </div>
 
       </div>
-      </br>
 
-      </br>
-      <div class="row">
-        <div class="col col-50"> <span class="kiml-text-bold">prognostizierter Saldo  </br>  {{prognoseTarget}}</span></div>
-        <div class="col col-offset-10 kiml-text" style="text-align: right"> </br> {{erwarteterStand}} €
+
+      <div class="row" >
+        <div class="col col-50"> <span class="kiml-text-bold-white">prognostizierter Saldo  </br>  {{prognoseTarget}}</span></div>
+        <div class="col col-offset-10 kiml-text-white" style="text-align: right"> </br> {{erwarteterStand}} €
         </div>
-        <button ng-click="notify()" style="" class="button button-clear col col-10  icon ">
-          <img src="img/Info.svg" /></button>
+        <button ng-click="notify()" style="margin-top: -23px" class="button button-clear col col-10  icon ">
+          <img src="img/Info2.svg" /></button>
       </div>
-
+</div>
 
     </ion-content>
   <ion-footer-bar style="height: 130px; width: 98%; background: transparent" title="Was willst du tun?">
@@ -71,13 +74,13 @@
     </ion-header-bar>
     <ion-content >
       <ion-list>
-        <ion-item><span class="kiml-text">Dein Minimalbetrag</span> {{minAmount.toFixed(2)}} € </ion-item>
+        <ion-item><span class="kiml-text">Deine Wohlfühlgrenze</span> {{minAmount.toFixed(2)}} € </ion-item>
         <ion-item><span class="kiml-text">prognostizerte Abbuchungen</span>  {{prognose.toFixed(2)}} € </ion-item>
       </ion-list>
 
       </br></br>
 
-      <span class="kiml-text" style="padding-left: 10px" > Siehe deinen Finanzstatus:</span>
+      <span class="kiml-text" style="padding-left: 10px" > Siehe deinene Prognose:</span>
       </div>
       <a ui-sref="menu.finanzstatus">
         <div ng-app="app.controllers">
@@ -100,7 +103,7 @@
           zur Wunschliste hinzufügen
         </button>
         <button class="item button-light button-block" ng-click="closePopover('Finanzstatus anzeigen')">
-          Finanzstatus anzeigen
+          Prognose anzeigen
         </button>
       </div>
     </ion-content>

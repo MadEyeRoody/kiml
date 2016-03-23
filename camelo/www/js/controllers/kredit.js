@@ -11,9 +11,16 @@ angular
           $scope.kreditBack = "menu.empfehlung"
               + window.localStorage.getItem("kreditBack");
 
+
           $scope.rate = Math
               .round(100.0 * (parseFloat($scope.fehlbetrag) / $scope.laufzeit)) / 100.0;
           ;
+
+          if($scope.rate > 250){
+            $scope.iconKredit = "rot";
+          } else {
+            $scope.iconKredit = "gruen";
+          }
 
           $scope.saveLaufzeit = function(laufzeit) {
             console.log(laufzeit);
@@ -21,6 +28,12 @@ angular
             $scope.rate = Math
                 .round(100.0 * (parseFloat($scope.fehlbetrag) / laufzeit)) / 100.0;
             ;
+            if($scope.rate > 250){
+              $scope.iconKredit = "rot";
+            } else {
+              $scope.iconKredit = "gruen";
+            }
+
             console.log($scope.rate);
             $scope.$apply();
             window.localStorage.setItem("rate", $scope.rate.toFixed(2));
