@@ -5,6 +5,8 @@ angular.module('app.controllers').controller(
           .toFixed(2);
       $scope.rate = window.localStorage.getItem("rate");
       $scope.laufzeit = window.localStorage.getItem("laufzeit");
+      $scope.gesamtbetrag = parseFloat(
+        window.localStorage.getItem("amount")).toFixed(2);
 
       $scope.order = function() {
         var alertPopup = $ionicPopup.alert({
