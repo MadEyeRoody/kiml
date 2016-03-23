@@ -5,6 +5,7 @@ angular
         function($scope, $state, $ionicPopup, $ionicModal, $ionicPopover, wishlist) {
           window.localStorage.setItem('refresh', 1);
 		  $scope.wishlistitem = {};
+		  $scope.wishlistitem.name = window.localStorage.getItem("name");
           $scope.todoChoice = "zur Wunschliste hinzufügen";
           $scope.amount = parseFloat(window.localStorage.getItem("amount"));
           $scope.konto1 = parseFloat(window.localStorage.getItem("Konto"

@@ -40,7 +40,8 @@ angular.module('app.services', [])
 	  } else if ((kontoGesamtValue - (betragValue + prognose)) < minRemaining) {
 		$state.go('menu.empfehlung3');
 	  }
-	  window.localStorage.setItem("amount", betragValue)
+	  window.localStorage.setItem("amount", betragValue);
+	  window.localStorage.setItem("name", name);
 	} else {
 
 	  var alertPopup = $ionicPopup.alert({
