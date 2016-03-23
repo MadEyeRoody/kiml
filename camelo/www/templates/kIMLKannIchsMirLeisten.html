@@ -37,5 +37,18 @@
 
 </ion-view>
 
+<script id="modalScan.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-stable">
+      <h1 class="title">Hinweis</h1>
+      <button class="button button-clear button-primary" ng-click="modal.hide()">OK</button>
+    </ion-header-bar>
+
+    <div class="col col-33"> <span style="text-align: left; color: #0066B3; ">Mein Wunsch:</span></div>
+    <div class="col">{{artikel}}</div>
+
+    </ion-content>
+  </ion-modal-view>
+</script>
 
 
