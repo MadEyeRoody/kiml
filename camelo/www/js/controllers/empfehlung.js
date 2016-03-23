@@ -2,8 +2,9 @@ angular
     .module('app.controllers')
     .controller(
         'empfehlungCtrl',
-        function($scope, $state, $ionicPopup, $ionicModal, $ionicPopover) {
-          window.localStorage.setItem('refresh', 1)
+        function($scope, $state, $ionicPopup, $ionicModal, $ionicPopover, wishlist) {
+          window.localStorage.setItem('refresh', 1);
+		  $scope.wishlistitem = {};
           $scope.todoChoice = "zur Wunschliste hinzufügen";
           $scope.amount = parseFloat(window.localStorage.getItem("amount"));
           $scope.konto1 = parseFloat(window.localStorage.getItem("Konto"
@@ -28,7 +29,7 @@ angular
             if (target) {
               if (target == "zur Wunschliste hinzufügen") {
                 var myPopup = $ionicPopup.show({
-                  template : '<input type="text" ng-model="wishlist">',
+                  template : '<input type="text" ng-model="wishlistitem.name">',
                   title : 'Zur Wunschliste hinzufügen',
                   subTitle : 'Gib einen Namen für diesen Wunsch ein',
                   scope : $scope,
@@ -40,18 +41,13 @@ angular
                       text : 'Speichern',
                       type : 'button-energized',
                       onTap : function(e) {
-                        if (!$scope.wishlist) {
-                          // don't allow the user to close unless he enters
-                          // wifi password
-                          window.localStorage.setItem("wish", $scope.wishlist
-                            + ' - ' + window.localStorage.getItem("amount")
-                            + ' €');
-
-                          $state.go('menu.kIMLKannIchsMirLeisten');
-
+                        if (!$scope.wishlistitem.name) {
+						    // don't allow the user to close unless he enters
+							// wish description
+							e.preventDefault();
                         } else {
-                          e.preventDefault();
-
+					      wishlist.add($scope.wishlistitem.name, window.localStorage.getItem("amount"));
+                          $state.go('menu.kIMLKannIchsMirLeisten');
                         }
                       }
                     } ]

@@ -2,9 +2,10 @@ angular
     .module('app.controllers')
     .controller(
         'empfehlung2Ctrl',
-        function($scope, $state, $ionicPopup, $ionicModal,$ionicPopover) {
+        function($scope, $state, $ionicPopup, $ionicModal,$ionicPopover, wishlist) {
           $scope.todoChoice = "zur Wunschliste hinzufügen";
-          window.localStorage.setItem('refresh', 1)
+          window.localStorage.setItem('refresh', 1);
+      $scope.wishlistitem = {};
           $scope.amount = parseFloat((window.localStorage.getItem("amount")));
           $scope.konto1 = parseFloat(window.localStorage.getItem("Konto"
               + window.localStorage.getItem("primeKonto")));
@@ -37,7 +38,7 @@ angular
             if (target) {
               if (target == "zur Wunschliste hinzufügen") {
                 var myPopup = $ionicPopup.show({
-                  template : '<input type="text" ng-model="wishlist">',
+                  template : '<input type="text" ng-model="wishlistitem.name">',
                   title : 'Zur Wunschliste hinzufügen',
                   subTitle : 'Gib einen Namen für diesen Wunsch ein',
                   scope : $scope,
@@ -49,19 +50,14 @@ angular
                         text : 'Speichern',
                         type : 'button-energized',
                         onTap : function(e) {
-                          if (!$scope.wishlist) {
-                            // don't allow the user to close unless he enters
-                            // wifi password
-                            window.localStorage.setItem("wish", $scope.wishlist
-                                + ' - ' + window.localStorage.getItem("amount")
-                                + ' €');
-
-                            $state.go('menu.kIMLKannIchsMirLeisten');
-
-                          } else {
-                            e.preventDefault();
-
-                          }
+                          if (!$scope.wishlistitem.name) {
+                // don't allow the user to close unless he enters
+              // wish description
+              e.preventDefault();
+              } else {
+                wishlist.add($scope.wishlistitem.name, window.localStorage.getItem("amount"));
+                $state.go('menu.kIMLKannIchsMirLeisten');
+              }
                         }
                       } ]
                 });
