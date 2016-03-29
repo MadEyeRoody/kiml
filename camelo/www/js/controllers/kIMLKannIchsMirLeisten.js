@@ -20,7 +20,8 @@ angular
           }
 
           $scope.formdata = [];
-		  $scope.artikel='';
+		  $scope.artikelTitle='';
+          $scope.artikelExtra='';
 
           $scope.checkAmount = function(betrag) {
 			empfehlung.showEmpfehlung($scope.artikel,betrag);
@@ -33,7 +34,7 @@ angular
                   console.log("Scan cancelled");
                 } else {
                   getPreisToBarcode(result.format, result.text);
-                  $scope.openModal(result.format, result.text);
+
                 }
               }, function(error) {
                 // An error occurred
@@ -50,10 +51,21 @@ angular
           function getPreisToBarcode(format, data) {
             // mock impl.
             if ("UPC_A" === format && "888462108799" === data) {
-              $scope.formdata.betragValue = 1599.99;
-              $scope.artikelAnzeigeVisibility=true;
-              $scope.artikel="Apple MacBook Pro mit Retina Display - Core i7 2,2 GHz - 15,4";
-            } else {
+              $scope.artikelTitle="Apple MacBook Pro mit Retina Display";
+              $scope.artikelExtra = "Core i7 2,2 GHz - 15,4"
+              $scope.betrag =1599.99;
+              $scope.wishPic="Macbook";
+              $scope.openModal();
+
+            }
+            else if ("UPC_A" === format && "888462062657" === data) {
+              $scope.artikelTitle="Apple IPhone 6 Silver";
+              $scope.artikelExtra = "16 GB"
+              $scope.betrag =699.99;
+              $scope.wishPic="IPhone";
+              $scope.openModal();
+
+            }else {
               var alertPopup = $ionicPopup.alert({
                 title : "Kein Preis gefunden",
                 // template: "Zu dem gescannten Artikel konnte kein Preis
@@ -72,13 +84,11 @@ angular
             $scope.modal = modal;
             console.log(modal);
           });
-          $scope.openModal = function(format, data) {
-            $scope.format = format;
-            $scope.data = data;
+          $scope.openModal = function() {
             $scope.modal.show();
           };
           $scope.closeModal = function() {
-
+            $scope.formdata.betragValue = $scope.betrag;
             $scope.modal.hide();
           };
           // Cleanup the modal when we're done with it!

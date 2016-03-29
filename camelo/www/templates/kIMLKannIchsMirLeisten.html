@@ -1,13 +1,9 @@
 <ion-view title="Demo" hide-back-button="true">
 
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg center">
-   <h1 >Kann ich's mir leisten? </h1>
-	  <div style="height:50px">
-      	<div class="row" ng-show="artikelAnzeigeVisibility">
-        	<div class="col col-33"> <span style="text-align: left; color: #0066B3; ">Mein Wunsch:</span></div>
-        	<div class="col">{{artikel}}</div>
-        </div>
-      </div>
+      </br></br>
+      <h1 >Kann ich's mir leisten? </h1>
+      </br></br>
 
       <form  ng-submit="checkAmount(formdata.betragValue)" >
            <div  style="height:80px; width: 70%; margin-left: 15%" class="item item-input-inset " >
@@ -25,10 +21,7 @@
             </button>
         </form>
 
-
-
          </br></br></br></br></br></br></br></br>
-
 
         <video width="98%" autobuffer style="bottom: 70px"  controls="controls" poster="img/vidBack.png" tabindex="0" >
           <source src="vid/kiml.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
@@ -40,12 +33,23 @@
 <script id="modalScan.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-stable">
-      <h1 class="title">Hinweis</h1>
-      <button class="button button-clear button-primary" ng-click="modal.hide()">OK</button>
+      <h2 class="title">Dein Wunsch</h2>
+      <button class="button button-clear button-primary" ng-click="modal.hide()">Abbrechen</button>
     </ion-header-bar>
-
-    <div class="col col-33"> <span style="text-align: left; color: #0066B3; ">Mein Wunsch:</span></div>
-    <div class="col">{{artikel}}</div>
+    <ion-content style="position: relative">
+    <div class="list card">
+      <div class="item item-image">
+        <img src="img/{{wishPic}}.jpg">
+      </div>
+      <div class="item item-content">
+        <span class="kiml-text">{{artikelTitle}}</span></br>
+        <span class="kiml-text-small">{{artikelExtra}}</span></br>
+        <span class="kiml-text-small">{{betrag}} €</span>
+      </div>
+    </div>
+    <button type="button" ng-click="closeModal()" class="button button-float center col-offset-25" style="width: 40%; height: 65px; font-size: x-large">
+      Übernehmen
+    </button>
 
     </ion-content>
   </ion-modal-view>
