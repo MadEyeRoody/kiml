@@ -36,22 +36,26 @@
       <h2 class="title">Dein Wunsch</h2>
       <button class="button button-clear button-primary" ng-click="modal.hide()">Abbrechen</button>
     </ion-header-bar>
-    <ion-content style="position: relative">
+    <ion-content >
     <div class="list card">
-      <div class="item item-image">
-        <img src="img/{{wishPic}}.jpg">
+      <div class="item item-image" >
+        <img src="img/{{wishPic}}.jpg" style="position: static">
       </div>
-      <div class="item item-content">
+      <div class="item item-content" >
         <span class="kiml-text">{{artikelTitle}}</span></br>
         <span class="kiml-text-small">{{artikelExtra}}</span></br>
         <span class="kiml-text-small">{{betrag}} €</span>
       </div>
     </div>
-    <button type="button" ng-click="closeModal()" class="button button-float center col-offset-25" style="width: 40%; height: 65px; font-size: x-large">
-      Übernehmen
-    </button>
 
     </ion-content>
+    <ion-footer-bar style="background: transparent">
+      <div class="button-bar" style="background: transparent">
+        <button type="button" ng-click="closeModal()" class="button button-energized" style=" height: 65px; font-size: x-large">
+          Übernehmen
+        </button>
+      </div>
+    </ion-footer-bar>
   </ion-modal-view>
 </script>
 

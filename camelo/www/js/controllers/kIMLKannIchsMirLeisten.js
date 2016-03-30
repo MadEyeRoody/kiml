@@ -65,7 +65,21 @@ angular
               $scope.wishPic="IPhone";
               $scope.openModal();
 
-            }else {
+            }else if ("UPC_A" === format && "888462532556" === data) {
+              $scope.artikelTitle="Apple IPad Pro Silver";
+              $scope.artikelExtra = "Wifi - 128GB"
+              $scope.betrag =799.99;
+              $scope.wishPic="IPad";
+              $scope.openModal();
+
+            }else if ("UPC_A" === format && "811571016549" === data) {
+              $scope.artikelTitle="Google Chromecast";
+              $scope.artikelExtra = ""
+              $scope.betrag =34.99;
+              $scope.wishPic="Chromecast";
+              $scope.openModal();
+
+            } else {
               var alertPopup = $ionicPopup.alert({
                 title : "Kein Preis gefunden",
                 // template: "Zu dem gescannten Artikel konnte kein Preis

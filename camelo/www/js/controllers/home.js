@@ -34,7 +34,7 @@ angular.module('app.controllers')
           // End Start Values
           $timeout(function() {
             $state.go('menu.kIMLKannIchsMirLeisten');
-          }, 5200);
+          }, 5000);
 
           //
         });

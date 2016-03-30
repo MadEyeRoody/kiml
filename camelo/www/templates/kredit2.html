@@ -16,18 +16,31 @@
           <img src="img/Info.svg" /></button>
       </div>
 
-      </div>
       </br>
-      </br></br></br>
+      </br></br></br></br></br>
 
 
-      <span class="kiml-text-header">Angebot</span></br></br>
-        <ion-list>
-         <label class="item item-input"> <span class="kiml-text-bold col col-80 ">Kreditbetrag:</span><span class="kiml-text col col 20"> {{fehlbetrag}} €</span></label>
-          <label class="item item-input"> <span class="kiml-text-bold col col-80 ">Laufzeit:</span> <span class="kiml-text col col 20">{{laufzeit}} Monate</span></label>
-          <label class="item item-input">  <span class="kiml-text-bold col col-80 ">Rate:</span> <span class="kiml-text col col 20">{{rate}} €</span></label>
-        </ion-list>
+      <span class="kiml-text-header">Angebot</span>
+         <div class="card" style="background-color: #a0509a" >
+        <div class="row">
+          <div class="col col-50"> <span class="kiml-text-bold-white">Kreditbetrag</span></div>
+          <div class="col col-offset-10 kiml-text-white" style="text-align: right"> {{fehlbetrag}} €
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-50"> <span class="kiml-text-bold-white">Laufzeit</span></div>
+          <div class="col col-offset-10 kiml-text-white" style="text-align: right">  {{laufzeit}} Monate
+      </div>
+          </div>
+          <div class="row">
+          <div class="col col-50"> <span class="kiml-text-bold-white">Rate</span></div>
+          <div class="col col-offset-10 kiml-text-white" style="text-align: right"> {{rate}} €
+          </div>
 
+      </div>
+
+
+           </div>
     </ion-content>
 
   <ion-footer-bar style="height: 130px; width: 98%; background: transparent" title="Was willst du tun?">
