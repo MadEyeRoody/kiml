@@ -42,14 +42,14 @@
           </br></br>
           <label class="item item-input" name="untergrenze">
                 <span class="kiml-text-bold">Wohlfühlgrenze in €</span>
-                <input style="text-align: right; color: #a0509a; font-size: large;" type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="minRemaining" ng-change="changeRemaining(minRemaining)" >
+                <input class="kiml-text" style="text-align: right;" type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="minRemaining" ng-change="changeRemaining(minRemaining)" >
             </label>
           </br>
             <label class="item item-input item-select">
               <span class="kiml-text-bold">
                Stichtag für die Prognose
               </span>
-              <select style="text-align: right; color: #a0509a; font-size: large;" ng-model="prognoseTarget" ng-options="item for item in ['zur Mitte des Monats','zum Ende des Monats']" ng-change="changePrognoseTarget(prognoseTarget)">
+              <select class="kiml-text"  style="text-align: right;" ng-model="prognoseTarget" ng-options="item for item in ['zur Mitte des Monats','zum Ende des Monats']" ng-change="changePrognoseTarget(prognoseTarget)">
               </select>
             </label>
             </br></br>
