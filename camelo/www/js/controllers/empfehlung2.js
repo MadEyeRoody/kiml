@@ -67,7 +67,7 @@ angular
               } else if (target == "Kredit beantragen") {
                 window.localStorage.setItem("kreditBack", 2);
                 $state.go('menu.kredit')
-              }else if(target=="Finanzstatus anzeigen"){
+              }else if(target=="Prognose anzeigen"){
                 window.localStorage.setItem("financeType", 'gelb');
                 $state.go('menu.finanzstatus');
               } else {

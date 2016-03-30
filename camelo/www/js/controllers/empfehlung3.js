@@ -81,7 +81,7 @@ angular
                 window.localStorage.setItem("kreditBack", 3);
                 $state.go('menu.kredit')
 
-              }else if(target=="Finanzstatus anzeigen"){
+              }else if(target=="Prognose  anzeigen"){
                 window.localStorage.setItem("financeType", 'rot');
                 $state.go('menu.finanzstatus');
               }  else {

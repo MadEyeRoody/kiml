@@ -53,7 +53,7 @@ angular
                       }
                     } ]
                 });
-              }else if(target=="Finanzstatus anzeigen"){
+              }else if(target=="Prognose anzeigen"){
                 window.localStorage.setItem("financeType", 'gruen');
                 $state.go('menu.finanzstatus');
               } else {

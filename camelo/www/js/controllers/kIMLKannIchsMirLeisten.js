@@ -53,7 +53,7 @@ angular
             if ("UPC_A" === format && "888462108799" === data) {
               $scope.artikelTitle="Apple MacBook Pro mit Retina Display";
               $scope.artikelExtra = "Core i7 2,2 GHz - 15,4"
-              $scope.betrag =1599.99;
+              $scope.betrag =1999.00;
               $scope.wishPic="Macbook";
               $scope.openModal();
 
@@ -61,22 +61,29 @@ angular
             else if ("UPC_A" === format && "888462062657" === data) {
               $scope.artikelTitle="Apple IPhone 6 Silver";
               $scope.artikelExtra = "16 GB"
-              $scope.betrag =699.99;
+              $scope.betrag =719.00;
               $scope.wishPic="IPhone";
               $scope.openModal();
 
             }else if ("UPC_A" === format && "888462532556" === data) {
               $scope.artikelTitle="Apple IPad Pro Silver";
               $scope.artikelExtra = "Wifi - 128GB"
-              $scope.betrag =799.99;
+              $scope.betrag =499.99;
               $scope.wishPic="IPad";
               $scope.openModal();
 
             }else if ("UPC_A" === format && "811571016549" === data) {
-              $scope.artikelTitle="Google Chromecast";
+              $scope.artikelTitle="Google Chromecast 2";
               $scope.artikelExtra = ""
-              $scope.betrag =34.99;
+              $scope.betrag =37.00;
               $scope.wishPic="Chromecast";
+              $scope.openModal();
+
+            }else if ("UPC_A" === format && "" === data) {
+              $scope.artikelTitle="Snickers Riegel";
+              $scope.artikelExtra = ""
+              $scope.betrag =0.57;
+              $scope.wishPic="Snickers";
               $scope.openModal();
 
             } else {

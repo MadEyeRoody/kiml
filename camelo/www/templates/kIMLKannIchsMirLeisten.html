@@ -38,8 +38,8 @@
     </ion-header-bar>
     <ion-content >
     <div class="list card">
-      <div class="item item-image" >
-        <img src="img/{{wishPic}}.jpg" style="position: static">
+      <div class="item item-body" >
+       <img src="img/{{wishPic}}.jpg" style="position: absolute">
       </div>
       <div class="item item-content" >
         <span class="kiml-text">{{artikelTitle}}</span></br>
@@ -49,8 +49,8 @@
     </div>
 
     </ion-content>
-    <ion-footer-bar style="background: transparent">
-      <div class="button-bar" style="background: transparent">
+    <ion-footer-bar style="background: transparent; height: 75px">
+      <div class="button-bar" style="background: transparent; height: 75px">
         <button type="button" ng-click="closeModal()" class="button button-energized" style=" height: 65px; font-size: x-large">
           Übernehmen
         </button>
