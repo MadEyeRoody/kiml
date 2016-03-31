@@ -2,7 +2,7 @@ angular
     .module('app.controllers')
     .controller(
         'kreditCtrl',
-        function($scope, $state) {
+        function($scope, $state, $ionicPopup) {
           $scope.fehlbetrag = parseFloat(
               window.localStorage.getItem("fehlbetrag")).toFixed(2);
           $scope.laufzeit = parseFloat(window.localStorage.getItem("laufzeit"));
@@ -39,5 +39,10 @@ angular
             window.localStorage.setItem("rate", $scope.rate.toFixed(2));
 
           }
-
+          $scope.demo = function(target) {
+            var alertPopup = $ionicPopup.alert({
+              title: 'Hinweis',
+              template: 'Diese Funktion ist in der Demo nicht verfügbar'
+            });
+          }
         });

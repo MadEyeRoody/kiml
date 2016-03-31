@@ -21,4 +21,10 @@ angular.module('app.controllers').controller(
           $state.go('menu.empfehlung');
         });
       }
+      $scope.demo = function(target) {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Hinweis',
+          template: 'Diese Funktion ist in der Demo nicht verfügbar'
+        });
+      }
     });

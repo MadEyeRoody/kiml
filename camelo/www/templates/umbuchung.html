@@ -1,15 +1,20 @@
 <ion-view title="Umbuchung" hide-back-button="true">
     <ion-content overflow-scroll="true" padding="true" class="has-header scroll-bg">
-      </br></br>
-    <div>
-        <label class="item item-input" name="gesamtbetrag">
-          <span class=" col col-80 kiml-text-bold">Zu zahlender Betrag</span> <span class="kiml-text col col 20"> {{gesamtbetrag}} €</span>
-        </label>
-        <label class="   item item-input" name="fehlbetrag">
-          <span class="kiml-text-bold col col-80 ">Fehlbetrag</span>  <span class="kiml-text col col 20">{{fehlbetragDisplay}} €</span>
+      </br></br></br> </br>
+      <div class="row" >
+        <span class="kiml-text-bold col col-50 ">Zu zahlender Betrag</span> <span class="kiml-text col col-offset-20"> {{gesamtbetrag}} €</span>
+      </div>
+      <div class="row" >
+        <span class="kiml-text-bold col col-50 ">Fehlbetrag</span> <span class="kiml-text col col-offset-20"> {{fehlbetragDisplay}} €</span>
+        <button ng-click="demo()" style="margin-top: -35px" class="button button-clear col col-10  icon ">
+          <img src="img/Info.svg" /></button>
+      </div>
 
-        </label>
-    </div></br></br></br></br>
+      </div>
+      </br>
+      </br></br></br></br></br>
+
+
       <span class="kiml-text-header" >Von welchem Konto soll umgebucht werden?</span>
       </br></br>
 
