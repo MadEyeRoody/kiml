@@ -3,7 +3,7 @@ angular.module('app.controllers').controller('addWunschCtrl',
       $scope.wunschliste = wishlist.list;
 
       $scope.addWunsch = function(newWish) {
-        wishlist.add(newWish.name, newWish.betrag);
+        wishlist.add(newWish.name, newWish.betrag, newWish.beschreibung);
         $state.go('menu.wunschliste');
       }
     });

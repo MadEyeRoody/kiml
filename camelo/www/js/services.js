@@ -5,10 +5,11 @@ angular.module('app.services', [])
 
   wishlist.list = [];
 
-  wishlist.add = function(name, betrag) {
+  wishlist.add = function(name, betrag, beschreibung) {
     wishlist.list.push({
       name : name,
-      betrag : betrag
+      betrag : betrag,
+      beschreibung : beschreibung
     });
   };
 

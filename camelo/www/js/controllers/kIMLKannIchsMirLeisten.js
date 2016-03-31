@@ -20,11 +20,11 @@ angular
           }
 
           $scope.formdata = [];
-		  $scope.artikelTitle='';
+          $scope.artikelTitle='';
           $scope.artikelExtra='';
 
           $scope.checkAmount = function(betrag) {
-			empfehlung.showEmpfehlung($scope.artikel,betrag);
+              empfehlung.showEmpfehlung($scope.artikelTitle,betrag);
           }
 
           $scope.scanBarCode = function() {

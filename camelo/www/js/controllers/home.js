@@ -27,9 +27,9 @@ angular.module('app.controllers')
           window.localStorage.setItem("minRemaining", 200.00);
           window.localStorage.setItem("height", 550);
 
-          wishlist.add("Fahrrad",600);
-          wishlist.add("Fernseher",1100);
-          wishlist.add("Tablet",399.99);
+          wishlist.add("Fahrrad",600,"Rotes Mountain-Bike vom Allbikes Shop um die Ecke");
+          wishlist.add("Fernseher",1100,'Riesige 60" UHD Glotze mit Curved Display vom HelloEntertain Laden in der Stadt. Hammer Teil!');
+          wishlist.add("Tablet",399.99,"Endlich eins mit schnellem Prozessor und SIM-Karten Slog.");
 
           // End Start Values
           $timeout(function() {
