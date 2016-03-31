@@ -4,19 +4,19 @@
 			<div  style="height:58px" class="item item-input-inset" >
              	<label class=" item-input-wrapper" name="name" style="background: transparent">
              		<span class="kiml-text">Name:</span>
-			   		<input style="text-align: right; color: #a0509a; font-size: large;" type="text" ng-model="newWish.name" />
+			   		<input style="text-align: right" type="text" class="kiml-text" ng-model="newWish.name" />
 			   	</label>
 			 </div>
 			 <div  style="height:58px" class="item item-input-inset" >
 			   	<label class=" item-input-wrapper" name="betrag" style="background: transparent">
 			   		<span class="kiml-text">Betrag in €:</span>
-			   		<input style="text-align: right; color: #a0509a; font-size: large;" type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="newWish.betrag" />
+			   		<input style="text-align: right" class="kiml-text" type="tel" pattern="\d*[0-9](\.\d{1,2})?$" ng-model="newWish.betrag" />
 			   	</label>
 			 </div>
 			<div class="item item-input-inset" >
 			   	<label class="item-stacked-label item-input-wrapper" name="beschreibung" style="background: transparent">
 			   		<span class="kiml-text">Beschreibung</span>
-			   		<textarea style="color: #a0509a; font-size: large; width:100%;" ng-model="newWish.beschreibung" rows="8"></textarea>
+			   		<textarea style=" width:100%;" class="kiml-text" ng-model="newWish.beschreibung" rows="8"></textarea>
 			   	</label>
 			 </div>
 			 <button type="submit" class="button button-energized button-block">Wunsch hinzufügen</button>
