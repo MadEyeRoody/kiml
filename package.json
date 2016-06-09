@@ -8,7 +8,6 @@
   "dependencies": {
     "express": "4.12.x",
     "ejs": "*",
-    "cloudant": "*",
     "body-parser": "1.13.2",
     "method-override": "2.3.3",
     "morgan": "1.6.1",
