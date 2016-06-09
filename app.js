@@ -87,7 +87,7 @@ function initDBConnection() {
 			db = cloudant.use(dbCredentials.dbName);
 }
 
-initDBConnection();
+
 
 app.get('/', routes.index);
 
